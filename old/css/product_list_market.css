@@ -1,8 +1,0 @@
-.prd_list_best{margin-top: 0px;}
-.prd_name .product_list_name{margin-bottom: 0.5rem;}
-.prd_list_data .prd_icon {height: 0;}
-.thumbnail_area > span > a {justify-content: center;}
-.thumbnail_area .prd_img{width: 100%; height: 100%;}
-@media(max-width:768px){
-.prd_list_best{margin-top: 60px;}
-}
