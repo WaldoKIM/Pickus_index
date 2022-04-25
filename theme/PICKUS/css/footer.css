@@ -6,7 +6,7 @@
     text-align: center;
     background-color: #fafafa;
   }
-  
+
   #ft * {
     color: #666;
     font-size: 14px;
@@ -16,13 +16,17 @@
     font-weight: 400;
     text-align: left;
   }
-  
+
   #ft_logo {
     position: absolute;
     right: 0;
     top: 0;
   }
-  
+  #ft_logo a{
+    font-size: 2.1rem;
+    font-weight: bold;
+    color:#4F7670;
+  }
   #ft_link {
     text-align: left;
     display: -webkit-box;
@@ -34,7 +38,7 @@
     margin-left: -12px;
     margin-right: -12px;
   }
-  
+
   #ft_link a {
     padding: 0 12px;
     text-decoration: none;
@@ -43,12 +47,12 @@
     line-height: 24px;
     font-size: 14px;
   }
-  
+
   #ft_company {
     padding: 20px 0 8px;
     margin: 0 auto;
   }
-  
+
   #ft_company li {
     display: block;
     text-align: left;
@@ -56,7 +60,7 @@
     line-height: 24px;
     color: #9c9c9c;
   }
-  
+
   .ft_company-info li::after {
     content: '';
     width: 1px;
@@ -65,31 +69,31 @@
     display: inline-block;
     margin: 0 7px;
   }
-  
+
   #ft_company li:nth-child(3) {
     float: none;
   }
-  
+
   #ft_company li:nth-child(3)::after {
     display: none;
   }
-  
+
   #ft_company li:last-child::after {
     display: none;
   }
-  
+
   .ft_company-info::after {
     content: '';
     display: block;
     clear: both;
   }
-  
+
   #ft_copy {
     color: #9c9c9c;
     font-size: 13px;
     font-weight: 600;
   }
-  
+
   @media (max-width: 768px) {
     #ft_link {
       -ms-flex-wrap: wrap;
@@ -121,6 +125,5 @@
       display: inline-block;
     }
   }
-  
+
   /*# sourceMappingURL=widget.css.map */
-  

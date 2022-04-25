@@ -49,7 +49,7 @@ if (G5_IS_MOBILE) {
 
                 $i = 0;
                 foreach( $menu_datas as $row ){
-                    if( empty($row) ) continue; 
+                    if( empty($row) ) continue;
                 ?>
             <li class="mobile-list">
                 <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_1da" data-hover="<?php echo $row['me_name'] ?>"><?php echo $row['me_name'] ?>
@@ -62,7 +62,7 @@ if (G5_IS_MOBILE) {
                     $k = 0;
                     foreach( (array) $row['sub'] as $row2 ){
 
-                        if( empty($row2) ) continue; 
+                        if( empty($row2) ) continue;
 
                         if($k == 0)
                             echo '<ul class="mb-sub-ul">'.PHP_EOL;
@@ -89,11 +89,11 @@ if (G5_IS_MOBILE) {
         <div class="side_contact">
             <div class="contact_info">
                 <h3 class="contact_title">Contact Us</h3>
-                <p class="contact_list">Tel. 1234-1234</p>
+                <p class="contact_list">Tel. 1800-5528</p>
                 <p class="contact_list">평일 09:00 - 18:00 <span> (주말/공휴일 휴무)</span></p>
             </div>
 
-            <div class="side_sns"> 
+            <div class="side_sns">
                 <ul class="side_sns_list clearfix">
                     <li class="sns_icon"><a href="#"><i class="xi-kakaotalk"></i> <span class="sound_only">카카오톡</span> </a></li>
                     <li class="sns_icon"><a href="#"><i class="xi-twitter"></i> <span class="sound_only">트위터</span> </a></li>
@@ -102,10 +102,10 @@ if (G5_IS_MOBILE) {
                     <li class="sns_icon"><a href="#"><i class="xi-instagram"></i> <span class="sound_only">인스타그램</span> </a></li>
                 </ul>
             </div>
-  
+
         </div>
 
-        
+
     </div>
 </div>
 <div class="mask"></div>
@@ -122,7 +122,7 @@ if (G5_IS_MOBILE) {
             } else {
                 $(this).parent().removeClass('on');
                 $(this).parent().find('ul').slideUp();
-                
+
             }
 
             return false;
@@ -140,7 +140,7 @@ if (G5_IS_MOBILE) {
             $(".mask").css('display', 'block');
             $("html").css('overflow', 'hidden');
 
-           
+
         });
 
         $("#mobile_menu_close, .mask").click(function() {
@@ -151,7 +151,7 @@ if (G5_IS_MOBILE) {
             $("html").css('overflow', 'auto');
             $(".mask").css('display', 'none');
         });
-    
+
     });
 </script>
 
@@ -175,17 +175,17 @@ if (G5_IS_MOBILE) {
             </div>
             <div id="ft_company">
                 <ul class="ft_company-info">
-                    <li class="ft_company-info-list">(주)NAMIWEB</li>
-                    <li class="ft_company-info-list">대표자 : 김나미</li>
-                    <li class="ft_company-info-list">서울특별시 나미구 나미로 나미동 29 , 나미빌딩 4층 </li>
-                    <li class="ft_company-info-list">TEL : 1234-1234</li>
-                    <li class="ft_company-info-list">E-mail : namiweb@mail.com</li>
-                    <li class="ft_company-info-list">사업자등록번호 : 987-65-43210</li>
+                    <li class="ft_company-info-list">DEHUV</li>
+                    <li class="ft_company-info-list">대표자 : 천정훈</li>
+                    <li class="ft_company-info-list">경기도 고양시 일산동구 동국로 32 동국대학교 산학협력관 203호</li>
+                    <li class="ft_company-info-list">TEL : 1800-5528</li>
+                    <li class="ft_company-info-list">E-mail : cs@repickus.com</li>
+                    <li class="ft_company-info-list">사업자등록번호 : 291-39-00208</li>
                 </ul>
             </div>
-            <div id="ft_copy">Copyright &copy; NAMIWEB All rights reserved.</div>
+            <div id="ft_copy">Copyright &copy; dehuv All rights reserved.</div>
             <div id="ft_logo">
-                <a href="<?php echo G5_URL ?>"><img src="<?php echo G5_THEME_IMG_URL ?>/common/ft_logo.png" alt="<?php echo $config['cf_title']; ?>"></a>
+                <a href="<?php echo G5_URL ?>">PICKUS</a>
             </div>
         </div>
         <button type="button" id="top_btn"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sound_only">상단으로</span></button>

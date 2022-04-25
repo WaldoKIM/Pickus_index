@@ -25,11 +25,11 @@ $(function(){
         var header =$('.board_visual_wrap').outerHeight();
         var footer =$('#ft').outerHeight();
         var wrap_h = wheight - header - footer;
-        
+
         $('#bo_list,#bo_gall').css('min-height',wrap_h);
-        
+
         $('#container').css('min-height',wheight -footer);
-        
+
         console.log(header);
         console.log(footer);
         console.log(wrap_h);
@@ -52,14 +52,14 @@ $(function(){
                 $("#mb-open-menu").removeClass("scroll_bg");
             }
         }, 400);
-        
+
 
          /* 스크롤 top 버튼 */
          $('.scroll-top').on('click',function(){
                 $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
                 return false;
             });
-            
+
             var lastScrollTop = 0;
             var scroll_btn = $('.scroll-top');
 
@@ -75,7 +75,7 @@ $(function(){
 
                 if (st === 0) {
                     scroll_btn.fadeOut();
-                
+
                 }else{
                     $(scroll_btn).fadeIn();
                 }
@@ -85,7 +85,7 @@ $(function(){
 
 <!-- 상단 시작 { -->
 <div id="hd">
-    
+
     <h1 id="hd_h1"><?php echo $g5['title'] ?></h1>
 
     <div id="skip_to_container"><a href="#container">본문 바로가기</a></div>
@@ -99,15 +99,17 @@ $(function(){
         <div class="inner clearfix">
             <ul class="left_tnb">
                 <li>
-                    <i class="icon phone"></i><span>1234-123</span>
+                    <i class="icon phone"></i><span>1800-5528</span>
                 </li>
                 <li>
                     <i class="icon clock"></i><span>(월~금) 9:00 - 18:00</span>
-                </li>                
+                </li>
             </ul>
             <ul class="right_tnb">
                 <?php if ($is_member) {  ?>
                 <li><a href="<?php echo G5_BBS_URL ?>/member_confirm.php?url=<?php echo G5_BBS_URL ?>/register_form.php"><i class="fa fa-cog" aria-hidden="true"></i> 정보수정</a></li>
+                <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> 알림</a></li>
+                <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> 정산내역</a></li>
                 <li><a href="<?php echo G5_BBS_URL ?>/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃</a></li>
                 <?php if ($is_admin) {  ?>
                 <li class="tnb_admin"><a href="<?php echo G5_ADMIN_URL ?>"><b><i class="fa fa-user-circle" aria-hidden="true"></i> 관리자</b></a></li>
@@ -123,7 +125,7 @@ $(function(){
        <div class="inner">
         <div id="logo">
             <a href="<?php echo G5_URL ?>">
-                <!--                    <img src="<?php echo G5_IMG_URL ?>/logo.png" alt="<?php echo $config['cf_title']; ?>">-->
+              PICKUS
             </a>
         </div>
 
@@ -165,7 +167,7 @@ $(function(){
 
                     $i = 0;
                     foreach( $menu_datas as $row ){
-                        if( empty($row) ) continue; 
+                        if( empty($row) ) continue;
                     ?>
                     <li class="gnb_1dli" style="z-index:<?php echo $gnb_zindex--; ?>">
                         <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_1da"><?php echo $row['me_name'] ?></a>
@@ -173,7 +175,7 @@ $(function(){
                         $k = 0;
                         foreach( (array) $row['sub'] as $row2 ){
 
-                            if( empty($row2) ) continue; 
+                            if( empty($row2) ) continue;
 
                             if($k == 0)
                                 echo '<span class="bg">하위분류</span><ul class="gnb_2dul">'.PHP_EOL;
@@ -245,7 +247,7 @@ $(function(){
 
 
 
-            
+
             setInterval(function() {
                 if ($(window).scrollTop() >= 80) {
                     $("#hd").addClass("scroll_on");
@@ -263,7 +265,7 @@ $(function(){
 </div>
 
 <hr>
- 
+
 
 <!-- 콘텐츠 시작 { -->
     <div id="wrapper">
