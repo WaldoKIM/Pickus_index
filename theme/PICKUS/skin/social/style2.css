@@ -1,0 +1,9 @@
+.layer_login .sns-wrap-over .sns-naver{background:url('./img/sns_naver_s.png') no-repeat!important}
+.layer_login .sns-wrap-over .sns-google {background:url('./img/sns_gp_s.png') no-repeat!important}
+.layer_login .sns-wrap-over .sns-facebook {background:url('./img/sns_fb_s.png') no-repeat!important}
+.layer_login .sns-wrap-over .sns-twitter {background:url('./img/sns_twitter_s.png') no-repeat!important}
+.layer_login .sns-wrap-over .sns-payco {background:url('./img/sns_payco_s.png') no-repeat!important}
+.layer_login .sns-wrap-over .sns-kakao {background:url('./img/sns_kakao_s.png') no-repeat!important}
+.layer_login .login-sns h4{padding-top:10px;text-align:center;color:#777;font-weight:normal}
+.layer_login #sns_outlogin .sns-icon {padding: 0}
+.layer_login .login-sns {margin-top: 0}
