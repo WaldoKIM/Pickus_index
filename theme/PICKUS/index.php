@@ -32,9 +32,9 @@ include_once(G5_THEME_PATH.'/head.php');
                         }">
                     </div>
                     <div class="banner_tit inner">
-                        <h2>샘플배너</h2>
-                        <p class="desc">피커스 샘플 배너입니다.
-                             <br>유뷰트배너 테스트입니다.</p>
+                        <h2>지속가능한 자원</h2>
+                        <p class="desc">피커스는 지속가능한 미래를 만들기 위해
+                             <br>끈임없이 노력합니다.</p>
                         <div class="view_more">
                             <a href="#">Learn More</a>
                         </div>
