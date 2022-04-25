@@ -1,0 +1,111 @@
+.requst_list .bank_form{display:table-row;}
+.requst_list .bank_form_font{width: 100%;}
+.req_list .wallet_bank_add_btn{float: right; margin-top: 1rem; margin-right: 5%; text-align: center; background-color: #1379cd; color:#fff; line-height: 2.5rem;}
+.req_list .trade_font_bold{font-size: 2rem; margin-bottom: 1rem;}
+.nobanco{color:red; font-size: 1.6rem;}
+.sibanco{color:#1379cd; font-size: 1.6rem; position: relative; margin-top: 1rem;}
+
+
+    .req_list .trade_font_bold span{font-size: 1.6rem;}
+    .requst_list {padding: 0;}
+    .requst_list thead tr{display: flex;}
+    .requst_list thead tr th{display: none;}
+    .requst_list .bank_form{display:flex;}
+    .requst_list .bank_form .bank_form_font {flex-direction: row;}
+    .requst_list .bank_form .banktitle {width: 25%; font-size: 1.6rem; vertical-align: middle; line-height: 40px;  
+    }
+    .requst_list .bank_form input {width: 75%; font-size: 1.6rem !important; vertical-align: middle;
+        background-color: #ececec; color:#1379cd !important; font-weight: 700!important;}
+    .wallet_flex{padding: 10px 0 10px 0;}
+    .wallet_flex tbody tr td{padding: 0 !important;}
+    .wallet_flex .tabletd_all{padding: 0 !important;}
+    .wallet_con_font0 {font-size: 2rem; font-weight: 400; letter-spacing: -0.05em;}
+    .wallet_con_font1 {font-size: 1.8rem; font-weight: 400; letter-spacing: -0.15em;}
+    .wallet_con_font2 {font-size: 1.8rem;}
+    .wallet_con_font3 {font-size: 1.4rem; padding-left: 5%; line-height: 3rem;}
+    .bbold{font-weight: 700;}
+    .nbold{font-weight: 400;}
+    .wallet_export_form{font-size: 2rem; text-align: center;}
+    .tabh{width:23%}
+    .tabg{margin-left: 10%;}
+    .control_btnon, .control_btnoff{font-size: 1.8rem; float: right; margin-top: 2rem; font-weight: 700; color: #fff
+        !important;} 
+    .control_btnon span{font-size: 1.8rem; font-weight: 700; color: rgb(255, 120, 0)!important; line-height: normal; }
+    .control_btnoff span{font-size: 1.8rem; font-weight: 700; color: rgb(255, 120, 0)!important; line-height: normal;}    
+    .flxc{display: flex; flex-direction: column; font-size: 1.8rem; width:80%;}
+    .flxr{ text-align: left; padding-left: 5%;}
+    .pntn{color: rgb(255, 120, 0); font-weight: 700; font-size: 2rem;}
+    .resetlist{background-color: #465058;
+        border-radius: 18px;
+        margin-top: 1rem;
+        width: 83.33333333%;
+        margin-left: 8.33333333%;
+        padding: 10px 5px 10px 5px;
+        text-align: center;
+    }
+    .resetlist a{
+        color: #fff !important;
+    }
+    
+    .addacc {width: 100% !important; clear: both;}
+    .addacc .control_btnon {background-color: #465058;
+        border-radius: 18px;
+        margin-top: 2.8rem;
+        width: 83.33333333% !important;
+        margin-left: 8.33333333%;
+        padding: 10px 5px 10px 5px;
+        text-align: center;
+        font-weight: 400 !important;
+    color: #fff;}
+    .addacc a {width: 100% !important; float: none;}
+    .wallet_export_btn {
+        border-top: 1px solid #ddd !important;
+        left: 0px !important;
+        bottom: 0px !important;
+        width: 200px;
+        background: #1379cd !important;
+        
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0;
+        font-weight: bold;
+        float: right;
+        margin-left: 0;
+        border-radius: 5px;
+        height: 5.6rem;
+    }
+    .wallet_export_btn span{color: #fff; font-size: 2.4rem !important;}
+
+
+
+
+    @media (max-width:768px){
+        .flxr a{width: 20%;
+        min-width: 90px;}
+        .flxr a span{width: 100%;
+            text-align: center;
+        font-size: 1.2rem;
+    font-weight: 700;}
+    .control_wrap {margin-top: 80px;}
+    .wallet_export_btn {
+        border-top: 1px solid #ddd !important;
+        left: 0px !important;
+        bottom: 0px !important;
+        width: 100% !important;
+        background: #1379cd !important;
+        color: #fff !important;
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0;
+        font-weight: bold;
+        position: fixed;
+        margin-left: 0;
+        border-radius: 5px;
+        height: 5.6rem;
+        z-index: 9;
+        float: none;
+    }
+    .wallet_export_btn span{color: #fff; font-size: 2.4rem !important;}
+    }

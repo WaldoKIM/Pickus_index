@@ -1,0 +1,12 @@
+#blog{margin-top: 70px;}
+
+.main .spacelin10 {
+	height:1em;	
+	}
+
+.prd_list_data .prd_icon{height: 0;}
+
+.prd_list_data .thumbnail_area a .prd_img{height: 100%; width: 100%;}
+.thumbnail_area > span > a{justify-content: center;}
+	
+

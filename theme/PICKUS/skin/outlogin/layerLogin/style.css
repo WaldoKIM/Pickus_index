@@ -1,0 +1,200 @@
+.layer_login{
+  display: none;
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -184px 0px 0px -150px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 0px 9999px rgba(0,0,0,0.6);
+  animation-fill-mode: both;
+  animation-duration: 1s;
+  animation-name: bounceInDown;
+  border-radius: 3px;
+  color: #b5b5b5;
+  z-index: 5000
+}
+
+.layer_login h2 {
+  color: #a4bc4f;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: left;
+  padding: 30px 0px 20px 25px
+}
+
+.layer_login a {
+  color: #46485c;
+  text-decoration: none;
+}
+
+.layer_login .user,
+.layer_login .pw{
+  border-left: 5px solid transparent;
+  transition: all 0.3s linear;
+}
+
+.layer_login .user:hover,
+.layer_login .pw:hover{
+  background: #F0F0F0;
+    border-left: 5px solid #8FB252;
+    
+}
+
+.layer_login input[type="text"],
+.layer_login input[type="password"] {
+  width: 290px;
+  padding: 20px 0px;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: #222;
+  margin: 0 auto;
+  text-indent: 20px;
+  font-weight: bold;
+}
+
+.layer_login input[type=checkbox] {
+  display: none;
+}
+
+.layer_login label {
+  display: block;
+  position: absolute;
+  margin-top: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  content: "";
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0px 0px 0px 2px #ccc;
+  box-sizing: content-box;
+}
+
+.layer_login #remember:checked ~ label[for=remember] {
+  background: #b5cd60;
+  border: 3px solid white;
+  box-shadow: 0px 0px 0px 2px #b5cd60;
+}
+
+
+.layer_login input[type="submit"] {
+  background: #b5cd60;
+  border: 0;
+  height: 30px;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  padding: 0px 25px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-left: 75px;
+}
+.layer_login input[type="submit"]:hover {
+  background: #a4bc4f;
+}
+
+.layer_login .forgot {
+  margin-top: 10px;
+  display: block;
+  font-size: 13px;
+  text-align: left;
+  font-weight: bold;
+  color: #b5b5b5;
+  padding: 0 0 7px 25px;
+}
+
+.layer_login .forgot a {padding: 0!important}
+
+.layer_login ::-webkit-input-placeholder {
+  color: #777;
+  font-weight: bold;
+}
+
+.layer_login .remlog{
+  border-bottom: 1px solid #ddd;
+}
+
+.layer_login .remember {
+  padding: 30px 0px;
+  font-size: 12px;
+  text-indent: 20px;
+  line-height: 15px;
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.layer_login .forgot h4{
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.layer_login .forgot a{
+  color: #777;
+}
+
+.layer_login .close{
+  width: 32px;
+  height: 32px;
+  display: block;
+  border: 0;
+  border-radius: 0px 3px 0px 0px;
+  position: absolute;
+  right: 0px;
+  padding: 0px;
+  background: #fff;
+  cursor: pointer;
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.layer_login .close:after{
+  content:'';
+  display: block;
+  position: absolute;
+  width: 3px;
+  height: 16px;
+  transform: rotate(45deg);
+  background: #ccc;
+  margin: -8px 0px 0px 14px
+}
+.layer_login .close:before{
+  content:'';
+  display: block;
+  position: absolute;
+  width: 3px;
+  height: 16px;
+  transform: rotate(-45deg);
+  background: #ccc;
+  margin: -8px 0px 0px 14px
+}
+
+.layer_login .close:hover:before,
+.layer_login .close:hover:after{
+  background: #777;
+  transition: all 0.2s linear;
+}
+
+.layer_login #SignIn{
+  border: 2px solid white;
+  background: transparent;
+  padding: 10px 35px;
+  margin: -21px 0px 0px -57px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  outline: none;
+  
+}
+
+@keyframes bounceInDown{
+0% {opacity: 0;	transform: translateY(-2000px);}
+60% {opacity: 1;transform: translateY(30px);}
+80% {transform: translateY(-10px);}
+100% {transform: translateY(0);}

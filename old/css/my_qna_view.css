@@ -1,0 +1,282 @@
+.order_border{margin-bottom: 30px !important; overflow: hidden;
+    box-sizing: border-box;
+    background-color: #fff;
+    width: 100%;
+    padding: 10px;
+    float: left;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    box-shadow: 2px 3px 5px #ccc;
+
+}
+    
+
+.request{border: none; background-color:#f3e7e7e3; padding: 0px;}
+.answer{border: 3px solid #b9faff7e; padding: 0;}
+
+.order_form{
+    text-overflow:unset;
+    white-space:normal;
+    overflow:visible;
+    text-align: left;
+    width: 100%;    
+}
+
+
+.order_form .product_list_form{
+padding-top: 10px;
+}
+
+
+
+.qnacontentbox{padding: 5px 5px 5px 5px;}
+
+h2.tit{display: none;}
+
+.qnatitle{display: none;}
+    
+
+.qnasubtitle{
+    width: 100%;
+    display: block;
+    color: #465058 ;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.15rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 2rem;
+    text-align: left;
+    padding-left: 2rem;
+}
+
+.product_list_form .product_list_content .gdsname{font-size: 2rem;font-family: 'GoyangDeogyang'; line-height: 2.4rem; color: #465058}
+
+.qnacontent{
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 2rem;
+    letter-spacing: -0.05em;    
+    line-height: 3.6rem;
+    
+    border: 3px solid #fff !important;
+    border-radius: 5px;
+        
+
+}
+
+
+.answerform{clear: both;}
+.qnasubtitle2{
+    
+    display: block;
+    color:#1379cd;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    padding-right: 2rem;
+    letter-spacing: -0.15rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 2rem;
+    text-align: right;
+}
+
+.zonatxt{font-size: 2rem; color: black; border:none !important; height: fit-content; min-height: 200px; line-height: 3.6rem; background-color: #ffe4b383; padding: 10px; box-sizing: border-box; font-weight: 700;}
+
+.fixbtnwrap{display: block; width: 100%; position: fixed; left:0; bottom: 0; z-index: 9;}
+
+
+
+
+
+
+/* 여기부턴 대체로 구매후기 화면 관련 with KJS Dance 20220315 */
+
+.product_list_content i{color: #ffc12f;}
+.order_check .left_gnb {margin-top: 60px;}
+.product_list_form{display: flex;}
+.product_list_img{width: 40%; display: flex; align-content: center; max-height:150px;}
+.product_list_form img{width: 100%; object-fit: cover; border-radius:15px;}
+.qnacontent .gdsname {font-size: 2rem; font-weight: 700; margin-bottom: 10px;}
+
+
+
+.order_btn_area{
+
+}
+
+.order_btn_area .bckbtn{
+    width: 100%;
+float: left;
+    color: #fff;    
+        font-size: 2.4rem;    
+    height: 5.6rem;
+    line-height: 5.6rem;
+    font-weight: 400;
+    background: #1379cd;
+    border-radius: 5px;
+border-top-left-radius: 5px !important;
+border-top-right-radius: 5px !important;    
+}
+
+.order_btn_area .bckbtn1, .order_btn_area .bckbtn2, .order_btn_area .bckbtn3{
+    width: 33.3%;
+float: left;
+    color: #fff;    
+        font-size: 2.4rem;    
+    height: 5.6rem;
+    line-height: 5.6rem;
+    font-weight: 400;    
+    border-radius: 5px;
+border-top-left-radius: 5px !important;
+border-top-right-radius: 5px !important;    
+}
+.order_btn_area .bckbtn1{background: #1379cd;}
+.order_btn_area .bckbtn2{background: #fe8e3a;}
+.order_btn_area .bckbtn3{background: #465058 ;}
+.product_list_content{padding-left: 5px; width: 60%;}
+
+#blog{margin-top: 30px;}
+
+.order_check .left_gnb ul.menu li{width: 15%;}
+.order_check .left_gnb ul.menu li button{font-size: 1.4rem; line-height: 72px; padding-bottom: 0;}
+
+.main{margin-bottom: 100px;}
+
+.order_border .cstname{font-size: 2rem; font-weight: 700; color: #1379cd;} 
+
+
+.order_check .left_gnb ul.menu li button.sensbutton-checked, .order_check .left_gnb ul.menu li button{background: none; border: none; width: 100%; height: 100%; color: #fff;
+    font-family: 'Goyang';
+    }
+    .order_check .left_gnb ul.menu li:nth-child(1) {background-image:url("/img//mobile/profile_w.png"); width:10vw; height:10vw;
+     top: 170px; left: 23%;
+    background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    margin-left: 12vw;
+    }
+    .order_check .left_gnb ul.menu li:nth-child(2) {background-image:url("/img//mobile/like_w.png"); width:10vw; height:10vw;
+     top: 280px; left: 23%; background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    margin-left: 12vw;}
+    .order_check .left_gnb ul.menu li:nth-child(3) {background-image:url("/img//mobile/request_w.png"); width:10vw; height:10vw;
+     top: 280px; right: 5%;  background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    margin-left: 12vw;}
+    .order_check .left_gnb ul.menu li:nth-child(4) {background-image:url("/img//mobile/box_w.png"); width:10vw; height:10vw;
+     top: 280px; right:30%; background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    
+    margin-left: 12vw;}
+    .order_check .left_gnb ul.menu{background-color: rgba(0, 0, 0, 0.488); padding-top: 20px; padding-bottom: 20px;}
+
+    .product_list_form img {
+        max-width: 120px;
+        max-height: 120px;
+        display: block;
+        float: left;
+        
+        margin: auto;
+    }
+
+    .fixbar{display: none;}
+
+    textarea {resize: none;}
+
+
+    .fixbtnwrap .bckbtn1, .fixbtnwrap .bckbtn2, .fixbtnwrap .bckbtn3, .bckbtn0{
+    width: 33.3%;
+    float: left;
+    color: #fff;
+    font-size: 2.4rem;
+    height: 5.6rem;
+    line-height: 5.6rem;
+    font-weight: 400;
+    border-radius: 5px;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    text-align: center;
+}
+.fixbtnwrap .bckbtn0{width: 100%; color: #fff;}
+
+
+.fixbtnwrap .bckbtn1, .fixbtnwrap .bckbtn0{background-color: #1379cd;}
+.fixbtnwrap .bckbtn2{background-color: #fe8e3a;} 
+.fixbtnwrap .bckbtn3{background-color: #465058;}
+
+   
+.site-wrapper{
+ background: rgb(228,172,171);
+ background: linear-gradient(180deg, rgba(228,172,171) 0%, rgba(255,228,196,0) 66%);
+}
+.order_check .left_gnb ul.menu{background-color: rgba(0, 0, 0, 0.488); padding-top: 20px; padding-bottom: 20px;
+    width: 100vw; box-sizing: border-box; position: absolute; top: 100px; left: 0px;}
+    .main{margin-top: 100px;}
+
+@media(min-width: 769px){.site-wrapper{background: transparent;}
+.request{border: 3px solid #ededed; background-color:transparent; padding: 0px;}
+.order_check .left_gnb ul.menu{background-color: rgba(0, 0, 0, 0.488); padding-top: 20px; padding-bottom: 20px;
+    width: unset; box-sizing: unset; position: unset; }
+.main{margin-top: unset;}
+.qnacontent{
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 2rem;
+    letter-spacing: -0.05em;    
+    line-height: 3.6rem;    
+    border:none !important;
+    background: #fff;
+
+}
+
+
+            .order_check .left_gnb ul.menu li:nth-child(1) {background-image:url("/img//mobile/profile_w.png"); width:72px; height:72px;
+                top: 170px; left: 23%;
+               background-repeat: no-repeat;
+               background-position:top center;
+               background-size: cover;
+               margin:0 18px;
+               }
+               .order_check .left_gnb ul.menu li:nth-child(2) {background-image:url("/img//mobile/like_w.png"); width:72px; height:72px;
+                top: 280px; left: 23%; background-repeat: no-repeat;
+               background-position:top center;
+               background-size: cover;
+               margin:0 18px;}
+               .order_check .left_gnb ul.menu li:nth-child(3) {background-image:url("/img//mobile/request_w.png"); width:72px; height:72px;
+                top: 280px; right: 5%;  background-repeat: no-repeat;
+               background-position:top center;
+               background-size: cover;
+               margin:0 18px;}
+               .order_check .left_gnb ul.menu li:nth-child(4) {background-image:url("/img//mobile/box_w.png"); width:72px; height:72px;
+                top: 280px; right:30%; background-repeat: no-repeat;
+               background-position:top center;
+               background-size: cover;
+               margin:0 18px;}
+        
+        
+               
+                .revbox{ width:90%; float: left; overflow: hidden; border: 1px solid #ededed; border-radius: 10px; margin-top: 1%; margin-bottom: 1%; margin-left:2%; margin-right: 2%; padding: 15px 5px 5px 15px;}
+                .order_check .main{padding-top: 50px;}
+               .main .order_border, .main .qnasubtitle , .main .order_btn_area{width:90%; float: right;}
+               .main .order_form .answer{width: 100%;}
+               .fixbtnwrap{display: block; width: 90%; float: right; position: relative;}
+               .main .tit{display: block; width: 90%; text-align: left; float: right; font-size: 2.4rem; padding: 10px 0; font-family: 'GoyangDeogyang'; color: #465058; margin-bottom: 5px;}
+
+               .site-wrapper{
+                background: rgb(228,172,171);
+                background: linear-gradient(180deg, rgba(228,172,171) 0%, rgba(255,228,196,0) 66%);
+               }
+}

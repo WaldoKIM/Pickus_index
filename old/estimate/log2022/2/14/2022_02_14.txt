@@ -1,0 +1,4 @@
+2022_02_14_05:12:58 | 검색모델명 : M20 | 검색된 정보 : []
+2022_02_14_12:35:44 | 검색모델명 : RH81M8131S8 | 검색된 정보 : [{"_id":{},"idx":"8170","category2":"가전","category3":"냉장고","brand":"삼성전자","year":"2018년","model_name":"RH81M8131S8","model_code":"RH81M8131S8","avgPrice":"800000","count":"3","maxPrice":"350000","minPrice":"200000"}]
+2022_02_14_14:49:08 | 검색모델명 : arc06 | 검색된 정보 : []
+2022_02_14_14:49:17 | 검색모델명 : arc06fqti | 검색된 정보 : [{"_id":{},"idx":"1737","category2":"가전","category3":"에어컨","brand":"캐리어","year":"2017년","model_name":"ARC06FQTI","model_code":"ARC06FQTI","avgPrice":"80000","count":"1","maxPrice":"80000","minPrice":"80000"}]

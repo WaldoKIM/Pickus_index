@@ -1,0 +1,2 @@
+2022_02_04_12:41:13 | 검색모델명 :  | 검색된 정보 : []
+2022_02_04_17:47:23 | 검색모델명 : Af15fvzb1wk | 검색된 정보 : [{"_id":{},"idx":"6612","category2":"가전","category3":"에어컨","brand":"삼성전자","year":"2013년","model_name":"AF15FVZB1WK","model_code":"AF15FVZB1WK","avgPrice":"150000","count":"1","maxPrice":"150000","minPrice":"150000"}]

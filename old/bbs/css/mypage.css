@@ -1,0 +1,170 @@
+.member .container{padding: 0;}
+#fregisterform{max-width: 585px; margin: 0 auto; background-color: #fff; padding: 10px; border-top: 0;} 
+.at-body{background-color: #f4f5f9;}
+input[type="button"]{margin-top: 0;}
+.form-group{border-bottom: 0;}
+.col-xs-4{padding: 0;}
+#divGoodsItem .col-md-2, #divGoodsItem .col-md-4{width: 20%;}
+
+
+
+
+  #board .view #proposeList li > div {
+    max-height: 265px;
+    height: auto;
+  }
+
+ 
+
+
+
+@media(max-width: 480px){
+    .full_mobile,
+    .full_mobile p,
+    .full_mobile .col-xs-4,
+    .full_mobile .text-right{width: 100%}
+    #divGoodsItem .col-md-2, #divGoodsItem .col-md-4{width: 100% !important;}
+}
+
+}
+
+/*마이페이지이동버튼*/
+.mypage_btn_header{
+display: none;
+}
+
+@media(max-width:1024px){
+.mypage_btn_header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 4% 5%;
+    border-bottom: 1px solid #ddd;
+    color: #666 !important;
+    font-family: nanumsquare;
+    background: #fff;
+}
+
+.back_btn{
+    position: absolute;
+}
+
+.back_btn > img{
+    width: 25px;
+}
+
+.title{
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.sub_title{
+    display: none;
+}
+}
+/*마이페이지이동버튼끝*/
+
+.roof {
+    display:block; 
+    background-color: #1379cd;
+    width: 120%;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+  }
+
+  .form-group .text-right{line-height: 2.5rem;}
+
+  #board .view .shop_list .img img {
+    margin: 5px auto 15px !important;
+    
+}
+.myreti {margin-bottom: 15px !important;}
+.main_co{font-family:'GoyangDeogyang';
+    font-weight:700; }
+.form_wrap .title {line-height : 20px !important;}    
+
+.form-group .myreti{font-size: 1.6rem; margin-top: -5px;}
+.form-group .myreti .waldo{font-size: 1.6rem; margin-top: 5px; display: block;}
+.infbox{font-size: 1.4rem; margin-top: -5px;}
+.signup_txt_area{font-size: 1.4rem;}
+.main_cowrap{margin-bottom: 0.6rem;}
+@media(max-width:768px){
+.form-group .myreti a{font-size: 1.5rem; display: block;}
+.infbox{font-size: 1.5rem;}
+.signup_txt_area{font-size: 1.5rem;}
+.main_cowrap{margin-bottom: 0.5rem;}
+}
+
+@media(max-width:768px){
+    .form-group .myreti .waldo{margin:1rem 0; font-size:  1.4rem;}
+    .myreti {margin-bottom: 5px !important;}
+    
+    #reviewTitle {text-align: center;}
+    .boardx {min-height: 400px !important;
+    max-height: none !important;
+    }
+    .signup_txt_area {margin : auto;
+        margin-top : 2rem;
+    }
+    #board .photo_list .con h5 {
+        margin-bottom: 0;
+        font-size: 1.8rem 
+    }
+    .reviewbox p {font-size: 1.5rem !important;}
+    .con .main_co{word-break: keep-all; } 
+    }
+
+    
+.noco{float: none !important; margin: auto!important; border:none !important; box-shadow: none !important;}
+.nocon{width:100%; height: 20vw; max-height: 300px; }
+.noconicon{width: 160px; margin: 2vw auto;}
+.noconicon i {color: rgba(140, 210, 248, 0.568);}
+.nocon p{width: 180px; margin: auto; color: midnightblue; box-sizing: content-box;}
+.nocon .donde{width:263px; margin-top: 3vw;}
+.nocon .donde a {color: rgb(157, 161, 168);}
+.nocon .donde a i{font-size: 1.5rem;}
+
+ @media(max-width: 768px){     
+   .nocon{width:100%; height: 70vw; min-height: 300px;}
+.noconicon{width: 160px; margin: 10vw auto;}
+.noconicon i {color: rgba(140, 210, 248, 0.568); font-size: 100px;}
+.nocon p{width: 220px; margin: auto; color: midnightblue; box-sizing: content-box;
+line-height: 2rem;}
+.nocon .donde{width:263px; margin-top: 10vw;}
+.nocon .donde a {color: rgb(157, 161, 168);}
+.nocon .donde a i{font-size: 1.5rem;}
+
+}
+
+.reviewtb {font-family: 'GoyangDeogyang'; font-size: 2rem; color: #1379cd;}
+.clotheslinefromhell {width: 100%; border-bottom: 2px dotted orange; margin-bottom: 5rem;}
+.myset{display: none;}
+
+
+.form-group .tab .tabs a{font-size: 1.8rem;}
+.portx {object-fit: cover;}
+.minfo {display: none;}
+
+#board .photo_list .con_wrap .img { width: 30%; }
+.con span{font-size: 1.6rem;}
+
+#area .title{text-align: left;}
+#area .title p{text-align: left;}
+#area .row .signup_txt_area{
+    line-height: 1rem; margin-top: 1rem;
+}
+.addbtn{margin-top: 10px;}
+#divGoodsItemList .row .wtf{text-align: left; margin-top: 1rem;}
+#divGoodsItemList .row .wtf2{text-align: left;}
+
+#board .photo_list .reviewboxfloat .reviewbox {width: 100%;}
+#board .photo_list #reviewList .reviewbox {width: 100%;}
+#board .photo_list .reviewboxfloat .con {width: 70%}
+#board .photo_list #reviewList .reviewbox .con {width: 70%;}
+#board .photo_list #reviewList .reviewbox .img img {min-height: 120px;}
+@media(max-width: 768px){     
+#board .photo_list #reviewList .reviewbox .img img {min-height: 0px;}    
+    
+}

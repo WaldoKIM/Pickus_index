@@ -1,0 +1,6 @@
+2022_01_25_12:00:23 | 검색모델명 : RF85K9062X8 | 검색된 정보 : []
+2022_01_25_13:33:34 | 검색모델명 : fq17v8wwjn | 검색된 정보 : [{"_id":{},"idx":"5669","category2":"가전","category3":"에어컨","brand":"LG전자","year":"2018년","model_name":"fq17v8wwjn","model_code":"fq17v8wwjn","avgPrice":"450000","count":"1","maxPrice":"450000","minPrice":"450000"}]
+2022_01_25_13:37:02 | 검색모델명 : gq17vnwwjn | 검색된 정보 : []
+2022_01_25_13:37:09 | 검색모델명 : fq17vnwwjn | 검색된 정보 : []
+2022_01_25_13:37:20 | 검색모델명 : fq17v8wwjn | 검색된 정보 : [{"_id":{},"idx":"5669","category2":"가전","category3":"에어컨","brand":"LG전자","year":"2018년","model_name":"fq17v8wwjn","model_code":"fq17v8wwjn","avgPrice":"450000","count":"1","maxPrice":"450000","minPrice":"450000"}]
+2022_01_25_13:37:37 | 검색모델명 : fq17v8wwjn | 검색된 정보 : [{"_id":{},"idx":"5669","category2":"가전","category3":"에어컨","brand":"LG전자","year":"2018년","model_name":"fq17v8wwjn","model_code":"fq17v8wwjn","avgPrice":"450000","count":"1","maxPrice":"450000","minPrice":"450000"}]

@@ -1,0 +1,47 @@
+.Mobile_btn{
+    padding-bottom: 50px;
+    border-bottom: 13px solid #ececec;
+}
+.Mobile_btn h2{
+    font-family: 'NanumSquare';
+    padding: 25px 20px 10px 20px;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 3rem;
+    color: #000;
+}
+.Mobile_btn div{
+    margin: 0 20px;
+}
+.Mobile_btn ul{
+    margin: 0 -10px -10px 0;
+}
+.Mobile_btn li{
+    position: relative;
+    width: 50%;
+    float: left;
+}
+.Mobile_btn li a{
+    margin: 0px 10px 6px 0px;
+    border: 1px solid #dddddd42;
+    box-shadow: rgb(0 0 0 / 10%) 1px 3px 4px 0px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.Mobile_btn li span{
+    font-family: 'NanumSquare';
+    left: 14px;
+    top: 20px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    position: absolute;
+}
+.Mobile_btn li p{
+    font-family: 'NanumSquare';
+    left: 14px;
+    top: 44px;
+    color:#999;
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    position: absolute;
+}

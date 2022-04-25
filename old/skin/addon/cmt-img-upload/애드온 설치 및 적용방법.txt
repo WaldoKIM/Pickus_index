@@ -1,0 +1,87 @@
+﻿
+---------------------------------------------------------------
+
+■ 설치방법
+
+---------------------------------------------------------------
+
+1. 다운로드 후 폴더채 압축을 푼 후 _api.php 파일을 자신에게 맞도록 수정해 줍니다.
+
+2. 그런 후 /skin/addon 폴더에 폴더 채 올려 줍니다. (/skin/addon/cmt-img-upload)
+
+
+---------------------------------------------------------------
+
+■ _api.php 파일 설정법 
+
+---------------------------------------------------------------
+
+// 업로드 가능한 최대 파일크기(MB)
+$is_max_upload = 2;
+
+// 비회원 업로드 허용 : 상품댓글은 회원만 이미지 등록가능하도록 자동설정됨
+$is_guest_upload = false;
+
+// 이미지파일(JPG/GIF/PNG)만 업로드 허용 : false 설정시 이미지외 파일은 일반첨부로 서버에 등록됨(/data/editor 폴더)
+$is_img_upload = true;
+
+// Imgur 업로드 사용 : 미사용시 에디터 이미지와 동일하게 /data/editor 폴더에 직접첨부됨
+$is_imgur_upload = true;
+
+// Imgur Client ID 등록
+$imgur_client_id = "";
+
+
+
+---------------------------------------------------------------
+
+■ 게시물 댓글 적용방법
+
+---------------------------------------------------------------
+
+1. 보드스킨 내 내용스킨(view.skin.php) 파일을 열어서 제일 하단에 아래와 같이 애드온을 호출합니다.
+
+<?php echo apms_addon('cmt-img-upload');?>
+
+2. 보드스킨 내 댓글스킨의 댓글등록폼에 아래와 같이 이미지 등록창을 호출하기 위한 버튼을 넣어 줍니다.
+
+<span class="cursor" title="이미지등록" data-toggle="modal" data-target="#cmtImageUpload">
+	<i class="fa fa-picture-o fa-lg"></i><span class="sound_only">이미지등록</span>
+</span>
+
+또는
+
+<button type="button" class="btn btn-black btn-sm" data-toggle="modal" data-target="#cmtImageUpload">
+	이미지 등록
+</button>
+
+
+※ 중요한 것은 넣은 버튼 또는 아이콘에 data-toggle="modal" data-target="#cmtImageUpload" 를 추가해서 등록창을 호출하도록 하는 것입니다.
+
+
+
+---------------------------------------------------------------
+
+■ 상품설명 댓글 적용방법
+
+---------------------------------------------------------------
+
+1. /skin/apms/item 폴더 내 상품스킨 내 item.skin.php 파일을 열어서 제일 하단에 아래와 같이 애드온을 호출합니다.
+
+<?php echo apms_addon('cmt-img-upload');?>
+
+2. 상품스킨 내 댓글스킨의 댓글등록폼에 아래와 같이 이미지 등록창을 호출하기 위한 버튼을 넣어 줍니다.
+
+<span class="cursor" title="이미지등록" data-toggle="modal" data-target="#cmtImageUpload">
+	<i class="fa fa-picture-o fa-lg"></i><span class="sound_only">이미지등록</span>
+</span>
+
+또는
+
+<button type="button" class="btn btn-black btn-sm" data-toggle="modal" data-target="#cmtImageUpload">
+	이미지 등록
+</button>
+
+
+※ 중요한 것은 넣은 버튼 또는 아이콘에 data-toggle="modal" data-target="#cmtImageUpload" 를 추가해서 등록창을 호출하도록 하는 것입니다.
+ 

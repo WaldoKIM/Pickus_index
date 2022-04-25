@@ -1,0 +1,1 @@
+2022_01_20_16:42:31 | 검색모델명 : TR16VK | 검색된 정보 : [{"_id":{},"idx":"9046","category2":"가전","category3":"세탁기","brand":"LG전자","year":"2019년","model_name":"TR16VK","model_code":"TR16VK","avgPrice":"350000","count":"3","maxPrice":"150000","minPrice":"100000"}]

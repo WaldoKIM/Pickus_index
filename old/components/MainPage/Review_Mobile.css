@@ -1,0 +1,199 @@
+.Review_Mobile{
+  background-color: #fff;
+  margin-bottom: 50px;
+  border-bottom: 13px solid #ececec;
+}
+.Review_Mobile h2{
+    font-family: 'NanumSquare';
+    padding: 5px 20px 10px 20px;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 3rem;
+    color: #000;
+}
+.Review_Mobile h3{
+    font-family: 'NanumSquare';
+    padding: 50px 20px 0px 20px;
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    color: #1379CD;
+}
+.Review_Mobile p {
+    font-family: 'NanumSquare';
+    color: #333;
+}
+.Review_Mobile p span{
+    line-height: 25px;
+}
+.Review_Mobile p strong{
+    font-size: 1.8rem;
+    font-weight: bold !important;
+    line-height: 2.6rem;
+    color: #1379CD;
+}
+.Review_Mobile_title{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* ==========================================================================
+Custom Card
+========================================================================== */
+.swiper-counter-wrap {
+    display:none;
+    position: relative;
+    bottom: 20px;
+    width: 30px;
+    text-align: center;
+    left: 20px;
+    padding: 5px 7px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9;.lunchbox-tab .swiper-slide
+    border-radius: 5px;
+}
+
+.hotel-detail-facilities-tabs-card {
+    background: var(--color-light);
+    color: #4f4f4f;
+    font-size: 1em;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #dddddd42;
+    box-shadow: rgb(0 0 0 / 14%) 17px 13px 20px 3px;
+    transition: box-shadow 0.3s ease-in-out;
+    margin: 0 20px;
+}
+.hotel-detail-facilities-tabs-card-name{
+    padding: 15px 0;
+}
+}
+.hotel-detail-facilities-tabs-card:hover {
+    box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.2);
+}
+
+.hotel-detail-facilities-tabs-card::after {
+    box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    /* hide the hover shadow */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.hotel-detail-facilities-tabs-card:hover::after {
+    opacity: 1;
+    /* show the hover shadow */
+}
+
+.img-responsive.hotel-detail-facilities-tabs-card-image {
+    border-radius: 8px 8px 0 0;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: auto;
+    display: block;
+    /* if parent is flex it will stretch this image */
+    /* align-self: center; */
+}
+
+img.img-responsive.hotel-detail-facilities-tabs-card-image {
+    width: 100%;
+    height: 100%;
+}
+
+.hotel-detail-facilities-tabs-card-times {
+    padding-top: 15px;
+}
+
+.hotel-detail-facilities-tabs-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.hotel-detail-facilities-tabs-card-details {
+    flex: 1 0 auto;
+}
+
+.hotel-detail-facilities-tabs-card-times {
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+/* ==========================================================================
+Swiper Customization
+========================================================================== */
+
+.swiper-wrapper {
+    display: flex;
+}
+
+.lunchbox-tab .swiper-slide {
+    height: auto;
+    padding: 0px !important;
+}
+
+.lunchbox-tab .swiper-slide>div {
+    height: 100%;
+    background-color: #fff;
+    padding: 30px 40px;
+}
+
+.lunchbox-tab {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.swiper-pagination {
+    display:none;
+    position: relative;
+    padding-top: 20px;
+    bottom: 0 !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    outline: none;
+}
+
+.swiper-button-next:before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%230e63f3'%2F%3E%3C%2Fsvg%3E");
+    background-position: 50% 50%;
+}
+
+.swiper-button-prev:before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%230e63f3'%2F%3E%3C%2Fsvg%3E");
+    background-position: 50% 50%;
+}
+
+.swiper-button-next:before,
+.swiper-button-prev:before {
+    content: "";
+    background-size: 27px 32px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    background-repeat: no-repeat;
+    transform: translateY(-35px);
+    -ms-transform: translateY(-35px);
+    -webkit-transform: translateY(-35px);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background: none;
+    width: 60px;
+    height: 100%;
+    margin-top: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-button-next {
+    right: 0;
+}

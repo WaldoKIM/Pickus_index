@@ -1,0 +1,198 @@
+.order_border{margin-bottom: 30px !important; overflow: hidden;
+    box-sizing: border-box;
+    
+    width: 100%;
+    padding: 10px;
+    float: left;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    box-shadow: 2px 3px 5px #ccc;
+
+}
+    
+
+.request{border: 3px solid #ffe4b3b2; background-color:#ffe4b383 ;}
+.answer{border: 3px solid #b9faff7e ;}
+
+.order_form{
+    text-overflow:unset;
+    white-space:normal;
+    overflow:visible;
+    text-align: left;
+    width: 100%;    
+}
+
+
+.order_form .product_list_form{
+padding-top: 10px;
+}
+
+
+
+.qnacontentbox{padding: 10px 5px 5px 5px;}
+
+.qnatitle{
+    width: 100%;
+    display: block;
+    color: #423d39;
+    font-weight: 600;
+    font-size: 2rem;
+    
+    margin-bottom: 5px;
+    margin-left: 15px;
+    letter-spacing: -0.15rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 2rem;
+}
+
+.qnasubtitle{
+    width: 100%;
+    display: block;
+    color: #fe8e3a;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.15rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 2rem;
+}
+
+.product_list_form .product_list_content .gdsname{font-size: 2rem;font-family: 'GoyangDeogyang'; line-height: 2.4rem; color: #465058}
+
+.qnacontent{
+    padding: 5px 0 0 0;
+    font-size: 2rem;
+    letter-spacing: -0.05em;    
+    line-height: 3.6rem;
+    margin-bottom: 5px;
+    border: 1px solid transparent !important
+}
+
+
+.answerform{clear: both;}
+.qnasubtitle2{
+    width: 100%;
+    display: block;
+    color:#1379cd;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    padding-right: 15px;
+    letter-spacing: -0.15rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 2rem;
+    text-align: right;
+}
+
+.zonatxt{font-size: 2rem; color: black; border:none !important; height: fit-content; min-height: 200px;}
+
+.fixbtnwrap{display: block; width: 100%; position: fixed; left:0; bottom: 0; z-index: 9;}
+
+.menusmall_btn4, .menusmall_btn3 {margin: 0; padding: 0; height: 40px; font-size: 2rem; line-height: 4rem;}
+.okbtn {font-size: 2.4rem; height: 5.6rem; line-height: 5.6rem;}
+.nahbtn {background-color:#fe8e3a !important; font-size: 2.4rem; height: 5.6rem; line-height: 5.6rem;}
+
+
+
+/* 여기부턴 대체로 구매후기 화면 관련 with KJS Dance 20220315 */
+
+.product_list_content i{color: #ffc12f;}
+.order_check .left_gnb {margin-top: 60px;}
+.product_list_form{display: flex;}
+.product_list_img{width: 40%; display: flex; align-content: center; max-height:150px;}
+.product_list_form img{width: 100%; object-fit: cover; border-radius:15px;}
+.qnacontent .gdsname {font-size: 2rem; font-weight: 700; margin-bottom: 10px;}
+
+
+
+.order_btn_area{
+
+}
+
+.order_btn_area .bckbtn{
+    width: 100%;
+float: left;
+    color: #fff;    
+        font-size: 2.4rem;    
+    height: 5.6rem;
+    line-height: 5.6rem;
+    font-weight: 400;
+    background: #1379cd;
+    border-radius: 5px;
+border-top-left-radius: 5px !important;
+border-top-right-radius: 5px !important;    
+}
+
+.order_btn_area .bckbtn1, .order_btn_area .bckbtn2, .order_btn_area .bckbtn3{
+    width: 33.3%;
+float: left;
+    color: #fff;    
+        font-size: 2.4rem;    
+    height: 5.6rem;
+    line-height: 5.6rem;
+    font-weight: 400;    
+    border-radius: 5px;
+border-top-left-radius: 5px !important;
+border-top-right-radius: 5px !important;    
+}
+.order_btn_area .bckbtn1{background: #1379cd;}
+.order_btn_area .bckbtn2{background: #fe8e3a;}
+.order_btn_area .bckbtn3{background: #465058 ;}
+
+
+#blog{margin-top: 30px;}
+
+.order_check .left_gnb ul.menu li{width: 15%;}
+.order_check .left_gnb ul.menu li button{font-size: 1.4rem; line-height: 72px; padding-bottom: 0;}
+
+.main{margin-bottom: 200px;}
+
+.order_border .product_list_content p{font-size: 1.8rem}
+
+.main .tit{
+font-size: 2.4rem;
+padding: 10px 0;
+font-family: 'GoyangDeogyang';
+color: #465058;
+width: 100;
+margin-bottom: 5px;
+}
+
+.order_check .left_gnb ul.menu li button.sensbutton-checked, .order_check .left_gnb ul.menu li button{background: none; border: none; width: 100%; height: 100%; color: #fff;
+    font-family: 'Goyang';
+    }
+    .order_check .left_gnb ul.menu li:nth-child(1) {background-image:url("/img//mobile/profile_w.png"); width:10vw; height:10vw;
+     top: 170px; left: 23%;
+    background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    margin-left: 12vw;
+    }
+    .order_check .left_gnb ul.menu li:nth-child(2) {background-image:url("/img//mobile/like_w.png"); width:10vw; height:10vw;
+     top: 280px; left: 23%; background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    margin-left: 12vw;}
+    .order_check .left_gnb ul.menu li:nth-child(3) {background-image:url("/img//mobile/request_w.png"); width:10vw; height:10vw;
+     top: 280px; right: 5%;  background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    margin-left: 12vw;}
+    .order_check .left_gnb ul.menu li:nth-child(4) {background-image:url("/img//mobile/box_w.png"); width:10vw; height:10vw;
+     top: 280px; right:30%; background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    
+    margin-left: 12vw;}
+    .order_check .left_gnb ul.menu{background-color: rgba(0, 0, 0, 0.488); padding-top: 20px; padding-bottom: 20px;}
+
+    @media(min-width:769px){
+    .fixbtnwrap{display: block; width: 100%; position: relative; left:0; bottom: 0; z-index: 9;}
+    }

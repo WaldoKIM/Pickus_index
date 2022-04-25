@@ -1,0 +1,183 @@
+	
+	.requst_list{margin: 0 auto; background-color: #fff; padding: 30px;}  
+	
+	input[type=text], input[type=password], input[type=search], input[type=email], input[type=number], input[type=tel]:focus{border:0 !important;}
+	.col-md-2{width: 30%;}
+	.col-md-10{width: 70%;}
+	.tab li{border-bottom: 3px solid #ccc !important;}
+	.tab li.on a h4{color: #fff !important;}
+	
+	.tab_area .tab li{border-bottom: 1px solid #ececec; border-radius: 18px;}
+	.tab_area .tab{max-width: 800px; margin:8rem auto 0;}
+	.tab_area .tab .main_bg.on h4{color: #fff;}
+	.tab_area .tab .on{background-color: #1379cd; }
+	.tab_area .tab .on a{color: #fff;}
+	.top_list{border-top: 2px solid #1379cd; background-color: #fff; margin: 20px auto;}
+	.req_list{width: 100%; overflow: hidden; border:1px solid #ededed; border-radius: 10px; margin-top: 2%; padding: 15px; box-shadow: 2px 3px 5px #ccc;}
+
+	.top_list th{
+	    padding: 5px 0;
+	    background-color: #eee;
+	    text-align: center;
+		font-size: 2.4rem;
+		font-weight: 400;
+		line-height: 2.4rem;
+	}
+	.top_list td{border-bottom: 1px solid #ddd;padding: 15px 0;
+		font-size: 20px;
+		font-weight: 700;
+		background-color: #ffffff;
+	    text-align: center;}
+		
+	.icon_star{margin-bottom: 10px;}	
+
+	#board .view table th{padding: 15px 0;
+	    background: #eee;
+	    text-align: center;
+		font-size: 2rem;
+    font-weight: 400;
+	
+	}
+	#board .view table td{text-align: center; font-size: 1.8rem;}
+	.esti_list .req_list p{margin-bottom: 10px;}
+    .guide_estimate{margin-top: 3rem;}
+    .m025050{margin: 0 25px 0 50px;}
+    .m025025{margin: 0 25px 0 25px;}
+    .m050025{margin: 0 50px 0 25px;}
+
+	.htitle {font-size: 31px;}
+	.hdesc {text-align: center; font-size: 14px; color: rgb(102, 102, 102); line-height: 16px;}
+	.tab_area .tab .mnone {display: inline; color: inherit; font-size: 2.4rem; line-height:  16px; font-family: 'GoyangDeogyang';}
+	.src_select {font-size: 1.2rem !important;}
+
+	.sub_title h1{margin-top: 4rem;}
+
+
+@media(max-width: 768px){
+	.top_list th{font-size: 2rem;}
+	#board .view table th{font-size: 1.8rem;}
+	#board .view table td{font-size: 1.4rem;}
+	.sub_title h1{margin-top: 0;}
+	.tab_area .tab{max-width: 800px; margin: 0 auto;}
+	.matitle{width: 125%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+	.starcol{width: 140%;}
+        .m025050{margin: 0;}
+        .m025025{margin: 0;}
+        .m050025{margin: 0;}
+		.top_list{font-size: 12px}
+
+		.top_list td{
+			font-size: 2rem;
+			font-weight: 700;			
+			text-align: center;}
+
+		.icon_star{margin-bottom: auto;}
+		.tab_area .tab .mnone {display: none;}		
+    }
+
+
+
+
+
+
+    /*출금 신청 내역 화면 with KJS dance 20220218*/
+	.wallet_settle_flex {padding: 20px 0 10px 0;}
+	.wallet_settle_font {font-family : 'NanumSquare','NanumSquareR'}
+	.wallet_settle_border{width: 100%;}
+    .wallet_settle_border .tabs{float: left; text-align: left;}
+	.wallet_settle_border .status_req{width: 100px; text-align: center; border-radius: 20px;  background-color: #1379cd;  color: #fff; font-size: 2rem;  float: right; margin-right: 1rem;}
+	.wallet_settle_border .notyet{background-color: #ff7800;}	
+	.wallet_settle_border .status_req .sub_tt{color: #fff; line-height: 3rem; font-size: 1.6rem; padding: 0; width: auto;}
+	.tabletd_all {padding: 0; line-height: normal;}
+	.rdate{font-size: 2rem;
+		   font-weight: 400;
+		   letter-spacing: -0.05em;
+		   padding-left: 5%;
+		   text-align: left;
+		margin-bottom: 10px; }
+
+	.rvalu {font-size: 1.8rem;
+			font-weight: 400;	
+			padding-left: 5%;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			letter-spacing: -0.05em;
+			width:30%
+		}
+
+	.rvalut {font-size: 1.8rem; color: #1379cd; margin-bottom: 5px; margin-top: 5px; font-weight: 700;}
+
+	.rinfo  {font-size: 1.4rem;
+		padding-left: 5%;
+		line-height: 3rem;
+		font-weight: 400;
+		width:30%	
+		}
+	.rinfot{font-size: 1.4rem;
+		
+		line-height: 3rem;}
+
+	.wlstbtn{
+	padding: 0.5em 0.8em 0.3em 0.8em;
+    margin-right: 0.2em;
+    background-color: #09C0EF;
+    border: 1px solid #08A9D2;
+    border-radius: 1px;
+    color: #ffffff;
+    font-size: 11pt;
+    line-height: 30px;
+    background: -moz-linear-gradient(top, #08A9D2 0%, #08A9D2 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#08A9D2), color-stop(100%,#08A9D2));
+    background: -webkit-linear-gradient(top, #09C0EF 0%,#08A9D2 100%);
+    background: -o-linear-gradient(top, #09C0EF 0%,efefefddd 100%);
+    background: -ms-linear-gradient(top, #09C0EF 0%,#08A9D2 100%);
+    background: linear-gradient(top, #09C0EF 0%,#08A9D2 100%);
+}	
+.sub_title .main_co a i{
+    color: #1379cd;
+}
+
+.dateft {text-align:center;  margin: auto; width: 100%;}
+
+.dateft .selut {width: 20%;}
+
+
+
+.noco{float: none !important; margin: auto!important; border:none !important; box-shadow: none !important;}
+  .nocon{width:100%; }
+  .noconicon{width: 160px; margin: 2vw auto;}
+  .noconicon i {color: rgba(140, 210, 248, 0.568);}
+  .nocon p{width: 180px; margin: auto; color: midnightblue; box-sizing: content-box;}
+  .nocon .donde{width:263px; margin-top: 3vw;}
+  .nocon .donde a {color: rgb(157, 161, 168);}
+  .nocon .donde a i{font-size: 1.5rem;}
+  .tab_area .tab h4{font-size: 2.4rem; font-family: 'GoyangDeogyang'}
+  .sub_title .tit_desc {font-size: 2.4rem; line-height: 2.4rem;}
+   @media(max-width: 768px){
+	.tab_area .tab h4{font-size: 2rem; }      
+     .nocon{width:100%; min-height: 300px;}
+  .noconicon{width: 160px; margin: 10vw auto;}
+  .noconicon i {color: rgba(140, 210, 248, 0.568); font-size: 100px;}
+  .nocon p{width: 220px; margin: auto; color: midnightblue; box-sizing: content-box;
+  line-height: 2rem;}
+  .nocon .donde{width:263px; margin-top: 10vw;}
+  .nocon .donde a {color: rgb(157, 161, 168);}
+  .nocon .donde a i{font-size: 1.5rem;}
+  .sub_title .tit_desc {
+  font-size: 1.8rem;
+    word-break: keep-all;
+    line-height: 2rem;
+    margin-top: 1rem;
+  	}
+
+  }
+
+  .member .container{margin-bottom: 10%;}
+
+ 
+
+  .tab_area{margin-top: 2rem;}
+
+  .assoff {margin-bottom: 200px;}
+
+  .tab li a{padding: 5px 0;}
