@@ -108,7 +108,6 @@ if (G5_IS_MOBILE) {
 
     </div>
 </div>
-<div class="mask"></div>
 
 <script>
     $(function() {
