@@ -31,9 +31,9 @@
 .main_banner .mb_slide4{background-image: url(../img/main/banner4.jpg);}
 
 
-.main_banner .swiper-button-prev, .main_banner .swiper-button-next{ margin-top: 0; width: 80px; height: 80px;     border: 1px solid rgba(255,255,255,0.4); -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); ;} 
-.main_banner .swiper-button-prev{} 
-.main_banner .swiper-button-prev:after{color: #fff;} 
+.main_banner .swiper-button-prev, .main_banner .swiper-button-next{ margin-top: 0; width: 80px; height: 80px;  -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); ;} 
+.main_banner .swiper-button-prev{}
+.main_banner .swiper-button-prev:after{color: #fff;}
 .main_banner .swiper-button-next{}
 .main_banner .swiper-button-next:after{color: #fff;}
 
@@ -49,10 +49,10 @@
 
 
 
-.main_banner .banner_tit .desc{margin: 30px 0 0; color: #fff; font-size: 24px; line-height: 30px; font-weight: 300; word-break: keep-all; text-align: center;} 
+.main_banner .banner_tit .desc{margin: 30px 0 0; color: #fff; font-size: 24px; line-height: 30px; font-weight: 300; word-break: keep-all; text-align: center;}
 
 .main_banner .banner_tit .view_more{margin: 50px auto 0; position: relative; width: 180px; height: 60px;}
-.main_banner .banner_tit .view_more a{width: 100%; line-height: 60px; color: #444; text-align: center; font-size: 16px; font-weight: 700; transition-duration: 0.3s; transition-timing-function: ease-in-out; background: #fff;} 
+.main_banner .banner_tit .view_more a{width: 100%; line-height: 60px; color: #444; text-align: center; font-size: 16px; font-weight: 700; transition-duration: 0.3s; transition-timing-function: ease-in-out; background: #fff;}
 
 .main_banner .banner_tit .view_more:hover a{background: #444; color: #fff;}
 /*ie9 banner*/
@@ -430,21 +430,21 @@
     .tit_area .view_more{margin: 25px auto 0; width: 155px; height: 40px;}
     .tit_area .view_more a{line-height: 40px; font-size: 13px;}
 
-    
+
     .main_banner .banner_tit{padding: 0 20px; margin-top: 10px;}
     .main_banner .banner_tit h2{font-size: 90px;}
     .main_banner .banner_tit .desc{margin: 15px 0 0; width: 100%; font-size: 16px; line-height: 22px;}
-    
+
     .main_banner .banner_tit .view_more{margin: 35px auto 0; width: 150px; height: 50px;}
-    .main_banner .banner_tit .view_more a{line-height: 50px; font-size: 15px;} 
-    
-   
+    .main_banner .banner_tit .view_more a{line-height: 50px; font-size: 15px;}
+
+
     .main_banner .swiper-button-prev{left: 10px;}
     .main_banner .swiper-button-next{right: 10px;}
     .main_banner .swiper-container-horizontal>.swiper-pagination-bullets, .main_banner .swiper-pagination-custom, .main_banner .swiper-pagination-fraction{bottom: 60px;}
     .main_sec{padding: 70px 0 90px;}
-    
-    
+
+
     .main_sec1 .text_box .num{font-size: 20px; line-height: 30px;}
     .main_sec1 .text .main_tit{font-size: 18px; line-height: 30px;}
     .main_sec1 .text .desc{font-size: 13px; line-height: 18px;}
@@ -468,22 +468,22 @@
     .main_banner .banner_tit .desc{margin: 15px auto 0; width: 80%;}
 
     .main_banner .swiper-container-horizontal>.swiper-pagination-bullets, .main_banner .swiper-pagination-custom, .main_banner .swiper-pagination-fraction{bottom: 40px;}
-    
+
 
     .main_banner .swiper-button-prev{left: 0;}
     .main_banner .swiper-button-next{right: 0;}
-    
+
     .main_sec{padding: 60px 0 80px;}
-    
-    
+
+
     .main_sec1 .list_area li{width: 100%; display: table;}
     .main_sec1 .list_area li:first-child{margin: 0 0 20px 0;}
     .main_sec1 .figure_box{float: none; width: 50%; display: table-cell;}
     .main_sec1 .text_box{float: none; display: table-cell; padding: 0 0 0 20px; width: 50%; vertical-align: middle; text-align: center;}
     .main_sec1 .text .main_tit{margin: 0 0 10px; text-align: left; word-break: keep-all;}
     .main_sec1 .text .desc{text-align: left;}
-    
-    
+
+
     .main_sec2{padding: 0 !important;}
     .main_sec2 .list_area ul {height: auto;}
     .main_sec2 .list_area li{padding: 50px 0; width: 100%;}
@@ -510,14 +510,14 @@
     .main_sec1 .figure_box{width: 100%; display: block;}
     .main_sec1 .text_box{display: block; margin-top: 0; padding: 30px 0 30px; width: 100%;}
     .main_sec1 .text_box .text{padding-left: 5px;}
-    
+
     .main_sec3 .tit_area .desc br{display: none;}
 
     .main_sec6 .box-info {padding: 20px 18px;}
     .main_sec6 .long-list2 {padding-left: 0;}
-    
 
-    
+
+
 }
 @media screen and (max-width:480px){
     .tit_area .sub_tit{margin-bottom: 0; font-size: 13px;}
@@ -525,45 +525,34 @@
     .tit_area .desc{margin: 15px auto 0; font-size: 13px; line-height: 20px;}
     .tit_area .view_more{width: 130px; height: 30px;}
     .tit_area .view_more a{line-height: 30px; font-size: 12px;}
-    
-    
+
+
     .main_banner .mb_slide{height: 550px;}
     .main_banner .banner_tit{margin-top: 20px; width: 100%;}
     .main_banner .banner_tit h2{font-size: 50px; letter-spacing: 5px;}
     .main_banner .banner_tit .desc{font-size: 14px; line-height: 18px;}
-    
+
     .main_banner .banner_tit .view_more{width: 130px; height: 40px;}
-    .main_banner .banner_tit .view_more a{line-height: 40px; font-size: 14px;} 
-    
-    
+    .main_banner .banner_tit .view_more a{line-height: 40px; font-size: 14px;}
+
+
     .main_banner .swiper-container-horizontal>.swiper-pagination-bullets, .main_banner .swiper-pagination-custom, .main_banner .swiper-pagination-fraction{bottom: 20px;}
     .main_sec{padding: 50px 0 70px;}
 
-    
-    
+
+
     .main_sec1 .list_area{margin-top: 40px;}
     .main_sec1 .text_box .main_tit{margin: 0 0 5px; font-size: 16px;}
     .main_sec1 .text_box .desc{font-size: 12px; line-height: 16px;}
-    
-    
 
-    
-    
-    
+
+
+
+
+
     .main_sec2 .list_area li{padding: 30px 0;}
-    
+
 
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
