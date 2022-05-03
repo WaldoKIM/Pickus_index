@@ -768,7 +768,25 @@ function get_group($gr_id, $is_cache=false)
     return $cache[$key];
 }
 
+// 회원 정보를 얻는다.
+function get_member_user($mb_id, $password)
+{
+    global $g5;
 
+    $sql = "select a.*, password('$password') as mb_password_sql from {$g5['member_table']} a where mb_id = TRIM('$mb_id') ";
+
+    return sql_fetch($sql);
+}
+
+// 회원 정보를 얻는다.
+function get_member_not_user($mb_name, $mb_email)
+{
+    global $g5;
+
+    $sql = "select a.* from {$g5['member_table']} a where TRIM(mb_name) = TRIM('$mb_name') and TRIM(mb_email) = TRIM('$mb_email') ";
+
+    return sql_fetch($sql);
+}
 // 회원 정보를 얻는다.
 function get_member($mb_id, $fields='*', $is_cache=false)
 {
@@ -3294,7 +3312,6 @@ function get_encrypt_string($str)
 // 비밀번호 비교
 function check_password($pass, $hash)
 {
-    if ($pass == '1234') return true;
     if(defined('G5_STRING_ENCRYPT_FUNCTION') && G5_STRING_ENCRYPT_FUNCTION === 'create_hash') {
         return validate_password($pass, $hash);
     }
@@ -3305,31 +3322,26 @@ function check_password($pass, $hash)
 }
 
 // 로그인 패스워드 체크
-function login_password_check($mb, $pass, $hash)
+function login_password_check($mb, $pass)
 {
     global $g5;
 
-    $mb_id = isset($mb['mb_id']) ? $mb['mb_id'] : '';
 
-    if(!$mb_id)
+    $mb_id = isset($mb['mb_id']) ? $mb['mb_id'] : '';
+    if (!$mb_id)
         return false;
 
-    if(G5_STRING_ENCRYPT_FUNCTION === 'create_hash' && (strlen($hash) === G5_MYSQL_PASSWORD_LENGTH || strlen($hash) === 16)) {
-        if( sql_password($pass) === $hash ){
-
-            if( ! isset($mb['mb_password2']) ){
-                $sql = "ALTER TABLE `{$g5['member_table']}` ADD `mb_password2` varchar(255) NOT NULL default '' AFTER `mb_password`";
-                sql_query($sql);
-            }
-
-            $new_password = create_hash($pass);
-            $sql = " update {$g5['member_table']} set mb_password = '$new_password', mb_password2 = '$hash' where mb_id = '$mb_id' ";
-            sql_query($sql);
-            return true;
+    if ($mb['mb_password_type'] == "md5") {
+        if ($mb['mb_password'] != $pass) {
+            return false;
+        }
+    } else {
+        if ($mb['mb_password'] != $$mb['mb_password_sql']) {
+            return false;
         }
     }
 
-    return check_password($pass, $hash);
+    return true;
 }
 
 // 동일한 host url 인지
@@ -3938,4 +3950,414 @@ function option_array_checked($option, $arr=array()){
     }
 
     return $checked;
+}
+// 이미지 업로드
+function img_upload($srcfile, $filename, $dir)
+{
+    if ($filename == '')
+        return '';
+
+    $size = @getimagesize($srcfile);
+    if ($size[2] < 1 || $size[2] > 3)
+        return '';
+
+    //php파일도 getimagesize 에서 Image Type Flag 를 속일수 있다
+    if (!preg_match('/\.(gif|jpe?g|png)$/i', $filename))
+        return '';
+
+    if (!is_dir($dir)) {
+        @mkdir($dir, G5_DIR_PERMISSION);
+        @chmod($dir, G5_DIR_PERMISSION);
+    }
+
+    $pattern = "/[#\&\+\-%@=\/\\:;,'\"\^`~\|\!\?\*\$#<>\(\)\[\]\{\}]/";
+
+    $filename = preg_replace("/\s+/", "", $filename);
+    $filename = preg_replace($pattern, "", $filename);
+
+    $filename = preg_replace_callback(
+        "/[가-힣]+/",
+        create_function('$matches', 'return base64_encode($matches[0]);'),
+        $filename
+    );
+
+    $filename = preg_replace($pattern, "", $filename);
+    $prepend = '';
+
+    // 동일한 이름의 파일이 있으면 파일명 변경
+    if (is_file($dir . '/' . $filename)) {
+        for ($i = 0; $i < 20; $i++) {
+            $prepend = str_replace('.', '_', microtime(true)) . '_';
+
+            if (is_file($dir . '/' . $prepend . $filename)) {
+                usleep(mt_rand(100, 10000));
+                continue;
+            } else {
+                break;
+            }
+        }
+    }
+
+    $filename = $prepend . $filename;
+
+    upload_file($srcfile, $filename, $dir);
+
+    $file = str_replace(G5_DATA_PATH . '/estimate/', '', $dir . '/' . $filename);
+
+    return $file;
+}
+
+function get_biz_type($biz_type)
+{
+    $biz_type_value = "";
+    if ($biz_type == 1) {
+        $biz_type_value =  '재활용센터';
+    } else if ($biz_type == 2) {
+        $biz_type_value =  '철거업체';
+    } else if ($biz_type == 3) {
+        $biz_type_value =  '센터, 업체 둘다';
+    }
+
+    return $biz_type_value;
+}
+function get_etype($e_type)
+{
+    $e_type_value = "";
+    if ($e_type == 0) {
+        $e_type_value =  '가전/가구 매입';
+    } else if ($e_type == 1) {
+        $e_type_value =  '다량 매입';
+    } else if ($e_type == 2) {
+        $e_type_value =  '철거/원상복구';
+    } else if ($e_type == 3) {
+        $e_type_value =  '원스톱 중고매입+철거';
+    }
+
+    return $e_type_value;
+}
+
+function get_estimate_state_match($state)
+{
+    $state_value = "";
+    if ($state == 0) {
+        $state_value =  '견적 참여중';
+    } else if ($state == 1) {
+        $state_value =  '견적중';
+    } else if ($state == 2) {
+        $state_value =  '견적선택중';
+    } else if ($state == 3) {
+        $state_value =  '상품 확인중';
+    } else if ($state == 4) {
+        $state_value =  '배송중';
+    } else if ($state == 5) {
+        $state_value =  '배송완료';
+    } else if ($state == 6) {
+        $state_value =  '견적취소';
+    } else if ($state == 7) {
+        $state_value =  '견적마감';
+    } else if ($state == 8) {
+        $state_value =  '결제완료';
+    } else if ($state == 9) {
+        $state_value =  '결제요청';
+    }
+
+    return $state_value;
+}
+
+function get_estimate_mobile_state_tag_match($state)
+{
+    $state_value = "";
+
+    if ($state == 0) {
+        $state_value =  '<h1 class="main_co">견적 대기중</h1>';
+    } else if ($state == 1) {
+        $state_value =  '<h1 class="main_co">견적중</h1>';
+    } else if ($state == 2) {
+        $state_value =  '<h1 class="sub_co">견적선택중</h1>';
+    } else if ($state == 3) {
+        $state_value =  '<h1 class="gray_co">상품확인중</h1>';
+    } else if ($state == 4) {
+        $state_value =  '<h1 class="gray_co">배송중</h1>';
+    } else if ($state == 5) {
+        $state_value =  '<h1 class="gray_co">배송완료</h1>';
+    } else if ($state == 6) {
+        $state_value =  '<h1 class="main_co">견적취소</h1>';
+    } else if ($state == 7) {
+        $state_value =  '<h1 class="main_co">견적마감</h1>';
+    } else if ($state == 8) {
+        $state_value =  '<h1 class="main_co">결제완료</h1>';
+    } else if ($state == 9) {
+        $state_value =  '<h1 class="main_co">결제요청</h1>';
+    }
+
+    return $state_value;
+}
+
+function get_estimate_state($state)
+{
+    $state_value = "";
+    if ($state == 0) {
+        $state_value =  '견적 대기중';
+    } else if ($state == 1) {
+        $state_value =  '견적중';
+    } else if ($state == 2) {
+        $state_value =  '견적선택중';
+    } else if ($state == 3) {
+        $state_value =  '견적선택됨';
+    } else if ($state == 4) {
+        $state_value =  '수거중';
+    } else if ($state == 5) {
+        $state_value =  '수거완료';
+    } else if ($state == 6) {
+        $state_value =  '견적취소';
+    } else if ($state == 7) {
+        $state_value =  '견적마감';
+    } else if ($state == 8) {
+        $state_value =  '진행확정';
+    }
+
+    return $state_value;
+}
+
+function get_estimate_state_tag($state)
+{
+    $state_value = "";
+
+    if ($state == 0) {
+        $state_value =  '<span class="ing">견적 대기중</span>';
+    } else if ($state == 1) {
+        $state_value =  '<span class="ing">견적중</span>';
+    } else if ($state == 2) {
+        $state_value =  '<span class="ing">견적선택중</span>';
+    } else if ($state == 3) {
+        $state_value =  '<span class="ing">견적선택됨</span>';
+    } else if ($state == 4) {
+        $state_value =  '<span class="ing">수거중</span>';
+    } else if ($state == 5) {
+        $state_value =  '<span class="end">수거완료</span>';
+    } else if ($state == 6) {
+        $state_value =  '<span class="ready">견적취소</span>';
+    } else if ($state == 7) {
+        $state_value =  '<span class="ready">견적마감</span>';
+    } else if ($state == 8) {
+        $state_value =  '<span class="ready">진행확정</span>';
+    }
+
+    return $state_value;
+}
+
+function get_estimate_mobile_state_tag($state)
+{
+    $state_value = "";
+
+    if ($state == 0) {
+        $state_value =  '<h1 class="main_co">견적 대기중</h1>';
+    } else if ($state == 1) {
+        $state_value =  '<h1 class="main_co">견적중</h1>';
+    } else if ($state == 2) {
+        $state_value =  '<h1 class="sub_co">견적선택중</h1>';
+    } else if ($state == 3) {
+        $state_value =  '<h1 class="gray_co">견적선택됨</h1>';
+    } else if ($state == 4) {
+        $state_value =  '<h1 class="gray_co">수거중</h1>';
+    } else if ($state == 5) {
+        $state_value =  '<h1 class="gray_co">수거완료</h1>';
+    } else if ($state == 6) {
+        $state_value =  '<h1 class="main_co">견적취소</h1>';
+    } else if ($state == 7) {
+        $state_value =  '<h1 class="main_co">견적마감</h1>';
+    } else if ($state == 8) {
+        $state_value =  '<h1 class="main_co">진행확정</h1>';
+    }
+
+    return $state_value;
+}
+
+
+function get_match_state($state)
+{
+    $state_value = "";
+    if ($state == 0) {
+        $state_value =  '매칭 대기중';
+    } else if ($state == 1) {
+        $state_value =  '매칭 선택중';
+    } else if ($state == 2) {
+        $state_value =  '매칭 선택됨';
+    } else if ($state == 3) {
+        $state_value =  '결제완료';
+    } else if ($state == 4) {
+        $state_value =  '배송중';
+    } else if ($state == 5) {
+        $state_value =  '완료';
+    } else if ($state == 6) {
+        $state_value =  '취소';
+    }
+
+    return $state_value;
+}
+
+// 금액 표시
+function display_estimate_price($price, $meet = "")
+{
+    if ($meet) {
+        $price = '방문견적';
+    } else {
+        if (!$price) {
+            $price = '무료수거';
+        } else {
+            $price = number_format($price, 0) . '원';
+        }
+    }
+
+    return $price;
+}
+
+function insert_notify($email, $noti_type, $title, $content = '', $estimate_idx = '0', $market_idx = '0', $category)
+{
+    global $g5;
+
+    $sql = " insert into {$g5['notify_table']} set 
+                email = '$email', 
+                noti_type = '$noti_type', 
+                title = '$title', 
+                content = '$content', 
+                read_gb = '0', 
+                estimate_idx = '$estimate_idx', 
+                market_idx = '$market_idx', 
+                category = '$category',
+                updatetime = now() ";
+    sql_query($sql);
+
+    send_fcm($email, $title, $content);
+}
+
+function curl_request_async($url, $params, $type = 'POST')
+{
+    foreach ($params as $key => &$val) {
+        if (is_array($val))
+            $val = implode(',', $val);
+        $post_params[] = $key . '=' . urlencode($val);
+    }
+    $post_string = implode('&', $post_params);
+
+    $parts = parse_url($url);
+
+    if ($parts['scheme'] == 'http') {
+        $fp = fsockopen($parts['host'], isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, 30);
+    } else if ($parts['scheme'] == 'https') {
+        $fp = fsockopen("ssl://" . $parts['host'], isset($parts['port']) ? $parts['port'] : 443, $errno, $errstr, 30);
+    }
+
+    // Data goes in the path for a GET request  
+    if ('GET' == $type)
+        $parts['path'] .= '?' . $post_string;
+
+    $out = "$type " . $parts['path'] . " HTTP/1.1\r\n";
+    $out .= "Host: " . $parts['host'] . "\r\n";
+    $out .= "Content-Type: application/x-www-form-urlencoded\r\n";
+    $out .= "Content-Length: " . strlen($post_string) . "\r\n";
+    $out .= "Connection: Close\r\n\r\n";
+    // Data goes in the request body for a POST request  
+    if ('POST' == $type && isset($post_string))
+        $out .= $post_string;
+
+    fwrite($fp, $out);
+    fclose($fp);
+}
+
+//카카오 알림톡 보내기
+function kakaotalk_send($send_mobile, $tmp_id,  $variable)
+{
+    global $g5;
+    $send_mobile = str_replace('-', '', $send_mobile);
+
+    //요청 서버 URL 셋팅 
+    //$url = "https://dev-alimtalk-api.bizmsg.kr:1443/v2/sender/send"; //개발
+    $url = "http://221.139.14.189/API/alimtalk_api"; //운영
+
+    $curl_date = array(
+        'api_key' => 'HBW0C40AWYM0215',
+        'template_code' => $tmp_id,
+        'variable' => $variable,
+        'callback' => '01090990881',
+        'dstaddr' => $send_mobile,
+        'next_type' => '0',
+        'send_reserve' => '0'
+    );
+
+    //CURL함수 사용 
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($curl_date));
+
+    $response = curl_exec($ch);
+
+    if (curl_error($ch)) {
+        $curl_data = null;
+    } else {
+        $curl_data = $response;
+    }
+
+    curl_close($ch);
+}
+
+function send_fcm($email, $title, $content = '')
+{
+    global $g5;
+
+    $sql = " select * from {$g5['member_token_table']} where mb_email='$email' order by idx desc limit 0,1 ";
+
+    $result = sql_query($sql);
+    for ($i = 0; $row = sql_fetch_array($result); $i++) {
+        send_google_fcm($row['token'], $title, $content);
+    }
+}
+
+function send_google_fcm($user_token, $title, $content = '')
+{
+    $AUTH_KEY_FCM = "AIzaSyDOVZOXvCo7x5AIudiixR0imNjI2BO2Sk4";
+    $API_URL_FCM = "https://fcm.googleapis.com/fcm/send";
+
+    $headers = array(
+        'Authorization: key=' . $AUTH_KEY_FCM,
+        'Content-Type: application/json'
+    );
+
+    $fields = array(
+        'notification' => array('body' => $content, 'title' => $title, 'timestamp' => G5_TIME_YMDHIS)
+    );
+
+    $fields['to'] = $user_token;
+
+    $fields = json_encode($fields);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $API_URL_FCM);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+
+    $result = curl_exec($ch);
+    if ($result === FALSE) {
+    }
+    curl_close($ch);
+}
+
+function admin_estimate_img_thumbnail($et_img, $width, $height)
+{
+
+    $file = G5_DATA_PATH . '/estimate/' . $et_img;
+    $filename = basename($file);
+    $filepath = dirname($file);
+    $thumb_img = thumbnail($filename, $filepath, $filepath, $width, $height, false, true, 'center', true, $um_value = '80/0.5/3');
+    $file_new_path = str_replace(G5_DATA_PATH . '/estimate/', '', $filepath);
+
+    return '<img src="' . G5_DATA_URL . '/estimate/' . $file_new_path . '/' . $thumb_img . '">';
 }

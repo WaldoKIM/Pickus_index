@@ -6,6 +6,10 @@ if (G5_IS_MOBILE) {
     include_once(G5_THEME_MOBILE_PATH.'/index.php');
     return;
 }
+$sql = "select sum(price) As totalprice from g5_estimate_propose";
+$amtInfo = sql_fetch($sql);
+$sql = "select count(idx) As totalestimate from g5_estimate_list";
+$estimateInfo = sql_fetch($sql);
 
 include_once(G5_THEME_PATH.'/head.php');
 ?>
@@ -32,9 +36,10 @@ include_once(G5_THEME_PATH.'/head.php');
                         }">
                     </div>
                     <div class="banner_tit inner">
-                        <h2>지속가능한 자원</h2>
-                        <p class="desc">피커스는 지속가능한 미래를 만들기 위해
+                        <h2><?php echo number_format($estimateInfo['totalestimate']); ?>건</h2>
+                        <p class="desc">피커스와 함께 지구를 구한 수
                              <br>끈임없이 노력합니다.</p>
+                             
                         <div class="view_more">
                             <a href="#">Learn More</a>
                         </div>
@@ -42,8 +47,8 @@ include_once(G5_THEME_PATH.'/head.php');
                 </div>
                 <div class="swiper-slide mb_slide mb_slide1">
                     <div class="banner_tit inner">
-                        <h2>일반배너</h2>
-                        <p class="desc">일반배너 테스트입니다.</p>
+                        <h2><?php echo number_format($amtInfo['totalprice']); ?>원</h2>
+                        <p class="desc">피커스에서 입찰된 견적 총합</p>
                         <div class="view_more">
                             <a href="#">Learn More</a>
                         </div>
@@ -97,7 +102,7 @@ include_once(G5_THEME_PATH.'/head.php');
                     clickable: true,
                 },
                  autoplay: {
-                    delay: 8000,
+                    delay: 8000000,
                     disableOnInteraction: false,
                 },
             });

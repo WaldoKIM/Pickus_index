@@ -3,16 +3,33 @@ include_once('./_common.php');
 
 $g5['title'] = "로그인 검사";
 
-$mb_id       = isset($_POST['mb_id']) ? trim($_POST['mb_id']) : '';
-$mb_password = isset($_POST['mb_password']) ? trim($_POST['mb_password']) : '';
+$login_gubun      = trim($_POST['mb_login_gubun']);
+$url              = trim($_POST['url']);
+$mb_id            = trim($_POST['mb_id']);
+$mb_name          = trim($_POST['mb_name']);
+$mb_password      = trim($_POST['mb_password']);
+$mb_password_temp = trim($_POST['mb_password_md5']);
+$saveid           = trim($_POST['save_id']);
 
-run_event('member_login_check_before', $mb_id);
-
-if (!$mb_id || !$mb_password)
-    alert('회원아이디나 비밀번호가 공백이면 안됩니다.');
-
-$mb = get_member($mb_id);
-
+if($login_gubun == "1"){
+    if (!$mb_id || !$mb_password){
+        alert('회원아이디나 비밀번호가 공백이면 안됩니다.(1)');
+    }
+    //$mb = get_member($mb_id);
+    $mb = get_member_user($mb_id, $password);
+}else if($is_social_password_check){
+	$mb = get_member($mb_id);
+	//echo $mb_id;
+	//print_r($mb);
+}else{
+    if (!$mb_id || !$mb_name){
+        alert('이메일이나 성명이 공백이면 안됩니다.');
+    }
+    $mb = get_member_not_user($mb_name, $mb_id);
+		if($mb['mb_level'] != 8){
+				alert('회원입니다. 회원 로그인으로 접속해주세요.');
+		}
+}
 //소셜 로그인추가 체크
 
 $is_social_login = false;
@@ -31,11 +48,25 @@ if(function_exists('social_is_login_check')){
 // 가입된 회원이 아니다. 비밀번호가 틀리다. 라는 메세지를 따로 보여주지 않는 이유는
 // 회원아이디를 입력해 보고 맞으면 또 비밀번호를 입력해보는 경우를 방지하기 위해서입니다.
 // 불법사용자의 경우 회원아이디가 틀린지, 비밀번호가 틀린지를 알기까지는 많은 시간이 소요되기 때문입니다.
-if (!$is_social_password_check && (! (isset($mb['mb_id']) && $mb['mb_id']) || !login_password_check($mb, $mb_password, $mb['mb_password'])) ) {
+if($login_gubun == "1"){
+	if(!$is_social_password_check && ( !$mb['mb_id'] ||  !login_password_check($mb, $mb_password_temp))){
 
-    run_event('password_is_wrong', 'login', $mb);
+			run_event('password_is_wrong', 'login', $mb);
+			alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 123대소문자를 구분합니다.');
 
-    alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 대소문자를 구분합니다.');
+	}
+}else{
+    if (!$is_social_password_check && !$mb['mb_id']) {
+
+        run_event('password_is_wrong', 'login', $mb);
+
+        alert('비회원 정보가 없습니다.(1)');
+    }else{
+        if($mb['mb_level'] != 8){
+            run_event('password_is_wrong', 'login', $mb);
+            //alert('비회원 정보가 없습니다.(2)');
+        }
+    }
 }
 
 // 차단된 아이디인가?
@@ -56,12 +87,18 @@ if ( is_use_email_certify() && !preg_match("/[1-9]/", $mb['mb_email_certify'])) 
     confirm("{$mb['mb_email']} 메일로 메일인증을 받으셔야 로그인 가능합니다. 다른 메일주소로 변경하여 인증하시려면 취소를 클릭하시기 바랍니다.", G5_URL, G5_BBS_URL.'/register_email.php?mb_id='.$mb_id.'&ckey='.$ckey);
 }
 
+// 업체 승인 안된 아이디
+if($mb['mb_level'] == 1 && $mb['mb_photo'] != ''){
+	alert('관리자 승인 후 이용 가능합니다');
+}
+
 run_event('login_session_before', $mb, $is_social_login);
 
 @include_once($member_skin_path.'/login_check.skin.php');
 
 // 회원아이디 세션 생성
 set_session('ss_mb_id', $mb['mb_id']);
+set_session('ss_mb_password', $mb['mb_password']);
 // FLASH XSS 공격에 대응하기 위하여 회원의 고유키를 생성해 놓는다. 관리자에서 검사함 - 110106
 set_session('ss_mb_key', md5($mb['mb_datetime'] . get_real_client_ip() . $_SERVER['HTTP_USER_AGENT']));
 
@@ -86,6 +123,13 @@ if (isset($auto_login) && $auto_login) {
 } else {
     set_cookie('ck_mb_id', '', 0);
     set_cookie('ck_auto', '', 0);
+}
+
+//이메일 기억하기
+if($saveid == 1){
+    set_cookie("save_mb_id", $mb['mb_id'], 365);
+}else{
+    set_cookie("save_mb_id", "", 0);
 }
 
 if ($url) {

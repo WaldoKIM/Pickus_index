@@ -141,6 +141,7 @@ include_once(G5_LIB_PATH.'/hook.lib.php');    // hook 함수 파일
 include_once(G5_LIB_PATH.'/get_data.lib.php');    // 데이타 가져오는 함수 모음
 include_once(G5_LIB_PATH.'/cache.lib.php');     // cache 함수 및 object cache class 모음
 include_once(G5_LIB_PATH.'/uri.lib.php');    // URL 함수 파일
+include_once(G5_LIB_PATH.'/estimate.lib.php');    // 견적 함수 파일
 
 $g5_object = new G5_object_cache();
 

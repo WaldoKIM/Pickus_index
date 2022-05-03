@@ -90,7 +90,7 @@ var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 <script src="<?php echo G5_JS_URL ?>/placeholders.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.3.8/js/swiper.min.js" integrity="sha512-2zMI2fi89JcUksrmozsywzC0tcEJAACDO/WQHxjm3hzTnG9rgGiVRUwOAbN7Pc8b8/n3Q2+Q39Ih1JOQwAiBeA==" crossorigin="anonymous"></script>
-
+<script src="<?php echo G5_JS_URL ?>/md5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/embed-js/5.0.4/embed.min.js" integrity="sha512-sCZMeavhBnVDQVJse3hbdJWLWQQf/XjMsIYOnAOT4zv5OEixbj852LeoHl+wZMZBWSbhvmkVSJd7kr2ACEqP3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.1/jquery.mb.YTPlayer.min.js"></script>
