@@ -55,6 +55,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                     </div>
                 </div>
                 <button type="submit" class="login_submit">로그인</button>
+                <a href="<?php echo G5_BBS_URL; ?>/register.php" class="lost_info" style="margin-right: 5%;">회원가입</a>
+                <a href="<?php echo G5_BBS_URL; ?>/find_id.php" class="lost_info">회원정보찾기</a>
             </fieldset> 
         </form>
         <?php @include_once(get_social_skin_path().'/social_login.skin.php'); // 소셜로그인 사용시 소셜로그인 버튼 ?>
