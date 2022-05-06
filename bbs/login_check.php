@@ -26,9 +26,9 @@ if($login_gubun == "1"){
         alert('이메일이나 성명이 공백이면 안됩니다.');
     }
     $mb = get_member_not_user($mb_name, $mb_id);
-		if($mb['mb_level'] != 8){
-				alert('회원입니다. 회원 로그인으로 접속해주세요.');
-		}
+	if($mb['mb_level'] != 8){
+		alert('회원입니다. 회원 로그인으로 접속해주세요.');
+	}
 }
 //소셜 로그인추가 체크
 
@@ -50,21 +50,16 @@ if(function_exists('social_is_login_check')){
 // 불법사용자의 경우 회원아이디가 틀린지, 비밀번호가 틀린지를 알기까지는 많은 시간이 소요되기 때문입니다.
 if($login_gubun == "1"){
 	if(!$is_social_password_check && ( !$mb['mb_id'] ||  !login_password_check($mb, $mb_password_temp))){
-
-			run_event('password_is_wrong', 'login', $mb);
-			alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 123대소문자를 구분합니다.');
-
+        run_event('password_is_wrong', 'login', $mb);
+		alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 123대소문자를 구분합니다.');
 	}
 }else{
     if (!$is_social_password_check && !$mb['mb_id']) {
-
         run_event('password_is_wrong', 'login', $mb);
-
         alert('비회원 정보가 없습니다.(1)');
     }else{
         if($mb['mb_level'] != 8){
             run_event('password_is_wrong', 'login', $mb);
-            //alert('비회원 정보가 없습니다.(2)');
         }
     }
 }
@@ -116,7 +111,7 @@ if (isset($auto_login) && $auto_login) {
     // 3.27
     // 자동로그인 ---------------------------
     // 쿠키 한달간 저장
-    $key = md5($_SERVER['SERVER_ADDR'] . $_SERVER['SERVER_SOFTWARE'] . $_SERVER['HTTP_USER_AGENT'] . $mb['mb_password']);
+    $key = md5($_SERVER['SERVER_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . $mb['mb_password']);
     set_cookie('ck_mb_id', $mb['mb_id'], 86400 * 31);
     set_cookie('ck_auto', $key, 86400 * 31);
     // 자동로그인 end ---------------------------
