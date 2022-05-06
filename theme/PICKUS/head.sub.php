@@ -86,7 +86,7 @@ var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 <script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<script src=""></script>
+<script type="text/javascript" src="<?php echo G5_JS_URL ?>/array-data.js"></script>
 <script src="<?php echo G5_JS_URL ?>/placeholders.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.3.8/js/swiper.min.js" integrity="sha512-2zMI2fi89JcUksrmozsywzC0tcEJAACDO/WQHxjm3hzTnG9rgGiVRUwOAbN7Pc8b8/n3Q2+Q39Ih1JOQwAiBeA==" crossorigin="anonymous"></script>
