@@ -780,3 +780,100 @@ $(function() {
         return true;
     });
 });
+
+var photo_count = 0;
+
+function doInitImage2(vHeight)
+    {//with KJS dance 중고 판매 매칭 업체 상세견적서 작성시 사진 무한 업로드 차단 20220117 *AAA 
+    //   alert(photo_count);
+        if(photo_count>=6){
+            alert('최대 6개 까지 등록 가능합니다');
+        return false
+        }
+        var vHtml = "";
+        vHtml += "<div class='estimate_photo col-md-4 text-center'>";
+        vHtml += "<input type='file' name='photo[]' accept='image/*' style='height: "+vHeight+";' class='estimate_photo_file'/>";
+        vHtml += "<div class='estimate_image_click_bg'>";
+        vHtml += "<img src='../img/common/estimate_icon_image_info.png'/>";
+        vHtml += "<p>사진파일 업로드</p>";
+        vHtml += "</div>";
+        
+        $("#imageList").append(vHtml);
+        
+        $(".estimate_photo_file").bind('change', function() {
+            var fv_file = this.files[0].name;
+            var fv_type = fv_file.substring(fv_file.length-3,fv_file.length);
+            fv_type = fv_type.toUpperCase();
+            
+            if(fv_type=="PEG"||fv_type=="JPG"||fv_type=="PNG"||fv_type=="GIF"||fv_type=="BMP")
+            {
+                var $el_div = $(this).closest(".estimate_photo");
+                loadImage(
+                    this.files[0],
+                    function (img) {
+                        //업로드 된 사진 클릭 차단으로 사진 중복 업로드 방지  with KJS dance *BBB                    
+                        $el_div.find(".estimate_photo_file").css("pointer-events","none");
+                        
+                        $el_div.find(".estimate_image_click_bg").remove();
+                        var vHtml2 = "";
+
+                        vHtml2 += "<div class='estimate_image_del_bg'><a href='javascript:' class='estimate_photo_file_remove'><i class='xi-close-min'></i></a></div>";
+                        $el_div.append(vHtml2);  
+                        $el_div.append(img);     
+                    }, {orientation:true,maxWidth: 150}
+                )
+                photo_count++;      
+                
+                doInitImage2(vHeight);   
+            
+
+            }else{
+                alert("이미지 파일만 업로드 가능합니다.");
+            }
+        });
+    }
+
+        //사진 업로드 하다 지우면 지운 수 만큼 최대 사진 수가 늘어나는 현상차단   with KJS dance *CCC
+        $(document).on("click", ".estimate_photo_file_remove", function(vHeight) {
+        var photos = $(this).closest(".estimate_photo");
+//        alert(photo_count);
+//최대 업로드 된 상태에서 삭제를 한 경우 다시 업로드 기능 활성화   with KJS dance *DDD
+        if(photo_count>=6){
+            photos.remove();
+            photo_count = photo_count-1;
+            doInitImage2(vHeight);
+            //alert(photo_count);
+            }
+            else{
+        photos.remove();
+        photo_count = photo_count-1;
+//        alert(photo_count);
+            }
+        });
+
+    function cfnNullCheckSelect(val, txt)
+    {
+        if(!val)
+        {
+            alert(txt+"을(를) 선택하십시오.");
+            return false;
+        }
+        
+        return true;
+    }
+    
+    function cfnNullCheckInput(val, txt)
+    {
+        if(!val)
+        {
+            alert(txt+"을(를) 입력하십시오.");
+            return false;
+        }
+        
+        return true;
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
