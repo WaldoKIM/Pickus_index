@@ -57,6 +57,36 @@ function get_paging($write_pages, $cur_page, $total_page, $url, $add="")
         return "";
 }
 
+// 한페이지에 보여줄 행, 현재페이지, 총페이지수, URL
+function get_paging_shop_List($write_pages, $cur_page, $total_page, $state, $marea1, $marea2 , $e_type , $memberlvl, $idx, $add = "")
+{
+    //$url = preg_replace('#&amp;page=[0-9]*(&amp;page=)$#', '$1', $url);
+    //$url = preg_replace('#(&amp;)?page=[0-9]*#', '', $url);
+    //$url .= substr($url, -1) === '?' ? 'page=' : '&amp;page=';
+
+    $str = '<span>';
+
+    $start_page = (((int)(($cur_page - 1) / $write_pages)) * $write_pages) + 1;
+    $end_page = $start_page + $write_pages - 1;
+
+    if ($end_page >= $total_page) $end_page = $total_page;
+
+    if ($start_page > 1) $str .= "<a href='javascript:goShopList(".($start_page - 1).",".$state.",\"".$marea1."\",\"".$marea2."\",".$e_type.",".$memberlvl.",".$idx.")' class='prev'></a>" . PHP_EOL;
+
+    if ($total_page > 1) {
+        for ($k = $start_page; $k <= $end_page; $k++) {
+            if ($cur_page != $k)
+                $str .= "<a href='javascript:goShopList(". $k  .",".$state.",\"".$marea1."\",\"".$marea2."\",".$e_type.",".$memberlvl.",".$idx.")'>" . $k ."</a>" . PHP_EOL;
+            else
+                $str .= "<a href='javascript:goShopList(". $k  .",".$state.",\"".$marea1."\",\"".$marea2."\",".$e_type.",".$memberlvl.",".$idx.")' class='on'>". $k ."</a>" . PHP_EOL;
+        }
+    }
+
+    if ($total_page > $end_page) $str .= "<a href='javascript:goShopList(".($end_page + 1).",".$state.",\"".$marea1."\",\"".$marea2."\",".$e_type.",".$memberlvl.",".$idx.")' class='next'></a>" . PHP_EOL;
+
+    return $str;
+}
+
 // 페이징 코드의 <nav><span> 태그 다음에 코드를 삽입
 function page_insertbefore($paging_html, $insert_html)
 {
