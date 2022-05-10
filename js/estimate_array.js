@@ -58,6 +58,33 @@ var states = [["0","견적 대기중"],
 
 var bankTypes = [["농협","302-1237-9285-41"]];
 
+function cfNvl2(value, defaultValue)
+{
+	var result = false;
+	if( value == "" ) {
+		result =  true;
+	}
+	if( value == "null" ) {
+		result =  true;
+	}
+
+	if( value == null ) {
+		result =  true;
+	}
+
+	if( /^\s+$/.test(value) ) {
+		value = "";
+		result =  true;
+	}
+	if(result)
+	{
+		return defaultValue;
+	}else{
+		return value;
+	}
+
+}
+
 function cfnBizTypesCombo(defaultValue)
 {
 	
@@ -107,7 +134,7 @@ function cfnBizTypes(compId, val, url)
 			checked = "current";
 		}
 		vHtml +="<li class='"+checked+" col-xs-4'>";
-		vHtml +="<a href='"+url+"?biztype="+bizTypes[i][0]+"'>";
+		vHtml +="<a href='"+url+"&biztype="+bizTypes[i][0]+"'>";
 		vHtml +=bizTypes[i][1];
 		vHtml +="</a>";
 		vHtml +="</li>";
@@ -145,10 +172,10 @@ function cfnGoodsItem(compId, val, yearVal)
 	$("#"+compId).html("");
 	var vHtml ="";
 	//var vHtml1 ="";
+	vHtml  +="<ul>";
 	for(var i=0; i<goodsItems.length; i++)
 	{
-		vHtml  +="<div class='col-md-"+goodsItems[i][0]+"'>";
-		vHtml  +="<div class='row'>";
+		vHtml  +="<div class='itemselect'>";
 
 		var checked = "";
 		var idx = arrVal.indexOf(goodsItems[i][1]);
@@ -158,12 +185,12 @@ function cfnGoodsItem(compId, val, yearVal)
 			checked = "checked";
 		}
 
-		vHtml  +="<div class='col-xs-8 col-md-12'>";
-		vHtml  +="<input type='checkbox' class='css-input-radio-checkbox' name='goodsItem' id='goodsItem"+i+"' value='"+goodsItems[i][1]+"'"+checked+"/>";
-		vHtml  +="<label for='goodsItem"+i+"' class='css-input-radio-checkbox-label'>"+goodsItems[i][1]+"</label>";
+		vHtml  +="<div class='itemselect-button'>";
+		vHtml  +="<input type='checkbox' class='itemselect-input-radio-checkbox' name='goodsItem' id='goodsItem"+i+"' value='"+goodsItems[i][1]+"'"+checked+"/>";
+		vHtml  +="<label for='goodsItem"+i+"' class='itemselect-input-radio-checkbox-label'>"+goodsItems[i][1]+"</label>";
 		vHtml  +="</div>";
 		
-		vHtml  +="<div class='col-xs-8 col-md-12'>";
+		vHtml  +="<div class='itemselect-year'>";
 		if(idx >= 0)
 		{
 			yearValue = arrYearVal[idx];
@@ -184,8 +211,8 @@ function cfnGoodsItem(compId, val, yearVal)
 		vHtml  +="</div>";
 		
 		vHtml  +="</div>";
-		vHtml  +="</div>";
 	}
+	vHtml  +="</ul>";
 	$("#"+compId).html(vHtml);
 	
 
@@ -207,7 +234,7 @@ function cfnRemoveItem(compId, val, removeEtc)
 	
 	$("#"+compId).html("");
 	var vHtml ="";
-	vHtml +="<ul class='row list'>";
+	vHtml +="<ul>";
 	for(var i=0; i<removeItems.length; i++)
 	{
 		var checked = "";
@@ -215,27 +242,29 @@ function cfnRemoveItem(compId, val, removeEtc)
 		{
 			checked = "checked";
 		}
-		vHtml +="<li class='col-xs-3 col-md-2'>";
-		vHtml +="<input type='checkbox' class='css-input-radio-checkbox' name='removeItem' id='removeItem"+i+"' value='"+removeItems[i]+"'"+checked+"/>";
-		vHtml +="<label for='removeItem"+i+"' class='css-input-radio-checkbox-label'>"+removeItems[i]+"</label>";
+		vHtml +="<li class='itemselect'>";
+		vHtml +="<div class='itemselect-button'>";
+		vHtml +="<input type='checkbox' class='itemselect-input-radio-checkbox' name='removeItem' id='removeItem"+i+"' value='"+removeItems[i]+"'"+checked+"/>";
+		vHtml +="<label for='removeItem"+i+"' class='itemselect-input-radio-checkbox-label'>"+removeItems[i]+"</label>";
+		vHtml +="</div>";
 		vHtml +="</li>";
 	}
-	vHtml +="</ul>";
 	var checked = "";
 	var vHtml1 = "";
 	if(arrVal.indexOf("기타") >= 0)
 	{
 		checked = "checked";
-		vHtml1 = "<input type='text' class='input_default' id='removeEtc' aria-describedby='기타입력' placeholder='기타입력' value='"+removeEtc+"'>";
+		vHtml1 = "<input type='text' class='frm_input full_input' id='removeEtc' aria-describedby='기타입력' placeholder='기타입력' value='"+removeEtc+"'>";
 	}else{
-		vHtml1 = "<input type='text' class='input_default' id='removeEtc' aria-describedby='기타입력' placeholder='기타입력' value='"+removeEtc+"' style='display:none;'>";
+		vHtml1 = "<input type='text' class='frm_input full_input' id='removeEtc' aria-describedby='기타입력' placeholder='기타입력' value='"+removeEtc+"' style='display:none;'>";
 	}	
-	vHtml +="<ul class='row list'>";
-	vHtml +="<li class='col-xs-3 col-md-2'>";
-	vHtml +="<input type='checkbox' class='css-input-radio-checkbox' name='removeItem' id='removeItem"+removeItems.length+"' value='기타'"+checked+"/>";
-	vHtml +="<label for='removeItem"+i+"' class='css-input-radio-checkbox-label'>기타</label>";
+	vHtml +="<li class='itemselect'>";
+	vHtml +="<div class='itemselect-button'>";
+	vHtml +="<input type='checkbox' class='itemselect-input-radio-checkbox' name='removeItem' id='removeItem"+removeItems.length+"' value='기타'"+checked+"/>";
+	vHtml +="<label for='removeItem"+i+"' class='itemselect-input-radio-checkbox-label'>기타</label>";
+	vHtml +="</div>";
 	vHtml +="</li>";
-	vHtml +="<li class='col-xs-9 col-md-10'>";
+	vHtml +="<li class='itemselect'>";
 	vHtml +=vHtml1;
 	vHtml +="</li>";
 	vHtml +="</ul>";
@@ -288,7 +317,6 @@ function cfnGetETypes(val)
 
 function cfnStatesCombo(defaultValue)
 {
-	
 	var vHtml ="";
 	if(defaultValue)
 	{

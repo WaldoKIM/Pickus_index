@@ -128,11 +128,12 @@ function prohibit_mb_email($reg_mb_email)
 function exist_mb_email($reg_mb_email, $reg_mb_id)
 {
     global $g5;
-    $row = sql_fetch(" select count(*) as cnt from `{$g5['member_table']}` where mb_email = '$reg_mb_email' and mb_id <> '$reg_mb_id' ");
-    if ($row['cnt'])
+    $sql = " select count(*) as cnt from `{$g5['member_table']}` where mb_email = '$reg_mb_email' ";
+    $row = sql_fetch(" select count(*) as cnt from `{$g5['member_table']}` where mb_email = '$reg_mb_email' ");
+    if ($row['cnt'] > 0)
         return "이미 사용중인 E-mail 주소입니다.";
     else
-        return "";
+        return "사용할수있음";
 }
 
 function empty_mb_name($reg_mb_name)

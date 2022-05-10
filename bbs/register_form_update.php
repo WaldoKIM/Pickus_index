@@ -115,14 +115,14 @@ if(!$mb_name){
     $mb_name = $mb_biz_name;
 }
 //회원별 지역을 추가한다.
-$sql = " delete from {$g5['member_area_table']} where mb_id = '$mb_id' ";
+$sql = " delete from g5_member_area where mb_id = '$mb_id' ";
 sql_query($sql);
 $area_count = (isset($_POST['mb_area1']) && is_array($_POST['mb_area1'])) ? count($_POST['mb_area1']) : 0;
 if($area_count) {
     for($i=0; $i<$area_count; $i++) {
         $area1     = $_POST['mb_area1'][$i];
         $area2     = $_POST['mb_area2'][$i];
-        $sql = " insert into {$g5['member_area_table']} set mb_id = '$mb_id', mb_area1='$area1', mb_area2='$area2' ";
+        $sql = " insert into g5_member_area set mb_id = '$mb_id', mb_area1='$area1', mb_area2='$area2' ";
         sql_query($sql);
     }
 }
