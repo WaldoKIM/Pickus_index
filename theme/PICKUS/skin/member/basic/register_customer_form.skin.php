@@ -454,6 +454,9 @@ jQuery(function($){
     }).on("mouseout", ".tooltip_icon", function(e){
         $(this).next(".tooltip").fadeOut();
     });
+	$("#reg_mb_hp").inputFilter(function(value) {
+			return /^\d*$/.test(value);
+		});
 });
 
 </script>

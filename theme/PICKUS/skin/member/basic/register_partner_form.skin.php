@@ -1,8 +1,20 @@
 <?php
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
+$biztype = $_GET['biztype'];
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 0);
+
+if (!$biztype) {
+	$biztype = "1";
+}
+
+$sql = " select area1 from {$g5['estimate_area1']} order by idx ";
+$result = sql_query($sql);
+
+for ($i=0; $row=sql_fetch_array($result); $i++){
+	echo '<option value="'.$row['area1'].'">'.$row['area1'].'</option>';
+}
 ?>
 
 <!-- 회원정보 입력/수정 시작 { -->
@@ -31,7 +43,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 	<script src="<?php echo G5_JS_URL ?>/certify.js?v=<?php echo G5_JS_VER; ?>"></script>
 	<?php } ?>
 
-		<form id="fregisterform" name="fregisterform" action="<?php echo $register_action_url ?>" onsubmit="return fregisterform_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off">
+		<form id="fregisterform" name="fregisterform" action="<?php echo $register_action_url ?>" method="post" enctype="multipart/form-data" autocomplete="off">
 		<input type="hidden" name="w" value="<?php echo $w ?>">
 		<input type="hidden" name="url" value="<?php echo $urlencode ?>">
 		<input type="hidden" name="agree" value="<?php echo $agree ?>">
@@ -75,7 +87,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                         <input type="text" id="mb_biz_name" name="mb_biz_name" <?php echo $required ?> class="frm_input full_input required" aria-describedby="센터이름" placeholder="센터이름">
                     </li>
                     <li>
-						<label for="reg_mb_email">E-mail<strong class="sound_only">필수</strong>
+						<label for="mb_email">E-mail<strong class="sound_only">필수</strong>
 						<?php if ($config['cf_use_email_certify']) {  ?>
 						<button type="button" class="tooltip_icon"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span class="sound_only">설명보기</span></button>
 						<span class="tooltip">
@@ -85,21 +97,21 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 						<?php } ?>
 						</label>
 						<input type="hidden" name="old_email" value="<?php echo $member['mb_email'] ?>">
-						<input type="text" name="mb_email" value="<?php echo isset($member['mb_email'])?$member['mb_email']:''; ?>" id="reg_mb_email" required class="frm_input email full_input required" size="70" maxlength="100" placeholder="E-mail">
+						<input type="text" name="mb_email" value="<?php echo isset($member['mb_email'])?$member['mb_email']:''; ?>" id="mb_email" required class="frm_input email full_input required" size="70" maxlength="100" placeholder="E-mail">
 					</li>
 					<li class=" left_input margin_input">
 						<label for="reg_mb_password">비밀번호<strong class="sound_only">필수</strong></label>
-						<input type="password" name="password_new" id="reg_mb_password" <?php echo $required ?> class="frm_input full_input <?php echo $required ?>" minlength="3" maxlength="20" placeholder="비밀번호">
+						<input type="password" name="password_new" id="password_new" <?php echo $required ?> class="frm_input full_input <?php echo $required ?>" minlength="3" maxlength="20" placeholder="비밀번호">
 					</li>
 					<li class=" left_input">
-						<label for="reg_mb_password_re">비밀번호 확인<strong class="sound_only">필수</strong></label>
-						<input type="password" name="password_new_re" id="reg_mb_password_re" <?php echo $required ?> class="frm_input full_input <?php echo $required ?>" minlength="3" maxlength="20" placeholder="비밀번호 확인">
+						<label for="password_new_re">비밀번호 확인<strong class="sound_only">필수</strong></label>
+						<input type="password" name="password_new_re" id="password_new_re" <?php echo $required ?> class="frm_input full_input <?php echo $required ?>" minlength="3" maxlength="20" placeholder="비밀번호 확인">
 					</li>
 					<li>
 					<?php if ($config['cf_use_hp'] || $config['cf_cert_hp']) {  ?>
-						<label for="reg_mb_hp">센터전화번호<?php if ($config['cf_req_hp']) { ?><strong class="sound_only">필수</strong><?php } ?></label>
+						<label for="mb_hp">센터전화번호<?php if ($config['cf_req_hp']) { ?><strong class="sound_only">필수</strong><?php } ?></label>
 						
-						<input type="text" name="mb_hp" value="<?php echo get_text($member['mb_hp']) ?>" id="reg_mb_hp" <?php echo ($config['cf_req_hp'])?"required":""; ?> class="frm_input full_input <?php echo ($config['cf_req_hp'])?"required":""; ?>" maxlength="20" placeholder="센터전화번호">
+						<input type="text" name="mb_hp" value="<?php echo get_text($member['mb_hp']) ?>" id="mb_hp" <?php echo ($config['cf_req_hp'])?"required":""; ?> class="frm_input full_input <?php echo ($config['cf_req_hp'])?"required":""; ?>" maxlength="20" placeholder="센터전화번호">
 						<?php if ($config['cf_cert_use'] && $config['cf_cert_hp']) { ?>
 						<input type="hidden" name="old_mb_hp" value="<?php echo get_text($member['mb_hp']) ?>">
 						<?php } ?>
@@ -142,8 +154,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 								<option value="경남은행">경남은행</option>
 								<option value="기타은행입력">기타은행입력</option>
 							</select>
+						<div class="form-group">
 						<input id="mb_bank_txt" class="frm_input" style="display: none" type="text" name="mb_bank_txt" placeholder="은행명">
+						</div>
 						<input type="number" id="mb_bank_num" class="frm_input full_input" name="mb_bank_num" aria-describedby="계좌번호" placeholder="정산계좌번호">
+					</li>
+					<li>
+						<label for="mb_biz_num">사업자번호<strong class="sound_only">필수</strong></label>
+						<input type="number" id="mb_biz_num" name="mb_biz_num" aria-describedby="사업자번호" placeholder="사업자번호">
 					</li>
 					<li>
 						<label for="mb_photo_bizcard">사업자등록증<strong class="sound_only">필수</strong></label>
@@ -176,7 +194,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 				<h2>견적설정</h2>
 				<ul>
 					<li class=" left_input">
-						<label for="mb_biz_worker_name">수거/철거 주 지역<br>* 여러 지역 설정이 가능합니다.<strong class="sound_only">필수</strong></label>
+						<label>수거/철거 주 지역<br>* 여러 지역 설정이 가능합니다.<strong class="sound_only">필수</strong></label>
 						<select id="area1" name="area1">
 							<option>시/도</option>
 						</select>
@@ -186,14 +204,23 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 						<a class="main_bg form_btn" href="javascript:doSaveArea()">지역 추가</a>
 						<div class="col-xs-12" id="divArea"></div>
 					</li>
-					<li class=" left_input">
-						<label for="mb_biz_worker_phone">담당자전화번호<strong class="sound_only">필수</strong></label>
-						<input type="text" name="mb_biz_worker_phone" id="mb_biz_worker_phone" <?php echo $required ?> class="frm_input full_input <?php echo $required ?>"  placeholder="담당자전화번호">
-					</li>
-					<li class=" left_input">
-						<label for="mb_biz_intro">업체소개글<strong class="sound_only">필수</strong></label>
-						<textarea name="mb_biz_intro" id="mb_biz_intro" <?php echo $required ?> class="frm_input full_input <?php echo $required ?>"  placeholder="업체소개글" style="height:270px;"></textarea>
-					</li>
+
+					<?php if ($biztype == 1 || $biztype == 3){ ?>
+						<li class=" left_input">
+							<label>매입품목/년식 설정<br>* 여러 품목 지정 설정이 가능합니다.<strong class="sound_only">필수</strong></label>
+							<div id="divGoodsItemList" class="ch_list tabcontent current">
+								<div class="row" id="divGoodsItem"></div><!-- row -->
+							</div><!-- 매입품목 -->
+						</li>
+					<?php } ?>
+					<?php if ($biztype == 2 || $biztype == 3) { ?>
+						<li class=" left_input">
+						<label>철거품목 설정<br>* 여러 품목 지정 설정이 가능합니다.<strong class="sound_only">필수</strong></label>
+							<div id="divRemoveItemList" class="tabcontent current">
+								<div id="divRemoveItem"></div>
+							</div>
+						</li>
+					<?php } ?>
 				</ul>
 			</div>
 			<div id="fregister">
@@ -209,6 +236,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 			<div class="tbl_frm01 tbl_wrap register_form_inner ">
 				<h2>동의설정</h2>
 				<ul>
+					<li class="chk_box">
+						<input type="checkbox" name="matchAgree" id="matchAgree" value="1" checked class="selec_chk">
+						<label for="matchAgree" name="matchAgree_lbl">
+							<span></span>
+							<b class="sound_only">판매동의</b>
+						</label>
+						<span class="chk_li">중고 물품 판매도 하고싶어요</span>
+					</li>
 					<li class="chk_box">
 						<input type="checkbox" name="mb_mailling" value="1" id="reg_mb_mailling" <?php echo ($w=='' || $member['mb_mailling'])?'checked':''; ?> class="selec_chk">
 						<label for="reg_mb_mailling">
@@ -260,18 +295,18 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 		</div>
 		<div class="btn_confirm">
 			<a href="<?php echo G5_URL ?>" class="btn_close">취소</a>
-			<button type="submit" id="btn_submit" class="btn_submit" accesskey="s"><?php echo $w==''?'회원가입':'정보수정'; ?></button>
+			<li><input class="btn_submit" class="btn_submit" type="button" onclick="fregisterform_submit()" value="회원가입 하기"></li>
 		</div>
 		</form>
 	</div>
 </div>
 <script>
+	//input 필드 필터
 	var vBizType;
 	jQuery(document).ready(function() {
-		doInitImageAjax("mb_photo", "divPhoto", "담당자 사진");
-		doInitImageAjax("mb_photo_site", "divPhotoSite", "사업장 정면 또는 내부 사진");
 		vBizType = $("#mb_biz_type").val();
-		cfnBizTypes("divBizType", vBizType, "./register_partner_form.php");
+
+		cfnBizTypes("divBizType", vBizType, "./register_form.php?registerType=partner");
 		cfnGoodsItem("divGoodsItem", "가전", "2006년");
 		cfnRemoveItem("divRemoveItem", "", "");
 
@@ -284,17 +319,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 				$("#mb_bank").val($(this).val());
 			}
 		});
-
-		if (vBizType == "1") {
-			$("#divGoodsItemList").show();
-			$("#divRemoveItemList").hide();
-		} else if (vBizType == "2") {
-			$("#divRemoveItemList").show();
-			$("#divGoodsItemList").hide();
-		} else if (vBizType == "3") {
-			$("#divGoodsItemList").show();
-			$("#divRemoveItemList").show();
-		}
 
 		$('input[name="goodsItem"]').click(function() {
 			var vId = $(this).attr('id');
@@ -409,12 +433,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 			cache: false,
 			success: function(data) {
 				var fvHtml = "";
-				// if ($("#area1").val()) {
-				// 	fvHtml += "<option value=\"\" selected>" + $("#area1").val() + " 전체</option>";
-				// } else {
-				// 	fvHtml += "<option value=\"\" selected>시/도</option>";
-				// }
-
 				if (!$("#area1").val()) {
 				 	fvHtml += "<option value=\"\" selected>시/도</option>";
 				}
@@ -426,7 +444,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 		});
 	}
 
-	function doSaveArea() {
+	function doSaveArea() {password_new_re
 		if (!$("#area1").val()) {
 			alert("시/도를 선택하십시오.");
 			return;
@@ -500,131 +518,257 @@ $(function() {
     <?php } ?>
 });
 
-// submit 최종 폼체크
-function fregisterform_submit(f)
-{   
-    f.mb_name.value = f.mb_biz_name.value;
-    f.mb_id.value = f.mb_email.value;
-	f.mb_password.value = hex_md5(f.password_new.value);
-    f.mb_password_re.value = hex_md5(f.password_new_re.value);
+function fregisterform_submit() {
+		//return false;
+		var f = document.fregisterform;
+		if (!checkFields()) return false;
 
-    if (f.w.value == "") {
-        if (f.mb_password.value.length < 3) {
-            alert("비밀번호를 3글자 이상 입력하십시오.");
-            f.mb_password.focus();
-            return false;
-        }
-    }
+		f.mb_name.value = f.mb_biz_name.value;
 
-    if (f.mb_password.value != f.mb_password_re.value) {
-        alert("비밀번호가 같지 않습니다.");
-        f.mb_password_re.focus();
-        return false;
-    }
+		var mb_email = f.mb_email.value;
+		$.ajax({
+			type: "POST",
+			url: "<?php echo G5_BBS_URL ?>/ajax.mb_email.php",
+			data: {
+				"mb_email": mb_email
+			},
+			cache: false,
+			async: false,
+			success: function(data) {
+				f.mb_id.value = f.mb_email.value;
+				f.mb_password.value = hex_md5(f.password_new.value);
 
-    if (f.mb_password.value.length > 0) {
-        if (f.mb_password_re.value.length < 3) {
-            alert("비밀번호를 3글자 이상 입력하십시오.");
-            f.mb_password_re.focus();
-            return false;
-        }
-    }
-			
-    <?php if($w == '' && $config['cf_cert_use'] && $config['cf_cert_req']) { ?>
-    // 본인확인 체크
-    if(f.cert_no.value=="") {
-        alert("회원가입을 위해서는 본인확인을 해주셔야 합니다.");
-        return false;
-    }
-    <?php } ?>
+				//alert(f.mb_id.value);
+				var goodsItem = "";
+				var goodsYear = "";
 
-    // 닉네임 검사
-    if ((f.w.value == "") || (f.w.value == "u" && f.mb_nick.defaultValue != f.mb_nick.value)) {
-        var msg = reg_mb_nick_check();
-        if (msg) {
-            alert(msg);
-            f.reg_mb_nick.select();
-            return false;
-        }
-    }
+				if (vBizType == "1" || vBizType == "3") {
+					$('input[name="goodsItem"]:checked').each(function(index, item) {
+						if (index != 0) {
+							goodsItem += ",";
+							goodsYear += ",";
+						}
+						goodsItem += $(this).val();
 
-    // E-mail 검사
-    if ((f.w.value == "") || (f.w.value == "u" && f.mb_email.defaultValue != f.mb_email.value)) {
-        var msg = reg_mb_email_check();
-        if (msg) {
-            alert(msg);
-            f.reg_mb_email.select();
-            return false;
-        }
-    }
+						var vId = $(this).attr('id');
+						var vIdx = vId.replace("goodsItem", "");
 
-    <?php if (($config['cf_use_hp'] || $config['cf_cert_hp']) && $config['cf_req_hp']) {  ?>
-    // 휴대폰번호 체크
-    var msg = reg_mb_hp_check();
-    if (msg) {
-        alert(msg);
-        f.reg_mb_hp.select();
-        return false;
-    }
-    <?php } ?>
+						if ($("#goodsYear" + vIdx).val()) {
+							goodsYear += $("#goodsYear" + vIdx).val();
+						} else {
+							goodsYear += "0";
+						}
+					});
+				}
 
-    if (typeof f.mb_icon != "undefined") {
-        if (f.mb_icon.value) {
-            if (!f.mb_icon.value.toLowerCase().match(/.(gif|jpe?g|png)$/i)) {
-                alert("회원아이콘이 이미지 파일이 아닙니다.");
-                f.mb_icon.focus();
-                return false;
-            }
-        }
-    }
+				var removeItem = "";
+				var removeEtc = "";
+				if (vBizType == "2" || vBizType == "3") {
+					$('input[name="removeItem"]:checked').each(function(index, item) {
+						if (index != 0) {
+							removeItem += ",";
+						}
+						removeItem += $(this).val();
+					});
+					removeEtc = $("#removeEtc").val();
+				}
 
-    if (typeof f.mb_img != "undefined") {
-        if (f.mb_img.value) {
-            if (!f.mb_img.value.toLowerCase().match(/.(gif|jpe?g|png)$/i)) {
-                alert("회원이미지가 이미지 파일이 아닙니다.");
-                f.mb_img.focus();
-                return false;
-            }
-        }
-    }
 
-    if (typeof(f.mb_recommend) != "undefined" && f.mb_recommend.value) {
-        if (f.mb_id.value == f.mb_recommend.value) {
-            alert("본인을 추천할 수 없습니다.");
-            f.mb_recommend.focus();
-            return false;
-        }
+				f.mb_biz_goods_item.value = goodsItem;
+				f.mb_biz_goods_year.value = goodsYear;
+				f.mb_biz_remove_item.value = removeItem;
+				f.mb_biz_remove_etc.value = removeEtc;
 
-        var msg = reg_mb_recommend_check();
-        if (msg) {
-            alert(msg);
-            f.mb_recommend.select();
-            return false;
-        }
-    }
+				//return false;
+				f.submit();
+			}
+		});
 
-	if (!$("#pbAgree").prop("checked")) {
-		alert("이용약관에 동의해주세요!");
-		return false;
+		checkFields(f);
+
+
 	}
 
-    <?php echo chk_captcha_js();  ?>
+	function checkFields() {
 
-    document.getElementById("btn_submit").disabled = "disabled";
+		removeClass();
 
-    return true;
-}
+		if (!$("#mb_biz_name").val()) {
+			alert("센터이름을 입력해주세요.");
+			return false;
+		}
 
-jQuery(function($){
-	
-	//tooltip
-    $(document).on("click", ".tooltip_icon", function(e){
-        $(this).next(".tooltip").fadeIn(400).css("display","inline-block");
-    }).on("mouseout", ".tooltip_icon", function(e){
-        $(this).next(".tooltip").fadeOut();
-    });
-});
+		if (!$("#mb_email").val()) {
+			alert("이메일을 입력해주세요.");
 
+			return false;
+		}
+
+		if (!this.validateEmail($("#mb_email").val())) {
+			alert("올바른 이메일형식을 입력해주세요.");
+			return false;
+		}
+
+		if (!$("#password_new").val()) {
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+
+		if ($("#password_new").val() != $("#password_new_re").val()) {
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.")
+			return false;
+		}
+
+		if ($("#password_new").val().length < 8 || $("#password_new").val().length > 16) {
+			alert('비밀번호는 8자 이상 16자 이하입니다.')
+			return false;
+		}
+
+		var password_new = $("#password_new").val();
+		var pattern = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/i;
+
+		if(!pattern.test(password_new)){
+			alert("비밀번호는 영문자, 숫자를 조합 8자 이상 16자 이하입니다.");
+			return false;
+		}
+
+
+		if (!$("#mb_hp").val()) {
+			alert('센터전화번호를 입력해주세요.');
+			return false;
+		}
+
+
+		if (!$("#mb_biz_addr1").val()) {
+			alert('센터주소를 입력해주세요.');
+			return false;
+		}
+
+		if (!$("#mb_biz_addr2").val()) {
+			alert('센터상세주소를 입력해주세요.');
+			return false;
+		}
+
+		if (!$("#mb_bank_num").val()) {
+			alert('정산계좌번호를 입력해주세요.');
+			return false;
+		}
+
+		if (!$("#mb_biz_num").val()) {
+			alert('사업자번호를 입력해주세요.');
+			return false;
+		}
+
+		/*if (!cfnNullCheckSelect($("#mb_photo_site").val(), "사업장사진")) return false;
+		if (!cfnNullCheckSelect($("#mb_photo").val(), "담당자사진")) return false;
+
+			var msg = reg_mb_email_check($("#mb_email").val());
+		    if (msg) {
+		        alert(msg);
+		        return false;
+		    }	*/
+
+		if (!$("#mb_biz_worker_name").val()) {
+			alert('담당자 이름을 입력해주세요.');
+			return false;
+		}
+
+		if (!$("#mb_biz_worker_phone").val()) {
+			alert('담당자 휴대전화번호를 입력해주세요.');
+			return false;
+		}
+
+		if (!$("#mb_biz_intro").val()) {
+			alert('업체 소개글을 입력해주세요.');
+			return false;
+		}
+
+
+		if (!$("#area1").val()) {
+			alert('시/도 를 선택해주세요.');
+			return false;
+		}
+
+		if (!$("#area2").val()) {
+			alert('시/구/군 을 선택해주세요.');
+			return false;
+		}
+
+
+		if($('#mb_biz_type').val() == '1'){
+			if (!$("input[name=goodsItem]").is(':checked')) {
+				alert('매입품목을 선택해주세요.');
+				return false;
+			}
+		}else if($('#mb_biz_type').val() == '2'){
+			if (!$("input[name=removeItem]").is(':checked')) {
+				alert('철거품목을 선택해주세요.');
+				return false;
+			}
+
+			if ($("input[name=removeItem]").is(':checked') && $("input[name=removeItem]:checked").val() == "기타") {
+				if($('#removeEtc').val() == ""){
+					alert('철거품목(기타)을 입력해주세요.');
+					return false;
+				}
+			}
+		}else{
+			if (!$("input[name=goodsItem]").is(':checked')) {
+				alert('매입품목을 선택해주세요.');
+				return false;
+			}
+
+			if (!$("input[name=removeItem]").is(':checked')) {
+				alert('철거품목을 선택해주세요.');
+				return false;
+			}
+
+			if ($("input[name=removeItem]").is(':checked') && $("input[name=removeItem]:checked").val() == "기타") {
+				if($('#removeEtc').val() == ""){
+					alert('철거품목(기타)을 입력해주세요.');
+					return false;
+				}
+			}
+		}
+
+
+
+
+
+		if (!$("#pbAgree").prop("checked")) {
+			alert("이용약관에 동의해주세요!");
+			return false;
+		}
+		return true;
+	}
+
+	function removeClass() {
+		$("#lbl_bizname").hide();
+		$("#lbl_email").hide();
+		$("#lbl_password").hide();
+		$("#lbl_passwordConfirm").hide();
+		$("#lbl_phone").hide();
+		$("#lbl_bizAddr1").hide();
+		$("#lbl_bizAddr2").hide();
+		$("#lbl_bizWorkerName").hide();
+		$("#lbl_bizWorkerPhone").hide();
+		$("#lbl_intro").hide();
+
+		$("#bizname").removeClass("input_error");
+		$("#email").removeClass("input_error");
+		$("#password").removeClass("input_error");
+		$("#passwordConfirm").removeClass("input_error");
+		$("#phone").removeClass("input_error");
+		$("#bizAddr1").removeClass("input_error");
+		$("#bizAddr2").removeClass("input_error");
+		$("#bizWorkerName").removeClass("input_error");
+		$("#bizWorkerPhone").removeClass("input_error");
+		$("#intro").removeClass("input_error");
+	}
+
+	function goMove() {
+		location.href = "<?php echo G5_URL; ?>";
+	}
 </script>
 
 <!-- } 회원정보 입력/수정 끝 -->

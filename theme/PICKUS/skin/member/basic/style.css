@@ -135,7 +135,6 @@
 #fregisterform #mb_addr3 {display:inline-block;margin:5px 0 0;vertical-align:middle}
 #fregisterform #mb_addr_jibeon {display:block;margin:5px 0 0}
 #fregisterform .btn_confirm {text-align:center}
-#fregisterform .form_01 div {margin:0 0 20px}
 #fregisterform .captcha {display:block;margin:5px 0 0}
 #fregisterform .reg_mb_img_file img {max-width:100%;height:auto}
 #reg_mb_icon, #reg_mb_img {float:right}
@@ -600,6 +599,41 @@
 .form_01 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.itemselect{
+  float: left;
+  border: 0 !important;
+}
+
+.itemselect-button{
+  margin-right: 20px !important;
+}
+
+.itemselect-input-radio-checkbox{
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+.itemselect-input-radio-checkbox:checked + .itemselect-input-radio-checkbox-label{
+  color: #ffffff;
+  background-color: #4F7670;
+  border: solid 1px #b1b1b1;
+}
+
+.itemselect-input-radio-checkbox-label{
+  display: block;
+  width: 90px;
+  text-align: center;
+  line-height: 40px;
+  color: #a9a9a9;
+  border: 1px solid #b1b1b1;
 }
 
 /* 회원가입 결과 */
