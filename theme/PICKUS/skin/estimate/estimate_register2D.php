@@ -1,7 +1,7 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] .'/estimate/_common.php');
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/head.php');
+include_once($_SERVER['DOCUMENT_ROOT'] .'/head.php');
 $g5['title'] = '견적신청';
 
 if ($member['mb_level'] == '2') {
@@ -18,24 +18,55 @@ $row = sql_fetch($sql);
 $provision = $row['co_content'];
 
 ?>
-<!-- <link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/base2.css?after" />
+<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/base2.css?after"/>
 <link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/board2.css" />
 <link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/member2.css?after" />
 <link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/estimate2.css" />
-<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/new_estimate.css?after" /> -->
+<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/new_estimate.css" />
+<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/list.css" />
+<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/reset.css" />
+<script src="<?php echo G5_JS_URL ?>/jQuery/jquery-ui.js"></script>
+<script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
+
+<link rel="stylesheet" href="<?php echo G5_THEME_CSS_URL; ?>/<?php echo G5_IS_MOBILE ? 'mobile' : 'default'; ?>.css?ver=<?php echo G5_CSS_VER; ?>">
 
 <!--GW-전환-견적신청-->
-<!-- <script>
+<script>
 	gtag('event', 'conversion', {
 		'send_to': 'AW-715468370/chWuCOrEiakBENLclNUC',
 		'transaction_id': 'estimate'
 	});
-</script> -->
+</script>
+<style type="text/css">
+	.estimate_image_bg img {
+		max-height: 180px;
+	}
+
+	.btn_wrap a {
+		margin: 0;
+	}
+
+	li.col-md-9 {
+		overflow: hidden;
+	}
+
+	ul#btm_fixed_bar {
+		display: none
+	}
+
+	@media(max-width: 800px) {
+		#txt_simple_pbAgree {
+			font-size: 12px;
+		}
+	}
+</style>
 <!--NAVER ADS-전환-견적신청-->
 <!-- <script type="text/javascript">
 	var _nasa = {};
 	_nasa["cnv"] = wcs.cnv("4", "100000");
 </script> -->
+
 
 <style type="text/css">
 	ul#btm_fixed_bar {
@@ -139,20 +170,19 @@ $provision = $row['co_content'];
 
 	<div class="request">
 		<div class="form_wrap layout_wrap">
-			<form style="height: 100%;" name="frmregister" action="<?php echo G5_URL; ?>/estimate/estimate_register1B_update.php" method="post" enctype="multipart/form-data" autocomplete="off" class="form_order sell_single process_margin layout_form">
-				<input type="hidden" name="sub_key" value="0">
-				<input type="hidden" name="e_type" value="0">
+			<form style="height:100%;" name="frmregister" action="<?php echo G5_URL; ?>/estimate/estimate_register2D_update.php" method="post" enctype="multipart/form-data" autocomplete="off" class="form_order sell_single process_margin layout_form">
+				<input type="hidden" name="sub_key" value="<?php echo time(); ?>">
+				<input type="hidden" name="e_type" value="1">
 				<input type="hidden" name="simple_yn" value="0">
-				<input type="hidden" name="test_type" value="A">
-				<input type="hidden" name="type" value="B">
-				<input type="hidden" name="title">
+				<input type="hidden" name="test_type" value="B">
+
 
 
 				<!--==================================섹션1====================================-->
 				<div class="form_section section_view01">
 					<div class="header">
 						<div class="container_sub_title">
-							<p>품목선택</p>
+							<p>품목정보입력</p>
 						</div>
 						<div>
 							<div class="progress">
@@ -162,143 +192,51 @@ $provision = $row['co_content'];
 								<p>0%</p>
 							</div>
 							<div class="container_title">
-								<p>품목을 골라주세요!</p>
-							</div>
-						</div>
-					</div>
-					<!--================섹션 - 입력 영역===============-->
-					<div class="form_section_value">
-						<div class="form-group btn_cate">
-
-							<ul>
-								<hr class="hr">
-								<li class="mb_btn_size">
-									<label class="box"><input type="radio" name="item_cat" id="item_cat1" value="가전" checked="checked" />
-										<i>
-											<p class="p_list">가전</p>
-										</i>
-									</label>
-								</li>
-								<hr class="hr">
-								<li class="mb_btn_size">
-									<label class="box"><input type="radio" name="item_cat" id="item_cat4" value="가구" />
-										<i>
-											<p class="p_list">가구</p>
-										</i>
-									</label>
-								</li>
-								<hr class="hr">
-								<li class="mb_btn_size">
-									<label class="box"><input type="radio" name="item_cat" id="item_cat2" value="주방집기" />
-										<i>
-											<p class="p_list">주방집기</p>
-										</i>
-									</label>
-								</li>
-								<hr class="hr">
-								<li class="mb_btn_size">
-									<label class="box"><input type="radio" name="item_cat" id="item_cat3" value="헬스용품" />
-										<i>
-											<p class="p_list">헬스용품</p>
-										</i>
-									</label>
-								</li>
-								<hr class="hr">
-								<li class="mb_btn_size">
-									<label class="box"><input type="radio" name="item_cat" id="item_cat5" value="기타" />
-										<i>
-											<p class="p_list">기타</p>
-										</i>
-									</label>
-								</li>
-								<hr class="hr">
-							</ul>
-
-						</div>
-					</div>
-
-
-					<p class="btng_bottom">
-						<a href="#" class="next_section_btn first_btn" onclick="next_section_btn()">다음</a>
-					</p>
-				</div>
-				<!--==================================섹션1끝====================================-->
-
-
-				<!--==================================섹션2====================================-->
-				<div class="form_section section_view02">
-					<div class="header">
-						<div class="container_sub_title">
-							<p>상세품목선택</p>
-						</div>
-						<div>
-							<div class="progress">
-								<div style="width:17%;" class="progressbar"></div>
-							</div>
-							<div class="progress-desc">
-								<p>17%</p>
-							</div>
-							<div class="container_title">
-								<p>상세품목을 골라주세요!</p>
+								<p>물품정보를 입력주세요!</p>
 							</div>
 
 						</div>
 					</div>
 					<!--===================섹션 - 입력 영역==================-->
+					<hr class="hr">
+
 					<div class="form_section_value">
-						<hr class="hr">
-						<div class="form-group">
+						<div class="form-group btn_cate">
+
 							<ul class="row">
 								<li class="col-md-2 title">
-									세부카테고리
+									견적제목
 								</li>
-								<li class="col-md-9 col-xs-6">
-									<input type="hidden" name="item_cat_dtl" id="item_cat_dtl">
-									<select name="item_cat_dtl_s" id="item_cat_dtl_s"></select>
-									<input type="text" id="item_cat_dtl_etc" name="item_cat_dtl_etc" placeholder="세부카테고리를 입력해주세요." style="max-width: 86%;display:none;">
+								<li style="overflow: unset !important;" class="col-md-9">
+									<input type="text" id="title" name="title" aria-describedby="ex) 이사정리, 집기정리, 사무정리 등" placeholder="ex) 이사정리, 집기정리, 사무정리 등">
 								</li>
 							</ul>
+
 						</div>
-						<hr class="hr">
+					</div>
+					<hr class="hr">
+					<div class="form_section_value">
 						<div class="form-group">
-							<ul class="row">
-								<li class="col-md-2 title">
-									제조사
-								</li>
-								<li class="col-md-9 col-xs-6">
-									<input type="hidden" name="manufacturer" id="manufacturer">
-									<select name="manufacturer_s" id="manufacturer_s"></select>
-									<input type="text" id="manufacturer_etc" name="manufacturer_etc" placeholder="제조사를 입력해주세요." style="max-width: 86%;display:none;">
-								</li>
-							</ul>
+							사진을 등록해주세요!
 						</div>
-						<hr class="hr">
-						<div class="form-group" id="divModelName">
-							<ul class="row">
-								<li class="col-md-2 title">
-									모델명
+						<div class="form-group">
+							<div class="row" id="imageList"></div>
+						</div><!-- 사진업로드 -->
+					</div>
+					<hr class="hr">
+					<div class="form_section_value">
+						<div class="form-group">
+							<ul>
+								<li class="title">
+									참고사항을 작성해주세요!
 								</li>
-								<li class="col-md-9 col-xs-8">
-									<input type="text" id="medel_name" name="medel_name" aria-describedby="ex) 가전 모델명 " placeholder="모델명을 입력해주세요.">
+								<li>
+									<textarea id="content" name="content" placeholder="품목리스트, 수량, 년식을 적어주세요. EX. 스크래치, 문콕 등&#13;&#10;물품상태에 대해 상세히 적어주세요&#13;&#10;물품에 대해 상세히 작성해 주시면 좀 더 정확한 견적이 가능합니다. "></textarea>
 								</li>
 							</ul>
-							<hr class="hr">
 						</div>
 
-						<div class="form-group">
-							<ul class="row">
-								<li class="col-md-2 title">
-									<span style="line-height: 25px !important;" id="spanYear" class="title">생산년도</span>
-								</li>
-								<li class="col-md-9 col-xs-6">
-									<input type="hidden" id="year" name="year" />
-									<select id="use_year" name="use_year"></select>
-								</li>
-							</ul>
-						</div>
 						<hr class="hr">
-
-
 					</div>
 					<!--===================섹션 - 입력 영역 끝==================-->
 
@@ -312,90 +250,8 @@ $provision = $row['co_content'];
 				<!--==================================섹션2끝====================================-->
 
 
-				<!--==================================섹션3====================================-->
-				<div class="form_section section_view03">
-
-					<div class="header">
-						<div class="container_sub_title">
-							<p>품목정보입력</p>
-						</div>
-						<div>
-							<div class="progress">
-								<div style="width:34%;" class="progressbar"></div>
-							</div>
-							<div class="progress-desc">
-								<p>34%</p>
-							</div>
-							<div class="container_title">
-								<p>물품정보를 알려주세요!</p>
-							</div>
-						</div>
-					</div>
-					<!--================섹션 - 입력 영역===============-->
-					<div class="form_section_value">
-						<hr class="hr">
-
-						<div class="form-group">
-							사진을 등록해주세요!
-							<!-- <a href="#." data-toggle="modal" data-target="#img_guide" class="guide_estimate"><i class="xi-help main_co"></i></a> -->
-						</div>
-
-						<div class="form-group">
-							<div class="row" id="imageList">
-						</div>
-					</div>
-					<hr class="hr">
-
-					<div class="form_section_value">
-						<div class="form-group">
-							참고사항을 작성해주세요!
-							<ul style="margin-top: 1.3%;">
-								<li>
-									<textarea id="content" name="content" placeholder="EX. 스크래치, 문콕 등&#13;&#10;물품상태에 대해 상세히 적어주세요&#13;&#10;물품에 대해 상세히 작성해 주시면 좀 더 정확한 견적이 가능합니다. "></textarea>
-									<!-- <p class="red_co">*물품에 대해 상세히 작성해 주시면 좀 더 정확한 견적이 가능합니다.</p> -->
-								</li>
-							</ul>
-						</div>
-					</div>
-
-					<hr class="hr">
-
-					<!-- <div id="noneGuide">
-						<div>
-							<div>
-								<h5 class="guide_title">중고가전/가구매입 사진 가이드</h5>
-								<ul class="row guide_content">
-									<li>
-										<img src="/img/estimate/estimate_popup01.png">
-									</li>
-									<li style="margin-bottom: 10px;"><em class="em_nu">1. </em>물품<em class="em_un">정면</em>사진</li>
-									<li>
-										<img src="/img/estimate/estimate_popup02.png">
-									</li>
-									<li style="margin-bottom: 10px;">2. <em class="em_un">상세정보</em>, <em class="em_un">제조년식</em></li>
-									<li>
-										<img src="/img/estimate/estimate_popup03.png">
-									</li>
-									<li>3. 물품 <em class="em_un">스크래치</em>, <em class="em_un">문콕</em> 등</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-					<hr class="hr"> -->
-
-					<p class="btng_bottom">
-						<a href="#" class="next_section_btn second_btn" onclick="prev_section_btn()" style="left:25%; background: #fff;
-    color: #0b71c8 !important;
-    border: 1px solid;">이전</a>
-						<a href="#" class="next_section_btn fourth_btn" onclick="next_section_btn()">다음</a>
-					</p>
-				</div>
-				<!--==================================섹션3끝====================================-->
-
-
-				<!--==================================섹션4====================================-->
-				<div class="form_section section_view04">
+				<!--==================================섹션2====================================-->
+				<div class="form_section section_view02">
 
 					<div class="header">
 						<div class="container_sub_title">
@@ -403,10 +259,10 @@ $provision = $row['co_content'];
 						</div>
 						<div>
 							<div class="progress">
-								<div style="width:51%;" class="progressbar"></div>
+								<div style="width:25%;" class="progressbar"></div>
 							</div>
 							<div class="progress-desc">
-								<p>51%</p>
+								<p>25%</p>
 							</div>
 							<div class="container_title">
 								<p>수거환경을 알려주세요!</p>
@@ -415,11 +271,12 @@ $provision = $row['co_content'];
 					</div>
 
 					<!--=================섹션 - 입력 영역===================-->
+					<hr class="hr">
 					<div class="form_section_value">
 						<div class="form-group address">
 							<ul class="row">
 								<li class="col-md-2 title">시.도</li>
-								<li class="col-md-9 col-xs-6">
+								<li style="overflow: unset !important;" class="col-md-9 col-xs-6">
 									<select id="area1" name="area1">
 										<option value="" selected="selected">선택</option>
 									</select>
@@ -427,22 +284,24 @@ $provision = $row['co_content'];
 
 							</ul>
 						</div>
+						<hr class="hr">
 						<div class="form-group address">
 							<ul class="row">
 								<li class="col-md-2 title">구.군</li>
-								<li class="col-md-9 col-xs-6">
+								<li style="overflow: unset !important;" class="col-md-9 col-xs-6">
 									<select id="area2" name="area2">
 										<option value="" selected="selected">선택</option>
 									</select>
 								</li>
 							</ul>
 						</div>
+						<hr class="hr">
 						<div style="padding-top:15px;" class="form-group">
 							<ul class="row">
 								<li class="col-md-2 title">
 									읍.면.동
 								</li>
-								<li class="col-md-9 col-xs-8">
+								<li style="overflow: unset !important;" class="col-md-9 col-xs-8">
 									<input type="text" id="area3" name="area3" aria-describedby="읍.면.동을 입력해 주세요" placeholder="읍.면.동을 입력해 주세요">
 								</li>
 							</ul>
@@ -474,6 +333,7 @@ $provision = $row['co_content'];
 								</ul>
 							</div>
 						</div>
+						<hr class="hr">
 					</div>
 
 					<p class="btng_bottom">
@@ -483,21 +343,21 @@ $provision = $row['co_content'];
 						<a href="#" class="next_section_btn fifth_btn" onclick="next_section_btn()">다음</a>
 					</p>
 				</div>
-				<!--==================================섹션4끝====================================-->
+				<!--==================================섹션3끝====================================-->
 
 
-				<!--==================================섹션5====================================-->
-				<div style="padding-bottom:100px;" class="form_section section_view05">
+				<!--==================================섹션3====================================-->
+				<div style="padding-bottom:100px;" class="form_section section_view03">
 					<div class="header">
 						<div class="container_sub_title">
 							<p>날짜선택</p>
 						</div>
 						<div>
 							<div class="progress">
-								<div style="width:68%;" class="progressbar"></div>
+								<div style="width:50%;" class="progressbar"></div>
 							</div>
 							<div class="progress-desc">
-								<p>68%</p>
+								<p>50%</p>
 							</div>
 							<div class="container_title">
 								<p>날짜를 골라주세요!</p>
@@ -505,14 +365,15 @@ $provision = $row['co_content'];
 						</div>
 					</div>
 					<!--=================섹션 - 입력 영역===================-->
+					<hr class="hr">
 					<div class="form_section_value">
-						<hr class="hr">
+
 						<div class="form-group">
 							<ul class="row">
 								<li class="col-md-2 title">
 									견적마감일
 								</li>
-								<li class="col-md-9">
+								<li style="overflow: unset !important;" class="col-md-9">
 									<input type="text" readonly="" id="pickup_date_magam" name="pickup_date_magam" aria-describedby="희망 마감날짜를 입력해 주세요" placeholder="희망 마감날짜를 입력해 주세요">
 								</li>
 							</ul>
@@ -523,8 +384,8 @@ $provision = $row['co_content'];
 								<li class="col-md-2 title">
 									수거요청일
 								</li>
-								<li class="col-md-9">
-									<input type="text" readonly="" id="pickup_date" name="pickup_date" aria-describedby="희망 수거날짜를 입력해 주세요" placeholder="희망 수거날짜를 입력해 주세요">
+								<li style="overflow: unset !important;" class="col-md-9">
+									<input type="text" id="pickup_date" name="pickup_date" aria-describedby="희망 수거날짜를 입력해 주세요" placeholder="희망 수거날짜를 입력해 주세요">
 								</li>
 							</ul>
 						</div>
@@ -537,21 +398,21 @@ $provision = $row['co_content'];
 						<a href="#" class="next_section_btn sixth_btn" onclick="next_section_btn()">다음</a>
 					</p>
 				</div>
-				<!--==================================섹션5끝====================================-->
+				<!--==================================섹션3끝====================================-->
 
 
-				<!--==================================섹션6====================================-->
-				<div class="form_section section_view06">
+				<!--==================================섹션4====================================-->
+				<div class="form_section section_view04">
 					<div class="header">
 						<div class="container_sub_title">
 							<p>개인정보입력</p>
 						</div>
 						<div>
 							<div class="progress">
-								<div style="width:85%;" class="progressbar"></div>
+								<div style="width:75%;" class="progressbar"></div>
 							</div>
 							<div class="progress-desc">
-								<p>85%</p>
+								<p>75%</p>
 							</div>
 							<div class="container_title">
 								<p>개인정보를 입력해주세요!</p>
@@ -559,6 +420,7 @@ $provision = $row['co_content'];
 						</div>
 					</div>
 					<!--=================섹션 - 입력 영역===================-->
+					<hr class="hr">
 					<div class="form_section_value">
 						<?php
 						$readonly = "";
@@ -573,37 +435,38 @@ $provision = $row['co_content'];
 										<li class="col-md-2 title">
 											이름
 										</li>
-										<li class="col-md-9">
+										<li style="overflow: unset !important;" class="col-md-9">
 											<input type="text" name="nickname" id="nickname" aria-describedby="이름" placeholder="이름" value="<?php echo $member['mb_name'] ?>" <?php echo $readonly ?>>
 											<p class="input_error error" id="lbl_nickname">8-16자 영문과 숫자를 조합해 주세요</p>
 										</li>
 									</ul>
 								</div>
-								<div class="form-group"></div>
+								<hr class="hr">
 
 								<div class="form-group">
 									<ul class="row">
 										<li style="margin-top: 15px;" class="col-md-2 title">
 											이메일
 										</li>
-										<li class="col-md-9">
+										<li style="overflow: unset !important;" class="col-md-9">
 											<input type="text" name="email" id="email" aria-describedby="이메일" placeholder="이메일" value="<?php echo $member['mb_email'] ?>" <?php echo $readonly ?>>
 											<p class="input_error error" id="lbl_email">8-16자 영문과 숫자를 조합해 주세요</p>
 										</li>
 									</ul>
 								</div>
-
+								<hr class="hr">
 								<div class="form-group">
 									<ul class="row">
 										<li style="margin-top: 15px;" class="col-md-2 title">
 											휴대폰 번호
 										</li>
-										<li class="col-md-9">
+										<li style="overflow: unset !important;" class="col-md-9">
 											<input placeholder="숫자만 입력해주세요" type="number" name="phone" id="phone" min="0" step="1" aria-describedby="휴대폰 번호" value="<?php echo $member['mb_hp'] ?>">
 										</li>
 									</ul>
 
 								</div>
+								<hr class="hr">
 								<?php
 								if (!$is_member) {
 								?>
@@ -616,7 +479,7 @@ $provision = $row['co_content'];
 											<a class="main_co" href="#" data-toggle="modal" data-target="#privacy">개인정보보호방침</a>에 대한 내용을 모두 이해하였으며 이에 동의합니다.
 										</label>
 									</div>
-									비회원 가입 시 이용약관, 개인정보보호방침 보기 추가 with PSS
+									<!--비회원 가입 시 이용약관, 개인정보보호방침 보기 추가 with PSS -->
 									<div class="modal fade" id="terms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
@@ -647,7 +510,7 @@ $provision = $row['co_content'];
 												</div>
 											</div>
 										</div>
-									</div> 
+									</div>	
 								<?php
 								}
 								?>
@@ -665,7 +528,7 @@ $provision = $row['co_content'];
 				<!--==================================섹션6끝====================================-->
 				<script>
 					// $("a[name='click_et']").click(function() {
-
+					// 	
 					// 	$('#load').show();
 
 					// 	return true;
@@ -726,6 +589,7 @@ $provision = $row['co_content'];
 						}
 					}
 				</style>
+
 				<!-- <div style="display:none; background: #0b71c8;
     padding: 10px;
     border-radius: 10px;" class="form_section section_view07">
@@ -739,7 +603,7 @@ $provision = $row['co_content'];
 			</form>
 
 			<!--스텝별 가이드-->
-			<div class="section_view01" id="process_text">
+			<!-- <div class="section_view01" id="process_text">
 				<div class="process_text_flex">
 					<div class="step_guide_content">
 						<p class="step_guide_title">피커스는?</p>
@@ -769,9 +633,9 @@ $provision = $row['co_content'];
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="section_view02" id="process_text">
+			<!-- <div class="section_view02" id="process_text">
 				<div class="process_text_flex">
 					<div class="step_guide_content">
 						<p class="step_guide_title">모델명가이드</p>
@@ -804,9 +668,9 @@ $provision = $row['co_content'];
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="section_view03" id="process_text">
+			<div class="section_view01" id="process_text">
 				<div class="process_text_flex">
 					<div class="step_guide_content">
 						<p class="step_guide_title">사진가이드</p>
@@ -855,7 +719,7 @@ $provision = $row['co_content'];
 				</div>
 			</div>
 
-			<div class="section_view04" id="process_text">
+			<div class="section_view02" id="process_text">
 				<div class="process_text_flex">
 					<div class="step_guide_content">
 						<p class="step_guide_title">피커스는?</p>
@@ -880,7 +744,7 @@ $provision = $row['co_content'];
 				</div>
 			</div>
 
-			<div class="section_view05" id="process_text">
+			<div class="section_view03" id="process_text">
 				<div class="process_text_flex">
 					<div class="step_guide_content">
 						<p class="step_guide_title">피커스는?</p>
@@ -905,7 +769,7 @@ $provision = $row['co_content'];
 				</div>
 			</div>
 
-			<div class="section_view06" id="process_text">
+			<div class="section_view04" id="process_text">
 				<div class="process_text_flex">
 					<div class="step_guide_content">
 						<p class="step_guide_title">피커스는?</p>
@@ -1040,170 +904,23 @@ $provision = $row['co_content'];
 	</div>
 </div>
 
-<!-- 사진 가이드 -->
-<!-- <div class="modal fade guide" id="object_guide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">가이드</h4>
-			</div>
-			<div class="modal-body">
-				<div>
-
-					<h5>중고가전/가구매입 시</h5>
-					<ul class="row">
-						<li>
-							<img src="/img/estimate/estimate_popup01.png">
-							각 물품의 정면 사진
-						</li>
-						<li>
-							<img src="/img/estimate/estimate_popup02.png">
-							가전 및 집기 모델명, 제조년식
-						</li>
-						<li>
-							<img src="/img/estimate/estimate_popup03.png">
-							물품 상태 (스크래치, 문콕 등)
-						</li>
-					</ul>
-
-					<h5>가전 모델명&제조년식 확인 하는 곳</h5>
-					<img src="/img/estimate/estimate_popup04.png">
-					<ul>
-						<li>1. 에너지 효율표와 함께 확인 가능</li>
-						<li>2. 냉장/냉동고 내부 양옆 벽면</li>
-						<li>3. 세탁기 앞면, 윗면, 양 옆면</li>
-						<li>4. 벽걸이 에어컨 옆면, 밑면</li>
-						<li>5. 그외 각 제품 뒷면</li>
-					</ul>
-					<div class="btn_wrap">
-						<ul class="row">
-							<li class="col-xs-4 col-xs-offset-4">
-								<a class="line_bg" href="#" data-dismiss="modal">닫기</a>
-							</li>
-						</ul>
-					</div>
-					<!-- btn_wrap -->
-<!-- </div>
-			</div> -->
-<!-- modal-body -->
-<!-- </div>
-	</div>
-</div>  -->
-
-
-<!-- <div class="modal fade guide" id="object_guide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">가이드</h4>
-			</div>
-			<div class="modal-body">
-				<div>
-
-					<h5>중고가전/가구매입 시</h5>
-					<ul class="row">
-						<li>
-							<img src="/img/estimate/estimate_popup01.png">
-							각 물품의 정면 사진
-						</li>
-						<li>
-							<img src="/img/estimate/estimate_popup02.png">
-							가전 및 집기 모델명, 제조년식
-						</li>
-						<li>
-							<img src="/img/estimate/estimate_popup03.png">
-							물품 상태 (스크래치, 문콕 등)
-						</li>
-					</ul>
-
-					<h5>가전 모델명&제조년식 확인 하는 곳</h5>
-					<img src="/img/estimate/estimate_popup04.png">
-					<ul>
-						<li>1. 에너지 효율표와 함께 확인 가능</li>
-						<li>2. 냉장/냉동고 내부 양옆 벽면</li>
-						<li>3. 세탁기 앞면, 윗면, 양 옆면</li>
-						<li>4. 벽걸이 에어컨 옆면, 밑면</li>
-						<li>5. 그외 각 제품 뒷면</li>
-					</ul>
-					<div class="btn_wrap">
-						<ul class="row">
-							<li class="col-xs-4 col-xs-offset-4">
-								<a class="line_bg" href="#" data-dismiss="modal">닫기</a>
-							</li>
-						</ul>
-					</div>
-					<!-- btn_wrap -->
-<!-- </div>
-			</div> -->
-<!-- modal-body -->
-<!-- </div>
-	</div>
-</div> -->
-
-<!-- 모델명 가이드
-<div class="modal fade" id="modal_review" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">이용후기</h4>
-			</div>
-			<div class="modal-body" id="modal_review_content">
-				<div id="board">
-					<div class="form-group">
-						<p class="text-right" id="reviewTitle"></p>
-					</div>
-					<div id="board">
-						<div class="photo_list">
-							<table id="reviewList"></table>
-						</div>
-					</div>
-
-					<div class="btn_wrap">
-						<ul class="row">
-							<li class="col-xs-4 col-xs-offset-4">
-								<a class="line_bg" href="#" data-dismiss="modal">닫기</a>
-							</li>
-						</ul>
-					</div> -->
-<!-- btn_wrap -->
-<!-- 
-				</div> -->
-<!-- board -->
-<!-- </div> -->
-<!-- modal-body -->
-<!-- </div>
-	</div>
-</div> -->
 
 <!-- 이용후기 -->
+
 <script type="text/javascript">
-	var imageMaxCnt = 6;
+	var imageMaxCnt = 9;
+	var estimateCnt = 0;
 
 	var section_toggle = 1;
 	var request_parner = 0;
 
 	var request_parner_cnt = 0;
-	var current_fs,
-		next_fs,
-		previous_fs;
-	var left,
-		opacity,
-		scale;
-	var animating;
 
-	//다음버튼
 	function next_section_btn() {
-		if (!doCheckForm(section_toggle))
-			return;
-
+		if (!doCheckForm(section_toggle)) return;
 		if (section_toggle == 1) {
 			$("#two").addClass("active");
+
 			$(".section_view01").css("display", "none");
 			$(".section_view02").css("display", "block");
 			section_toggle = 2;
@@ -1213,30 +930,15 @@ $provision = $row['co_content'];
 			$(".section_view03").css("display", "block");
 			section_toggle = 3;
 		} else if (section_toggle == 3) {
-			$("#four").addClass("active");
+			$("#three").addClass("active");
 			$(".section_view03").css("display", "none");
 			$(".section_view04").css("display", "block");
 			section_toggle = 4;
-		} else if (section_toggle == 4) {
-			$("#five").addClass("active");
-			$(".section_view04").css("display", "none");
-			$(".section_view05").css("display", "block");
-			section_toggle = 5;
-		} else if (section_toggle == 5) {
-			$("#six").addClass("active");
-			$(".section_view05").css("display", "none");
-			$(".section_view06").css("display", "block");
-			section_toggle = 6;
-		} else if (section_toggle == 6) {
-			$("#six").addClass("active");
-			$(".section_view06").css("display", "none");
-			$(".section_view07").css("display", "block");
-			section_toggle = 7;
 		}
-	}
-	//이전버튼
-	function prev_section_btn() {
 
+	}
+
+	function prev_section_btn() {
 		if (section_toggle == 2) {
 			$("#two").removeClass("active");
 			$(".section_view01").css("display", "block");
@@ -1248,159 +950,88 @@ $provision = $row['co_content'];
 			$(".section_view03").css("display", "none");
 			section_toggle = 2;
 		} else if (section_toggle == 4) {
-			$("#four").removeClass("active");
+			$("#three").removeClass("active");
 			$(".section_view03").css("display", "block");
 			$(".section_view04").css("display", "none");
 			section_toggle = 3;
-		} else if (section_toggle == 5) {
-			$("#five").removeClass("active");
-			$(".section_view04").css("display", "block");
-			$(".section_view05").css("display", "none");
-			section_toggle = 4;
-
-		} else if (section_toggle == 6) {
-			$("#six").removeClass("active");
-			$(".section_view05").css("display", "block");
-			$(".section_view06").css("display", "none");
-			section_toggle = 5;
-
 		}
+
 	}
 
-	//달력
-	jQuery(document).ready(function() {
+
+	$(document).ready(function() {
+
+		$.datepicker.setDefaults({
+			dateFormat: 'yymmdd',
+			prevText: '이전 달',
+			nextText: '다음 달',
+			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+			dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			showMonthAfterYear: true,
+			yearSuffix: '년'
+		});
+
 		var now = new Date();
 
 		var Year = now.getFullYear();
 
 		var Month = now.getMonth() + 1;
-		if (Month < 10)
-			Month = "0" + Month
+		if (Month < 10) Month = "0" + Month
 
 		var Day = now.getDate();
-		if (Day < 10)
-			Day = "0" + Day
+		if (Day < 10) Day = "0" + Day
 
 		var toDate = Year + "-" + Month + "-" + Day;
 
-		var date = $
-			.datepicker
-			.parseDate("yy-mm-dd", toDate);
+		var date = $.datepicker.parseDate("yy-mm-dd", toDate);
 
-		$
-			.datepicker
-			.setDefaults({
-				dateFormat: 'yymmdd',
-				prevText: '이전 달',
-				nextText: '다음 달',
-				monthNames: [
-					'1월',
-					'2월',
-					'3월',
-					'4월',
-					'5월',
-					'6월',
-					'7월',
-					'8월',
-					'9월',
-					'10월',
-					'11월',
-					'12월'
-				],
-				monthNamesShort: [
-					'1월',
-					'2월',
-					'3월',
-					'4월',
-					'5월',
-					'6월',
-					'7월',
-					'8월',
-					'9월',
-					'10월',
-					'11월',
-					'12월'
-				],
-				dayNames: [
-					'일',
-					'월',
-					'화',
-					'수',
-					'목',
-					'금',
-					'토'
-				],
-				dayNamesShort: [
-					'일',
-					'월',
-					'화',
-					'수',
-					'목',
-					'금',
-					'토'
-				],
-				dayNamesMin: [
-					'일',
-					'월',
-					'화',
-					'수',
-					'목',
-					'금',
-					'토'
-				],
-				showMonthAfterYear: true,
-				yearSuffix: '년'
-			});
+		$("#pickup_date").datepicker({
+			dateFormat: "yy-mm-dd",
+			language: "kr",
+			minDate: date
+		}).change(function() {
 
-		$("#pickup_date")
-			.datepicker({
-				dateFormat: "yy-mm-dd",
-				language: "kr",
-				minDate: date
-			})
-			.change(function() {
+			var t1 = $('#pickup_date').val().split("-");
+			var t2 = toDate.split("-"); // 오늘
 
-				var t1 = $('#pickup_date')
-					.val()
-					.split("-");
-				var t2 = toDate.split("-"); // 오늘
+			var t1_date = new Date(t1[0], t1[1], t1[2]);
+			var t2_date = new Date(t2[0], t2[1], t2[2]);
 
-				var t1_date = new Date(t1[0], t1[1], t1[2]);
-				var t2_date = new Date(t2[0], t2[1], t2[2]);
+			var diff = t1_date - t2_date;
+			var currDay = 24 * 60 * 60 * 1000;
 
-				var diff = t1_date - t2_date;
-				var currDay = 24 * 60 * 60 * 1000;
+			if (parseInt(diff / currDay) > 29) {
+				alert('견적변동이 가능하여 업체견적이 늦을 수도 있습니다.');
+			}
 
-				if (parseInt(diff / currDay) > 29) {
-					alert('견적변동이 가능하여 업체견적이 늦을 수도 있습니다.');
-				}
+		});
+		$("#pickup_date_magam").datepicker({
+			dateFormat: "yy-mm-dd",
+			language: "kr",
+			minDate: date
+		}).change(function() {
 
-			});
+			var t1 = $('#pickup_date_magam').val().split("-");
+			var t2 = toDate.split("-"); // 오늘
 
-		$("#pickup_date_magam")
-			.datepicker({
-				dateFormat: "yy-mm-dd",
-				language: "kr",
-				minDate: date
-			})
-			.change(function() {
+			var t1_date = new Date(t1[0], t1[1], t1[2]);
+			var t2_date = new Date(t2[0], t2[1], t2[2]);
 
-				var t1 = $('#pickup_date_magam')
-					.val()
-					.split("-");
-				var t2 = toDate.split("-"); // 오늘
+			var diff = t1_date - t2_date;
+			var currDay = 24 * 60 * 60 * 1000;
 
-				var t1_date = new Date(t1[0], t1[1], t1[2]);
-				var t2_date = new Date(t2[0], t2[1], t2[2]);
+			if (parseInt(diff / currDay) > 29) {
+				alert('견적변동이 가능하여 업체견적이 늦을 수도 있습니다.');
+			}
 
-				var diff = t1_date - t2_date;
-				var currDay = 24 * 60 * 60 * 1000;
+		});
+		$("#item_qty").inputFilter(function(value) {
+			return /^\d*$/.test(value);
+		});
 
-				if (parseInt(diff / currDay) > 29) {
-					alert('견적변동이 가능하여 업체견적이 늦을 수도 있습니다.');
-				}
-
-			});
 
 		$("#use_year").html(cfnEstimateYearsCombo("선택"));
 
@@ -1411,38 +1042,47 @@ $provision = $row['co_content'];
 				var vYear = $("#use_year").val();
 				if (itemCat == "가구") {
 					if (vYear >= 5) {
-						alert("년식이 오래되어 무료수거 또는 폐기로 처분이 가능할 수 있습니다. ");
+						alert("년식이 오래되어 무료수거나 수거 불가 할 수도 있습니다.");
 					}
 				} else {
 					if (vYear >= 10) {
-						alert("년식이 오래되어 무료수거 또는 폐기로 처분이 가능할 수 있습니다. ");
+						alert("년식이 오래되어 무료수거나 수거 불가 할 수도 있습니다.");
 					}
 				}
 
 			}
 		});
 
+		$(document).on("click", ".delete_item", function() {
+			$(this).closest("tr").remove();
+			estimateCnt--;
+		});
 
-		doInitImage2("165");
-
+		doInitImage2("250");
 		doSelectArea1();
 
-		$('input[name="item_cat"]').change(function() {
+		$('#item_cat_s').change(function() {
 			doSelectCategory2();
 
 		});
 
 		$('#item_cat_dtl_s').change(function() {
 			doSelectCategory3();
+
 		});
 
-		doSelectCategory2();
+		$("#attfile").bind('change', function() {
+			$("#attfilename").html(this.files[0].name);
+		});
+
+		doSelectCategory1();
+
 	});
 
 	function doSelectArea1() {
 		$.ajax({
 			type: "POST",
-			url: "/estimate/ajax.area1.php",
+			url: "<?php echo G5_URL ?>/estimate/ajax.area1.php",
 			data: {
 				"area1": $('#area1').val()
 			},
@@ -1463,7 +1103,7 @@ $provision = $row['co_content'];
 	function doSelectArea2() {
 		$.ajax({
 			type: "POST",
-			url: "/estimate/ajax.area2.php",
+			url: "<?php echo G5_URL ?>/estimate/ajax.area2.php",
 			data: {
 				"area1": $('#area1').val()
 			},
@@ -1485,11 +1125,11 @@ $provision = $row['co_content'];
 		request_parner = 0;
 		$.ajax({
 			type: "POST",
-			url: "/estimate/ajax.partner.php",
+			url: "<?php echo G5_URL ?>/estimate/ajax.partner.php",
 			data: {
 				"area1": $('#area1').val(),
 				"area2": $('#area2').val(),
-				"e_type": "0"
+				"e_type": "1"
 			},
 			cache: false,
 			success: function(data) {
@@ -1503,23 +1143,39 @@ $provision = $row['co_content'];
 		});
 	}
 
+	function doSelectCategory1() {
+		$.ajax({
+			type: "POST",
+			url: "<?php echo G5_URL ?>/estimate/ajax.category1.php",
+			data: {},
+			cache: false,
+			success: function(data) {
+				var fvHtml = "<option value=\"\" selected>선택</option>";
+				fvHtml += data;
+				$("#item_cat_s").html(fvHtml);
+			}
+		});
+	}
+
 	function doSelectCategory2() {
-		var itemCat = $('input[name="item_cat"]:checked').val();
+		var itemCat = $('#item_cat_s').val();
 		if (itemCat == "가구") {
 			$("#divModelName").hide();
-			$('#noneGuide').hide();
 		} else {
 			$("#divModelName").show();
-			$('#noneGuide').show();
 		}
 		if (itemCat == "가전") {
-			$("#spanYear").html("생산년도");
+			$("#spanYear").html("*가전 제조년식을 넣어주세요");
 		} else if (itemCat == "가구") {
-			$("#spanYear").html("생산년도");
+			$("#spanYear").html("*가구 사용년식을 넣어주세요");
 		} else {
-			//$("#spanYear").html("");
-			$("#spanYear").html("생산년도");
-			$("#spanYear").show();
+			//$("#spanYear").html("");.
+			if (itemCat) {
+				$("#spanYear").html(itemCat + " 제조년식을 넣어주세요");
+				$("#spanYear").show();
+			} else {
+				$("#spanYear").hide();
+			}
 		}
 
 		$("#manufacturer_s").val("");
@@ -1529,9 +1185,9 @@ $provision = $row['co_content'];
 
 		$.ajax({
 			type: "POST",
-			url: "/estimate/ajax.category2.php",
+			url: "<?php echo G5_URL ?>/estimate/ajax.category2.php",
 			data: {
-				category1: $('input[name="item_cat"]:checked').val()
+				category1: $('#item_cat_s').val()
 			},
 			cache: false,
 			success: function(data) {
@@ -1540,7 +1196,7 @@ $provision = $row['co_content'];
 				$("#item_cat_dtl_s").html("");
 				var fvHtml = "<option value=\"\" selected>선택</option>";
 				$("#manufacturer_s").html(fvHtml);
-				if ($('input[name="item_cat"]:checked').val()) {
+				if ($('#item_cat_s').val()) {
 					fvHtml += data;
 
 					$("#item_cat_dtl_s").html(fvHtml);
@@ -1552,6 +1208,7 @@ $provision = $row['co_content'];
 							$('#item_cat_dtl_etc').hide();
 						}
 					});
+
 
 				}
 				$("#item_cat_dtl_s").html(fvHtml);
@@ -1565,7 +1222,7 @@ $provision = $row['co_content'];
 			type: "POST",
 			url: "<?php echo G5_URL ?>/estimate/ajax.category3.php",
 			data: {
-				category1: $('input[name="item_cat"]:checked').val(),
+				category1: $('#item_cat_s').val(),
 				category2: $('#item_cat_dtl_s').val()
 			},
 			cache: false,
@@ -1589,64 +1246,171 @@ $provision = $row['co_content'];
 		});
 	}
 
+	function doAddItem() {
+		if (estimateCnt == 9) {
+			alert("최대 9개까지만 등록하실수 있습니다.");
+			return;
+		}
+		$('#item_cat_s').val("");
+		$('#manufacturer_s').val("");
+		$('#manufacturer_etc').val("");
+		$('#medel_name').val("");
+		$('#item_qty').val("1");
+		$('#use_year').val("");
+		$('#year').val("");
+		doSelectCategory2();
+		doSelectCategory3();
+		$("#spanYear").hide();
+		$("#divAddItem").show();
+		$("#divModifyItem").hide();
+
+		$('#modal_regist_item').modal();
+	}
+
+	function doSaveItem() {
+		if (!cfnNullCheckSelect($('#item_cat_s').val(), "품목")) return;
+		var itemCatDtl = $("#item_cat_dtl_s").val();
+		if (itemCatDtl == "직접입력") {
+			itemCatDtl = $("#item_cat_dtl_etc").val();
+		}
+
+		var manufacturer = $("#manufacturer_s").val();
+		if (manufacturer == "직접입력") {
+			manufacturer = $("#manufacturer_etc").val();
+		}
+
+		if (!cfnNullCheckSelect(itemCatDtl, "세부카테고리")) return;
+		if (!cfnNullCheckInput(manufacturer, "제조사")) return;
+
+		if (!cfnNullCheckInput($('#item_qty').val(), "수량")) return;
+		if (!cfnNullCheckInput($('#use_year').val(), "연식")) return;
+		var itemCat = $('#item_cat_s').val();
+		if (itemCat != "가구") {
+			//if(!cfnNullCheckInput($("#medel_name").val(), "모델명")) return;
+		}
+
+		var vHtml = "";
+		vHtml += "<tr>";
+		vHtml += "<input type='hidden' name='item_cat[]' value='" + $("#item_cat_s").val() + "'>";
+		vHtml += "<input type='hidden' name='item_cat_dtl[]' value='" + itemCatDtl + "'>";
+		vHtml += "<input type='hidden' name='manufacturer[]' value='" + manufacturer + "'>";
+		vHtml += "<input type='hidden' name='medel_name[]' value='" + $("#medel_name").val() + "'>";
+		vHtml += "<input type='hidden' name='year[]' value='" + $("#year").val() + "'>";
+		vHtml += "<input type='hidden' name='use_year[]' value='" + $("#use_year").val() + "'>";
+		vHtml += "<input type='hidden' name='item_qty[]' value='" + $("#item_qty").val() + "'>";
+		vHtml += "<td>" + $("#item_cat_s").val() + "</td>";
+		vHtml += "<td>" + itemCatDtl + "</td>";
+		vHtml += "<td>" + manufacturer + "</td>";
+		vHtml += "<td>" + $("#medel_name").val() + "</td>";
+		vHtml += "<td>" + $("#year").val() + "</td>";
+		vHtml += "<td>" + $("#item_qty").val() + "</td>";
+		vHtml += "<td><a class='form_btn line_bg delete_item' href='javascript:' >삭제</a></td>";
+		vHtml += "</tr>";
+
+		$("#multiList").append(vHtml);
+		estimateCnt++;
+		doAddItem();
+	}
+
+	function doCompleteItem() {
+		if (!cfnNullCheckSelect($('#item_cat_s').val(), "품목")) return;
+		var itemCatDtl = $("#item_cat_dtl_s").val();
+		if (itemCatDtl == "직접입력") {
+			itemCatDtl = $("#item_cat_dtl_etc").val();
+		}
+
+		var manufacturer = $("#manufacturer_s").val();
+		if (manufacturer == "직접입력") {
+			manufacturer = $("#manufacturer_etc").val();
+		}
+
+		if (!cfnNullCheckSelect(itemCatDtl, "세부카테고리")) return;
+		if (!cfnNullCheckInput(manufacturer, "제조사")) return;
+
+		if (!cfnNullCheckInput($('#item_qty').val(), "수량")) return;
+		if (!cfnNullCheckInput($('#use_year').val(), "연식")) return;
+		var itemCat = $('#item_cat_s').val();
+		if (itemCat != "가구") {
+			//if(!cfnNullCheckInput($("#medel_name").val(), "모델명")) return;
+		}
+
+		var vHtml = "";
+		vHtml += "<tr>";
+		vHtml += "<input type='hidden' name='item_cat[]' value='" + $("#item_cat_s").val() + "'>";
+		vHtml += "<input type='hidden' name='item_cat_dtl[]' value='" + itemCatDtl + "'>";
+		vHtml += "<input type='hidden' name='manufacturer[]' value='" + manufacturer + "'>";
+		vHtml += "<input type='hidden' name='medel_name[]' value='" + $("#medel_name").val() + "'>";
+		vHtml += "<input type='hidden' name='year[]' value='" + $("#year").val() + "'>";
+		vHtml += "<input type='hidden' name='use_year[]' value='" + $("#use_year").val() + "'>";
+		vHtml += "<input type='hidden' name='item_qty[]' value='" + $("#item_qty").val() + "'>";
+		vHtml += "<td>" + $("#item_cat_s").val() + "</td>";
+		vHtml += "<td>" + itemCatDtl + "</td>";
+		vHtml += "<td>" + manufacturer + "</td>";
+		vHtml += "<td>" + $("#medel_name").val() + "</td>";
+		vHtml += "<td>" + $("#year").val() + "</td>";
+		vHtml += "<td>" + $("#item_qty").val() + "</td>";
+		vHtml += "<td><a class='form_btn line_bg delete_item' href='javascript:' >삭제</a></td>";
+		vHtml += "</tr>";
+
+		$("#multiList").append(vHtml);
+		estimateCnt++;
+		$('#modal_regist_item').modal('hide');
+	}
+
+	function doSimpleEstimate() {
+		$("#simple_content").val("");
+		$("#modal_regist_simple").modal();
+	}
+
+	function doSaveSimpleEstimate() {
+		if (!cfnNullCheckInput($("#simple_nickname").val(), "이름")) return;
+		if (!cfnNullCheckInput($("#simple_email").val(), "이메일")) return;
+		if (!cfnNullCheckInput($("#simple_phone").val(), "연락처")) return;
+		<?php
+		if (!$is_member) {
+		?>
+			if (!validateEmail($("#simple_email").val())) {
+				alert("이메일 형식이 잘못되었습니다.");
+				return false;
+			}
+
+			if (!$("#simple_pbAgree").prop("checked")) {
+				alert("이용약관에 동의해주세요!");
+				return false;
+			}
+		<?php
+		}
+		?>
+		if (!cfnNullCheckInput($("#simple_content").val(), "참고사항")) return;
+
+		var f = document.frmsimple;
+		$('#load').show();
+		f.submit();
+	}
+
 	function doCheckForm(vGubun) {
-		if (vGubun == "2") {
-			var itemCatDtl = $("#item_cat_dtl_s").val();
-			if (itemCatDtl == "직접입력") {
-				itemCatDtl = $("#item_cat_dtl_etc").val();
+		if (vGubun == "1") {
+			if (!cfnNullCheckInput($("#title").val(), "견적제목")) return false;
+			if (!cfnNullCheckInput($("#content").val(), "참고사항")) return false;
+			if (photo_count == 0) {
+				alert("사진을 등록하십시오.");
+				return false;
 			}
 
-			var manufacturer = $("#manufacturer_s").val();
-			if (manufacturer == "직접입력") {
-				manufacturer = $("#manufacturer_etc").val();
-			}
-
-			if (!cfnNullCheckSelect(itemCatDtl, "세부카테고리"))
-				return false;
-			if (!cfnNullCheckInput(manufacturer, "제조사"))
-				return false;
-			var itemCat = $('input[name="item_cat"]:checked').val();
-			if (itemCat != "가구") {
-				if (!cfnNullCheckInput($("#medel_name").val(), "모델명"))
-					return false;
-			}
-
-			if (!cfnNullCheckSelect($("#use_year").val(), "년식"))
-				return false;
-
-		} else if (vGubun == "3") {
-			if (!cfnNullCheckInput($("#content").val(), "참고사항"))
-				return false;
-			// if (photo_count == 0) {
-			// 	alert("사진을 등록하십시오.");
-			// 	return false;
-			// }
-
-
-		} else if (vGubun == "4") {
-			if (!cfnNullCheckSelect($("#area1").val(), "시.도"))
-				return false;
-			if (!cfnNullCheckSelect($("#area2").val(), "구.군"))
-				return false;
-			if (!cfnNullCheckInput($("#area3").val(), "읍.면.동"))
-				return false;
-
+		} else if (vGubun == "2") {
+			if (!cfnNullCheckSelect($("#area1").val(), "시.도")) return false;
+			if (!cfnNullCheckSelect($("#area2").val(), "구.군")) return false;
+			if (!cfnNullCheckInput($("#area3").val(), "읍.면.동")) return false;
 			if ($('input:radio[id=elevator_yn2]').is(':checked')) {
 				if (!cfnNullCheckInput($("#floor").val(), "층수"))
 					return false;
 			}
 
-		} else if (vGubun == "5") {
-			if (!cfnNullCheckInput($("#pickup_date_magam").val(), "견적마감일"))
-				return false;
-			if (!cfnNullCheckInput($("#pickup_date").val(), "수거요청일"))
-				return false;
-			var req_Array = $('#pickup_date')
-				.val()
-				.split('-');
-			var close_Array = $('#pickup_date_magam')
-				.val()
-				.split('-');
+		} else if (vGubun == "3") {
+			if (!cfnNullCheckInput($("#pickup_date").val(), "수거요청일")) return false;
+			if (!cfnNullCheckInput($("#pickup_date_magam").val(), "견적마감일")) return false;
+			var req_Array = $('#pickup_date').val().split('-');
+			var close_Array = $('#pickup_date_magam').val().split('-');
 
 			var date_req = new Date(req_Array[0], req_Array[1], req_Array[2]);
 			var date_close = new Date(close_Array[0], close_Array[1], close_Array[2]);
@@ -1661,98 +1425,56 @@ $provision = $row['co_content'];
 				alert('마감일과 수거요청일은 같을 수 없습니다. \n수거요청일은 마감일 이후여야 입니다.');
 				return false;
 			}
-
 		}
 
 		return true;
 	}
 
 	function doRegistEstimate() {
-		var f = document.frmregister;
-		if (!cfnNullCheckSelect($("#area1").val(), "기본주소"))
-			return;
-		if (!cfnNullCheckSelect($("#area2").val(), "기본주소"))
-			return;
-		if (!cfnNullCheckInput($("#area3").val(), "상세주소"))
-			return;
+		if (!cfnNullCheckSelect($("#area1").val(), "기본주소")) return;
+		if (!cfnNullCheckSelect($("#area2").val(), "기본주소")) return;
+		if (!cfnNullCheckInput($("#area3").val(), "상세주소")) return;
 		if ($('input:radio[id=elevator_yn2]').is(':checked')) {
 			if (!cfnNullCheckInput($("#floor").val(), "층수"))
 				return false;
 		}
-		if (!cfnNullCheckInput($("#pickup_date").val(), "수거요청일"))
-			return;
+		if (!cfnNullCheckInput($("#pickup_date").val(), "수거요청일")) return;
+		if (!cfnNullCheckInput($("#title").val(), "견적제목")) return;
 
-		var itemCatDtl = $("#item_cat_dtl_s").val();
-		if (itemCatDtl == "직접입력") {
-			itemCatDtl = $("#item_cat_dtl_etc").val();
+		if (!cfnNullCheckInput($("#content").val(), "참고사항")) return;
+
+
+		if (photo_count == 0) {
+			alert("사진을 등록하십시오.");
+			return;
 		}
 
-		var manufacturer = $("#manufacturer_s").val();
-		if (manufacturer == "직접입력") {
-			manufacturer = $("#manufacturer_etc").val();
-		}
-
-		if (!cfnNullCheckSelect(itemCatDtl, "세부카테고리"))
-			return;
-		if (!cfnNullCheckInput(manufacturer, "제조사"))
-			return;
-		f.manufacturer.value = manufacturer;
-		f.item_cat_dtl.value = itemCatDtl;
-		var itemCat = $('input[name="item_cat"]:checked').val();
-		if (itemCat != "가구") {
-			if (!cfnNullCheckInput($("#medel_name").val(), "모델명"))
-				return;
-		}
-		f.title.value = itemCat + " " + manufacturer + " " + itemCatDtl;
-
-		if (!cfnNullCheckSelect($("#use_year").val(), "년식"))
-			return;
-		if (!cfnNullCheckInput($("#content").val(), "참고사항"))
-			return;
-
-
-
-		// if (photo_count == 0) {
-		// 	alert("사진을 등록하십시오.");
-		// 	return;
-		// }
-
-		if (!cfnNullCheckInput($("#nickname").val(), "이름"))
-			return;
-		if (!cfnNullCheckInput($("#email").val(), "이메일"))
-			return;
-		if (!cfnNullCheckInput($("#phone").val(), "연락처"))
-			return;
-
-
+		if (!cfnNullCheckInput($("#nickname").val(), "이름")) return;
+		if (!cfnNullCheckInput($("#email").val(), "이메일")) return;
+		if (!cfnNullCheckInput($("#phone").val(), "연락처")) return;
 		<?php
 		if (!$is_member) {
 		?>
-			if (!cfnNullCheckInput($("#nickname").val(), "이름"))
-			return 
-			if (!cfnNullCheckInput($("#email").val(), "이메일"))
-			return;
+				if (!cfnNullCheckInput($("#nickname").val(), "이름")) return;
+			if (!cfnNullCheckInput($("#email").val(), "이메일")) return;
 
 			if (!validateEmail($("#email").val())) {
 				alert("이메일 형식이 잘못되었습니다.");
 				return false;
 			}
 
-			if (!cfnNullCheckInput($("#phone").val(), "연락처"))
-			return;
+			if (!cfnNullCheckInput($("#phone").val(), "연락처")) return;
 
 			if (!$("#pbAgree").prop("checked")) {
 				alert("이용약관에 동의해주세요!");
 				return false;
 			}
-
-			
 		<?php
 		}
 		?>
-
 		$(".layer").removeClass("hidden");
-		$('#load').show();
+
+		var f = document.frmregister;
 		f.submit();
 	}
 
@@ -1773,96 +1495,6 @@ $provision = $row['co_content'];
 		}
 	}
 
-	function doReview(rcEmail, score) {
-		$.ajax({
-			type: "POST",
-			url: "<?php echo G5_URL ?>/estimate/ajax.review.modal.php",
-			data: {
-				rc_email: rcEmail
-			},
-			cache: false,
-			success: function(data) {
-				$("#modal_review_content").html(data);
-
-				$("#modal_review").modal();
-			}
-		});
-	}
-
-	function goMove() {
-		location.href = "<?php echo G5_URL; ?>/estimate/estimate_register.php";
-	}
-</script>
-
-<!-- AUTO COMPLETE -->
-<script type="text/javascript">
-	$(function() {
-		var ga_availableTags = [
-			"TV",
-			"냉장고",
-			"세탁기",
-			"김치냉장고",
-			"에어컨",
-			"냉동고",
-			"냉온풍기",
-			"전기밥솥",
-			"가스레인지"
-		];
-		var ma_availableTags = [
-			"삼성전자",
-			"LG전자",
-			"대우전자",
-			"대우루컴즈",
-			"스타리온",
-			"캐리어",
-			"유니크",
-			"우성",
-			"라셀르",
-			"휘센",
-			"센추리"
-		];
-
-		var gu_availableTags = [
-			"책상",
-			"침대",
-			"쇼파",
-			"장롱",
-			"식탁",
-			"피아노",
-			"책장",
-			"의자",
-			"사무용의자",
-			"서랍장",
-			"화장대",
-			"장식장"
-		];
-
-		$("#item_cat_dtl_s").autocomplete({
-			source: ga_availableTags
-		});
-		$("#manufacturer_s").autocomplete({
-			source: ma_availableTags
-		});
-		$('input[type=radio][name="item_cat"]').change(function() {
-			var itemCat = $('input[name="item_cat"]:checked').val();
-			if (itemCat == "가구") {
-				$("#item_cat_dtl_s").autocomplete({
-					source: gu_availableTags
-				});
-				$("#manufacturer_s").autocomplete({
-					source: ""
-				});
-			} else if (itemCat == "가전") {
-				$("#item_cat_dtl_s").autocomplete({
-					source: ga_availableTags
-				});
-				$("#manufacturer_s").autocomplete({
-					source: ma_availableTags
-				});
-			}
-		});
-	});
-
 	function setDisplay() {
 		if ($('input:radio[id=elevator_yn1]').is(':checked')) {
 			$('#noneDiv').hide();
@@ -1870,7 +1502,6 @@ $provision = $row['co_content'];
 			$('#noneDiv').show();
 		}
 	}
-
 </script>
 <?php
 include_once(G5_PATH . '/tail.php');

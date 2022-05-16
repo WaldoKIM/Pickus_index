@@ -13,9 +13,21 @@ include_once(G5_LIB_PATH.'/poll.lib.php');
 include_once(G5_LIB_PATH.'/visit.lib.php');
 include_once(G5_LIB_PATH.'/connect.lib.php');
 include_once(G5_LIB_PATH.'/popular.lib.php');
+include_once(G5_LIB_PATH.'/thumbnail.lib.php');
+include_once(G5_LIB_PATH.'/estimate.lib.php');
+
 ?>
 
 <script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+    dataLayer.push(arguments);
+}
+gtag('js', new Date());
+
+gtag('config', 'UA-146069223-1');
+
 $(function(){
        /* 화면 최소높이  */
    function page_h() {
