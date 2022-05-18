@@ -11,14 +11,13 @@
 @import url("introduce.css");
 @import url("product.css");
 @import url("board.css");
+@import url("estimate.css");
 
 
 
 
 /*  */
 @import url("main.css");
-@import url("sub/business.css");
-@import url("sub/company.css");
 
 .info_visual_img {
   width: 100%;
@@ -380,5 +379,3 @@
     font-size: 13px;
   }
 }
-
-/*# sourceMappingURL=widgets.css.map */

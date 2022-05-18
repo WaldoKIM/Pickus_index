@@ -15,7 +15,6 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 ?>
 
 <div class="latest_wr">
-
 <!-- 메인화면 최신글 시작 -->
 <?php
 //  최신글

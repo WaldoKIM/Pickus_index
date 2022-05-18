@@ -35,9 +35,19 @@ $readonly = ($w=='u') ? 'readonly' : '';
 if ($config['cf_use_addr'])
     add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 
+// 정보 수정일 시 페이지 컨트롤 소비자, 업체는 서로 다른 타입의 주소로 접근 불가
+$mb = get_member($mb_id);
+if ($w == 'u'){
+    if ($mb['mb_level'] == 8 || $mb['mb_level'] == 0){
+		$registerType = "customer";
+	}else{
+        $registerType = "partner";
+    }
+}
+
 if (!$registerType) {
     $registerType = "customer";
-}
+}       
 
 if ($registerType == "customer") {
     include_once($member_skin_path.'/register_customer_form.skin.php');

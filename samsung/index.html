@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="og:site_name" content="삼성전자 중고 보상 견적 이벤트" />
+    <meta name="og:title" content="삼성전자 중고 보상 견적 이벤트" />
+    <meta name="og:description" content="삼성전자 중고 보상 견적 이벤트 페이지 입니다." />
+    <meta name="og:url" content="https://repickus.com/samsung/" />
+    <meta name="og:image" content="https://repickus.com/samsung/img/tmn.jpg" />
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./trade_in.css">
+    <title>삼성전자 중고 보상 견적 이벤트</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="left-div">
+        <div class="left-area middle_position">
+            <h2 class="maincolor">이벤트/행사</h2>
+            <div>
+                <p><span>2022.06.01 ~ 2022.12.31</span></p>
+                <h1><span>중고보상 견적 이벤트<br>삼성닷컴 단독 혜택</span></h1>
+                <p>삼성닷컴에서 <span class="maincolor">중고 보상 견적 이벤트</span>에 참여하면<br>
+                <span class="subcolor">스타벅스 커피쿠폰 100%</span> 증정!!!</p>
+                <p>협력 업체를 통해 중고 가전 시세를 조회하고 견적을 받아 판매해 보세요.<br>
+                중고 가전을 판매하신 고객께 스타벅스 아메리카노 쿠폰을 드립니다!</p>
+                <button>이벤트 상세 정보 보기</button>
+            </div>
+        </div>
+    </div>
+    <div class="right-div">
+        <div class="right-area middle_position">
+            <h2 style="color:#fff;text-align:center;">지금 바로<br>이벤트 참여하기!</h2>
+            <div style="text-align:center;">
+
+                <form method="post" action="https://repickus.com/estimate/estimate_register1B.php">
+                    <input type="hidden" name="samsungevent" value="samsungevent">
+                    <input type="submit" id="pickus" class="register" value="개인고객 참가하기">
+                    <input type="button" id="refubmoa" class="register" value="기업고객 참가하기" onClick="location.href='https://refurbmoa.com/board/-/101/'">
+                </form>
+            </div>
+        </div>
+        <div class="right-area footer_position">
+            <p>※ 본 이벤트는 각 협력 업체를 통해 진행되며, 삼성전자와는 무관합니다.</p>
+            <p>개인고객 문의처 : 1800-5528 (https://repickus.com)<br>
+               기업고객 문의처 : 070-4866-1568 (https://refurbmoa.com)</p>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal_content middle_position" title="클릭하면 창이 닫힙니다.">
+            <h2 style="padding-bottom:50px; font-weight:500;">이벤트 상세 정보</h2><div class="xicon"><i class="fa-solid fa-xmark"></i></div>
+            <div class="modal_content_info">
+                <h3 class="maincolor"><i class="fa fa-user" aria-hidden="true"></i> 판매 가능한 가전 품목은 무엇인가요?</h3>
+                <p class="modal_contentpon">-</p><p class="modal_contenttext">TV, 냉장고, 김치냉장고, 세탁기, 건조기, 에어컨 등 다양한 품목의 가전 판매가 가능합니다.</p>
+                <br>
+                <h3 class="maincolor"><i class="fa fa-user" aria-hidden="true"></i> 보상 제외 가전 품목은 무엇인가요?</h3>
+                <p class="modal_contentpon">-</p><p class="modal_contenttext">고장 및 파손으로 인한 작동이 불가능한 가전, 빌트인 가전 10년 이상 된 가전 등은 보상에서 제외됩니다.</p>
+                <br>
+                <h3 class="maincolor"><i class="fa fa-user" aria-hidden="true"></i> 보상 판매는 어떻게 진행되나요?</h3>
+                <p class="modal_contentpon">-</p><p class="modal_contenttext">협력업체의 중고 가전 전문가들을 통해 무료 견적 서비스가 제공되며 다음 과정을 통해 보상판매가 진행됩니다.</p>
+                <br>
+            </div>
+            <div class="modal_content_step">
+                <div class="step-title maincolor">개인고객</div>
+                <div class="modal_step">
+                    <ul class="personal">
+                        <li class="li-margin">개인고객 참가하기</li><a>▸</a>
+                        <li class="li-margin">물품정보 입력</li><a>▸</a>
+                        <li class="li-margin">견적 비교 선택</li><a>▸</a>
+                        <li>업체 방문 및 수거</li>
+                    </ul>
+                </div>
+                <div class="step-title subcolor">기업고객</div>
+                <div class="modal_step">
+                    <ul class="business">
+                        <li class="li-margin">기업고객 참가하기</li><a>▸</a>
+                        <li class="li-margin">방문 견적 신청</li><a>▸</a>
+                        <li class="li-margin">업체 방문 및 견적</li><a>▸</a>
+                        <li>제품 수거 완료</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+$(function(){
+$("button").click(function(){
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  $('#canvas').hide();
+  document.body.classList.add("stop-scroll");
+  $(".modal").fadeIn();
+});
+
+$(".modal").click(function(){
+  document.body.classList.remove("stop-scroll");
+  $('#canvas').show();
+  $(".modal").fadeOut();
+});
+
+});
+</script>
+<script>
+    let canvas = document.getElementById("canvas")
+    let context = canvas.getContext('2d')
+
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.scrollHeight;
+  </script>
+<script>
+    class RandomParticle{
+      constructor(x, y, maxRadius = 10){
+        this.x = x
+        this.y = y
+
+        this.r = Math.floor(Math.random() * maxRadius)
+        this.color = this.generateRandomRGBAColor()
+      }
+
+      generateRandomRGBAColor(){
+        let red = Math.floor(73)
+        let green = Math.floor(173)
+        let blue = Math.floor(132)
+        let alpha = Math.floor(Math.random() * 10) / 10
+
+        return `rgba(${red}, ${green}, ${blue}, ${alpha}`
+      }
+
+      draw(context){
+        this.context = context
+
+        context.beginPath();
+        context.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+        context.closePath();
+
+        context.fillStyle = this.color;
+        context.fill();
+      }
+
+      moveDown(canvaHeight = 400){
+        this.y -= 1
+        if(this.y <= (0 - this.r)){
+          this.y = canvaHeight + this.r
+        }
+        this.draw(this.context)
+      }
+    }
+  </script>
+
+  <script>
+    function Mobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    let circles = []
+    let circle_size = 0
+    let circle_total = 0
+
+    if (Mobile()){
+        circle_size = 80
+        circle_total = 10
+    } else {
+        circle_size = 200
+        circle_total = 5
+    }
+    for(let i = 0; i < circle_total; i++){
+      let circle = new RandomParticle(Math.random() * canvas.width, Math.random() * canvas.height, circle_size)
+      circles.push(circle)
+      circle.draw(context)
+    }
+
+    function animate() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (var circle of circles) {
+            circle.moveDown(canvas.height);
+        }
+        requestAnimationFrame(animate)
+    }
+    animate()
+
+  </script>

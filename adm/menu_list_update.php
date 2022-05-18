@@ -69,7 +69,9 @@ for ($i=0; $i<$count; $i++)
                     me_target       = '".sql_real_escape_string(strip_tags($_POST['me_target'][$i]))."',
                     me_order        = '".sql_real_escape_string(strip_tags($_POST['me_order'][$i]))."',
                     me_use          = '".sql_real_escape_string(strip_tags($_POST['me_use'][$i]))."',
-                    me_mobile_use   = '".sql_real_escape_string(strip_tags($_POST['me_mobile_use'][$i]))."' ";
+                    me_mobile_use   = '".sql_real_escape_string(strip_tags($_POST['me_mobile_use'][$i]))."',
+                    view_target_1   = '".sql_real_escape_string(strip_tags($_POST['view_target_1'][$i]))."',
+                    view_target_2   = '".sql_real_escape_string(strip_tags($_POST['view_target_2'][$i]))."' ";
     sql_query($sql);
 }
 
