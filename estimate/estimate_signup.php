@@ -4,7 +4,7 @@ include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
 
 $estimateType = $_GET['estimateType'];
 
-include_once('./_head.php');
+include_once('../head.php');
 
 if (!$estimateType) {
     $estimateType = "single";
@@ -29,5 +29,5 @@ if ($estimateType == "single") {
     goto_url(G5_URL);
 }
 
-include_once('./_tail.php');
+include_once('../_tail.php');
 ?>
