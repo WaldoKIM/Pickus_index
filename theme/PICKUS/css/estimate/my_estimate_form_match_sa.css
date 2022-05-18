@@ -1,0 +1,5 @@
+#board .view .shop_list .img {float: left;}
+@media(max-width: 768px){  
+    .btn_wrap .col-xs-12 a{font-size: 2rem;}
+}
+

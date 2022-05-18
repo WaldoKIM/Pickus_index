@@ -1,18 +1,49 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/_common.php');
+include_once('./_common.php');
 
 
 $g5['title'] = '견적신청';
-include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/_head.php');
+include_once('./_head.php');
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
+$myEstForm = new MyEstimateSelect($member,$idx);
+$master=$myEstForm->myEstimateSelect(); //나의 물품견적을 가져옵니다.
+$photo=$myEstForm->photoInfo();
+$cxc=$myEstForm->photoCount();
+$daryang_chk=$myEstForm->daryangChk();
+$detailCnt=$myEstForm->detailCnt();
+$detail=$myEstForm->estimateMultiList();
+$propose_success=$myEstForm->proposeSuccess();
+$propose_process=$myEstForm->proposeProcess();
+$propose_process_fetch=$myEstForm->proposeProcessFetch();
+$propose_review=$myEstForm->proposeReview();
+$myEstForm->notifyUpdate();
+$centerCnt=$myEstForm->centerCnt();
+$cliInfo=$myEstForm->cliInfo();
+
+if(is_null($master)){
+	$url = G5_URL."/estimate/my_estimate_form_match_sa.php?idx=".$estimate_idx ;
+}
+
+if ($master['state'] == "7" && $member['mb_level'] > 9) {
+	alert("취소된 견적입니다.");
+}
+
+$price = 0;
+$price_minus = 0;
+if ($propose_success) {
+	$price = $propose_success['price'];
+	$price_minus = $propose_success['price_minus'];
+}
 
 
 ?>
-<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/board.css" />
+<link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/board.css" />
 <link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/estimate/member.css" />
 <link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/swiper.min.css" />
 <link rel="stylesheet" type="text/css" href="/theme/PICKUS/css/jquery.bxslider.css" />
+
+
 <style type="text/css">
 	.md_guide {
 		padding: 10px;
@@ -101,7 +132,45 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 		}
 		.nomore {touch-action: none; pointer-events: none;}
 	}
+
+	table, td, th {
+		table-layout: fixed;
+		border-collapse: collapse;
+		text-indent: 0;
+		width: 100%;
+		border-spacing: 0;
+	}
+
+	ul:after {
+    	display: block;
+     	height: 0;
+    	clear: both;
+    	float: none;
+    	content: "";
+	}
+
+	ul#bx-pager li{
+			max-width: 64px !important;
+		    float: left;
+			list-style: none;
+			position: relative;
+			width: 200px; 
+			margin-right: 5px;
+	}
+	ul#bx-pager li.bx-clone{visibility: hidden;}
+	.pager_wrap{background-color: #fff;}
 </style>
+
+<div class="info_visual_wrap">
+    <div class="info_visual_img info_default_img">
+        <div class="inner">
+            <div class="info_visual_text visual_txt">
+                <h6 class="wow fadeInDown" data-wow-delay="0.5s">내 신청현황</h6>
+                <p class="wow fadeInDown" data-wow-delay="0.7s">피커스의 차별화된 서비스를 더욱 편리하게 이용하실 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+</div>
 <form name="frmrequest" action="<?php echo G5_URL; ?>/estimate/my_estimate_form_request_update.php" method="post" enctype="multipart/form-data" autocomplete="off">
 	<input type="hidden" name="idx">
 	<input type="hidden" name="email">
@@ -109,28 +178,32 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 <div class="member com_pd">
 	<div class="container">
 		<div class="sub_title">
-			<h1 class="main_co">내신청현황</h1>
+			<h1 class="main_co">내신청현황
+			</h1>
 		</div><!-- sub_title -->
 		<div id="board">
 
 			<div class="view">
 				<div class="mob">
 				<?php
-							$sql = " select * from {$g5['estimate_list_photo']} where estimate_idx = '$idx' ";
-							$sqlx = " select count(*) as cnt from {$g5['estimate_list_photo']} where estimate_idx = '$idx' ";
-							$photo = sql_query($sql);
-							$fet_noti_choice = sql_fetch($sqlx);
-							$cxc = $fet_noti_choice['cnt'];
-							?>
-					<div class="mob_slider swiper-container<? if($cxc==1){echo 'nomore';}?>">
+					// $sql = " select * from g5_estimate_list_photo where estimate_idx = '$idx' ";
+					// $sqlx = " select count(*) as cnt from g5_estimate_list_photo where estimate_idx = '$idx' ";
+					
+					// $photo = sql_query($sql);
+					// $fet_noti_choice = sql_fetch($sqlx);
+					// $cxc = $fet_noti_choice['cnt'];
+					?>
+					<div class="mob_slider swiper-container<? if($cxc==0){echo 'nomore';}?>">
 						<ul id="mob_view_slider" class="swiper-wrapper">
 							<?php
-								$sql = " select * from {$g5['estimate_list_photo']} where estimate_idx = '$idx' ";
-								$photo = sql_query($sql);
+								// $sql = " select * from g5_estimate_list_photo where estimate_idx = '$idx' ";
+								// echo $sql;
+								// $photo = sql_query($sql);
+								
 
 								for ($i=0; $row1=sql_fetch_array($photo); $i++) {
-
 									// 썸네일
+									//$srcfile = G5_DATA_PATH."/estimate/".$row1['photo'];
 									$srcfile = G5_DATA_PATH."/estimate/".$row1['photo'];
 									$filename = basename($srcfile);
 									$filepath = dirname($srcfile);
@@ -140,6 +213,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 
 									echo '<li class="swiper-slide"><a href="'.G5_DATA_URL.'/estimate/'.$row1['photo'].'" target="_blank">'.$thumb_img.'</a></li>';
 								}
+								echo "AAa";
 							?>
 						</ul>
 
@@ -338,8 +412,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 						<th class="photo">
 							<ul id="view_slider">
 								<?php
-								$sql = " select * from {$g5['estimate_list_photo']} where estimate_idx = '$idx' ";
-								$photo = sql_query($sql);
+								// $sql = " select * from g5_estimate_list_photo where estimate_idx = '$idx' ";
+								// $photo = sql_query($sql);
+								$photo=$myEstForm->photoInfo();
 								for ($i = 0; $row1 = sql_fetch_array($photo); $i++) {
 									echo '<li><a href="' . G5_DATA_URL . '/estimate/' . $row1['photo'] . '" target="_blank">' . estimate_img_thumbnail($row1['photo'], 350, 350) . '</a></li>';
 								}
@@ -348,8 +423,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 							<div class="pager_wrap">
 								<ul id="bx-pager">
 									<?php
-									$sql = " select * from {$g5['estimate_list_photo']} where estimate_idx = '$idx' ";
-									$photo = sql_query($sql);
+									//$sql = " select * from g5_estimate_list_photo where estimate_idx = '$idx' ";
+									//$photo = sql_query($sql);
+									$photo=$myEstForm->photoInfo();
 									for ($i = 0; $row1 = sql_fetch_array($photo); $i++) {
 										echo "<li><a data-slide-index='" . $i . "' href=''>" . estimate_img_thumbnail($row1['photo'], 350, 350) . "</a></li>";
 									}
@@ -622,110 +698,164 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 
 				<ul class="shop_list" id="proposeList">
 					<?php
-					if ($centerCnt > 0) {
-						if ($state == "3" || $state == "4" || $state == "5" || $state == "8") {
-							$sql = " select
-										a.rc_email,
-										round(avg(a.score),1) as score,
-										round(avg(a.score)/5 * 100,0) as rate,
-										count(*) as cnt
-									from
-										g5_estimate_propose a
-										join g5_estimate_list b on a.estimate_idx = b.idx
-									where
-										ifnull(a.review,'') !=  ''
-										and a.rc_email = '{$propose_success['rc_email']}'
-									group by a.rc_email ";
-
-							$score_row = sql_fetch($sql);
-
-							$score = $score_row['score'];
-							echo "<li>";
-							echo "<div>";
-							echo "<div class='img'> <img src = '/data/estimate/" . $propose_success['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $propose_success['rc_email'] . "\")'>업체소개</p></div>";
-							echo "<div class='text'>";
-							if ($score > 0 && $score_row['cnt'] > 0) {
-								if ($score < 1) {
-									echo "<i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-								} else if ($score < 2) {
-									echo "<i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-								} else if ($score < 3) {
-									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-								} else if ($score < 4) {
-									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-								} else if ($score < 5) {
-									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i>";
-								} else {
-									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i>";
-								}
-								echo "<a class='re_btn' href='javascript:doReview(\"" . $propose_success['rc_email'] . "\",\"" . $propose_success['score'] . "\")'>후기보기 <i class='xi-angle-right-min'></i></a>";
-							}
-
-							$propose_success['rc_nickname'] = preg_replace('/(?<=.{1})./u', '○', $propose_success['rc_nickname']);
-							echo "<h4>" . $propose_success['rc_nickname'] . "</h4>";
-							//echo "<h5 style='text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden'>".$propose_success['mb_biz_addr1']."</h5>";
-							if ($propose_success['meet']) {
-								echo "<div class='pay main_co'><span>방문견적</span></div>";
-							} else {
-								if (!$propose_success['price'] && !$propose_success['price_minus']) {
-									if ($e_type == "2") {
-										echo "<div class='pay main_co'><span>무료철거</span></div>";
+						if ($centerCnt > 0) {
+							if ($state == "3" || $state == "4" || $state == "5" || $state == "8") {
+								$score_row=$myEstForm->partnerSelectList($propose_success);
+								$score = $score_row['score'];
+								echo "<li>";
+								echo "<div>";
+								echo "<div class='img'> <img src = '/data/estimate/" . $propose_success['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $propose_success['rc_email'] . "\")'>업체소개</p></div>";
+								echo "<div class='text'>";
+								if ($score > 0 && $score_row['cnt'] > 0) {
+									if ($score < 1) {
+										echo "<i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+									} else if ($score < 2) {
+										echo "<i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+									} else if ($score < 3) {
+										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+									} else if ($score < 4) {
+										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+									} else if ($score < 5) {
+										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i>";
 									} else {
-										echo "<div class='pay main_co'><span>무료수거</span></div>";
+										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i>";
 									}
+									echo "<a class='re_btn' href='javascript:doReview(\"" . $propose_success['rc_email'] . "\",\"" . $propose_success['score'] . "\")'>후기보기 <i class='xi-angle-right-min'></i></a>";
+								}
+					
+								$propose_success['rc_nickname'] = preg_replace('/(?<=.{1})./u', '○', $propose_success['rc_nickname']);
+								echo "<h4>" . $propose_success['rc_nickname'] . "</h4>";
+								//echo "<h5 style='text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden'>".$propose_success['mb_biz_addr1']."</h5>";
+								if ($propose_success['meet']) {
+									echo "<div class='pay main_co'><span>방문견적</span></div>";
 								} else {
-									if ($e_type == "2") {
-										echo "<div class='pay'><span class=' ma'>견적가</span> " . number_format($propose_success['price']) . "원</div>";
-									} else {
-										if ($propose_success['price']) {
-											echo "<div class='pay'><span class='white ma'>매입</span>" . number_format($propose_success['price']) . "원<span>보상</span></div>";
+									if (!$propose_success['price'] && !$propose_success['price_minus']) {
+										if ($e_type == "2") {
+											echo "<div class='pay main_co'><span>무료철거</span></div>";
+										} else {
+											echo "<div class='pay main_co'><span>무료수거</span></div>";
 										}
-										if ($propose_success['price_minus']) {
-											echo "<div class='pay'><span class='white pe'>폐기</span>" . number_format($propose_success['price_minus']) . "원<span>결제</span></div>";
+									} else {
+										if ($e_type == "2") {
+											echo "<div class='pay'><span class=' ma'>견적가</span> " . number_format($propose_success['price']) . "원</div>";
+										} else {
+											if ($propose_success['price']) {
+												echo "<div class='pay'><span class='white ma'>매입</span>" . number_format($propose_success['price']) . "원<span>보상</span></div>";
+											}
+											if ($propose_success['price_minus']) {
+												echo "<div class='pay'><span class='white pe'>폐기</span>" . number_format($propose_success['price_minus']) . "원<span>결제</span></div>";
+											}
 										}
 									}
 								}
-							}
-							echo "</div>";
-							echo "<div class='btn_list'>";
-							echo "<ul class='row'>";
-							if ($e_type == "2") {
-								echo "<a class='line_bg' href='javascript:doPriceDetail(\"" . $propose_success['idx'] . "\",\"" . $propose_success['estimate_idx'] . "\",\"" . $propose_success['rc_email'] . "\")'>상세견적</a>";
-							} else {
-								if ($propose_success['attach_file']) {
-									echo "<a class='line_bg' href='" . G5_DATA_URL . '/estimate/' . $propose_success['attach_file'] . "'>파일확인</a>";
+								echo "</div>";
+								echo "<div class='btn_list'>";
+								echo "<ul class='row'>";
+								if ($e_type == "2") {
+									echo "<a class='line_bg' href='javascript:doPriceDetail(\"" . $propose_success['idx'] . "\",\"" . $propose_success['estimate_idx'] . "\",\"" . $propose_success['rc_email'] . "\")'>상세견적</a>";
+								} else {
+									if ($propose_success['attach_file']) {
+										echo "<a class='line_bg' href='" . G5_DATA_URL . '/estimate/' . $propose_success['attach_file'] . "'>파일확인</a>";
+									}
 								}
-							}
-
-
-							echo "<a class='sub_bg' href='javascript:'>선택완료</a>";
-							/*echo "<a class='main_bg1' href='javascript:doSelect(\"".$row['idx']."\",\"".$row['estimate_idx']."\",\"".$row['rc_nickname']."\")'>파일확인</a>";*/
-							echo "</ul>";
-							echo "</div>";
-							echo "</div>";
-							echo "</li>";
-							if ($member['mb_level'] == '10') {
+					
+					
+								echo "<a class='sub_bg' href='javascript:'>선택완료</a>";
+								/*echo "<a class='main_bg1' href='javascript:doSelect(\"".$row['idx']."\",\"".$row['estimate_idx']."\",\"".$row['rc_nickname']."\")'>파일확인</a>";*/
+								echo "</ul>";
+								echo "</div>";
+								echo "</div>";
+								echo "</li>";
+								if ($member['mb_level'] == '10') {
+									for ($i = 0; $row = sql_fetch_array($propose_process); $i++) {
+										$score_row=$myEstForm->partnerNoSelect($row);
+										$score = $score_row['score'];
+					
+										echo "<li>";
+										echo "<div>";
+										echo "<div class='img'> <img src = '/data/estimate/" . $row['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $row['mb_email'] . "\")'>업체소개</p></div>";
+										echo "<div class='text'>";
+										if ($score > 0 && $score_row['cnt'] > 0) {
+											if ($score < 1) {
+												echo "<i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+											} else if ($score < 2) {
+												echo "<i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+											} else if ($score < 3) {
+												echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+											} else if ($score < 4) {
+												echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+											} else if ($score < 5) {
+												echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i>";
+											} else {
+												echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i>";
+											}
+											echo "<a class='re_btn' href='javascript:doReview(\"" . $row['rc_email'] . "\",\"" . $row['score'] . "\")'>후기보기 <i class='xi-angle-right-min'></i></a>";
+										}
+										$row['rc_nickname'] = preg_replace('/(?<=.{1})./u', '○', $row['rc_nickname']);
+										echo "<h4>" . $row['rc_nickname'] . "</h4>";
+										//echo "<h5 style='text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden'>".$row['mb_biz_addr1']."</h5>";
+										if ($row['meet']) {
+											echo "<div class='pay main_co'><span>방문견적</span></div>";
+										} else {
+											if (!$row['price'] && !$row['price_minus']) {
+												if ($e_type == "2") {
+													echo "<div class='pay main_co'><span>무료철거</span></div>";
+												} else {
+													if (!$row['price_minus']) {
+														echo "<div class='pay main_co'><span>무료수거</span></div>";
+													}
+												}
+											} else {
+												if ($e_type == "2") {
+													echo "<div class='pay'><span class=' ma'>견적가</span> " . number_format($row['price']) . "원</div>";
+												} else {
+													$arUnit = array(
+														'price' => $row['price'],
+														'price_minus' => $row['price_minus']
+													);
+													array_push($price_array, $arUnit);
+													if ($row['price']) {
+														echo "<div class='pay'><span class='white ma'>매입</span>" . number_format($row['price']) . "원 <span>보상</span></div>";
+													}
+													if ($row['price_minus']) {
+														echo "<div class='pay'><span class='white pe'>폐기</span>" . number_format($row['price_minus']) . "원<span>결제</span></div>";
+													}
+												}
+											}
+										}
+										echo "</div>";
+										echo "<div class='btn_list'>";
+										echo "<ul class='row'>";
+										echo "<li class='col-xs-12'>";
+										if ($e_type == "2" && !$row['meet']) {
+											echo "<a class='line_bg' href='javascript:doPriceDetail(\"" . $row['idx'] . "\",\"" . $row['estimate_idx'] . "\",\"" . $row['rc_email'] . "\")'>상세견적</a>";
+										} else {
+											if ($row['attach_file']) {
+												echo "<a class='line_bg' href='" . G5_DATA_URL . '/estimate/' . $row['attach_file'] . "'>파일확인</a>";
+											}
+										}
+										echo "</li>";
+										echo "<li class='col-xs-12'>";
+										if ($row['meet']) {
+											echo "<a class='main_bg' href='javascript:'>방문견적</a>";
+										}
+					
+										echo "</li>";
+										echo "</ul>";
+										echo "</div>";
+										echo "</div>";
+										echo "</li>";
+									}
+								}
+							} else if ($state == "1" || $state == "2" || $state == "6") {
 								for ($i = 0; $row = sql_fetch_array($propose_process); $i++) {
-									$sql = " select
-											a.rc_email,
-											round(avg(a.score),1) as score,
-											round(avg(a.score)/5 * 100,0) as rate,
-											count(*) as cnt
-										from
-											g5_estimate_propose a
-											join g5_estimate_list b on a.estimate_idx = b.idx
-										where
-											ifnull(a.review,'') !=  ''
-											and a.rc_email = '{$row['rc_email']}'
-										group by a.rc_email ";
-
-									$score_row = sql_fetch($sql);
-
+									$score_row=$myEstForm->partnerNoSelect($row);
+					
 									$score = $score_row['score'];
-
+					
 									echo "<li>";
 									echo "<div>";
-									echo "<div class='img'> <img src = '/data/estimate/" . $row['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $row['mb_email'] . "\")'>업체소개</p></div>";
+									echo "<div class='img'> <img src = '/data/estimate/" . $row['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $row['rc_email'] . "\")'>업체소개</p></div>";
 									echo "<div class='text'>";
 									if ($score > 0 && $score_row['cnt'] > 0) {
 										if ($score < 1) {
@@ -765,9 +895,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 													'price' => $row['price'],
 													'price_minus' => $row['price_minus']
 												);
-												array_push($price_array, $arUnit);
+												//array_push($price_array, $arUnit);
 												if ($row['price']) {
-													echo "<div class='pay'><span class='white ma'>매입</span>" . number_format($row['price']) . "원 <span>보상</span></div>";
+													echo "<div class='pay'><span class='white ma'>매입</span>" . number_format($row['price']) . "원<span>보상</span></div>";
 												}
 												if ($row['price_minus']) {
 													echo "<div class='pay'><span class='white pe'>폐기</span>" . number_format($row['price_minus']) . "원<span>결제</span></div>";
@@ -790,8 +920,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 									echo "<li class='col-xs-12'>";
 									if ($row['meet']) {
 										echo "<a class='main_bg' href='javascript:'>방문견적</a>";
+									} else {
+										if ($row['price'] > 0 && $e_type != '2') {
+											echo "<a class='main_bg' href='javascript:doSelect(\"" . $row['idx'] . "\",\"" . $row['estimate_idx'] . "\",\"" . $row['rc_nickname'] . "\")'>업체선택</a>";
+										} else {
+											echo "<a class='main_bg' href='javascript:doSelect_normal(\"" . $row['idx'] . "\",\"" . $row['estimate_idx'] . "\",\"" . $row['rc_nickname'] . "\")'>업체선택</a>";
+										}
 									}
-
 									echo "</li>";
 									echo "</ul>";
 									echo "</div>";
@@ -799,248 +934,67 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 									echo "</li>";
 								}
 							}
-						} else if ($state == "1" || $state == "2" || $state == "6") {
-							for ($i = 0; $row = sql_fetch_array($propose_process); $i++) {
-								$sql = " select
-											a.rc_email,
-											round(avg(a.score),1) as score,
-											round(avg(a.score)/5 * 100,0) as rate,
-											count(*) as cnt
-										from
-											g5_estimate_propose a
-											join g5_estimate_list b on a.estimate_idx = b.idx
-										where
-											ifnull(a.review,'') !=  ''
-											and a.rc_email = '{$row['rc_email']}'
-										group by a.rc_email ";
-
-								$score_row = sql_fetch($sql);
-
-								$score = $score_row['score'];
-
-								echo "<li>";
-								echo "<div>";
-								echo "<div class='img'> <img src = '/data/estimate/" . $row['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $row['rc_email'] . "\")'>업체소개</p></div>";
-								echo "<div class='text'>";
-								if ($score > 0 && $score_row['cnt'] > 0) {
-									if ($score < 1) {
-										echo "<i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 2) {
-										echo "<i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 3) {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 4) {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 5) {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i>";
-									} else {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i>";
-									}
-									echo "<a class='re_btn' href='javascript:doReview(\"" . $row['rc_email'] . "\",\"" . $row['score'] . "\")'>후기보기 <i class='xi-angle-right-min'></i></a>";
-								}
-								$row['rc_nickname'] = preg_replace('/(?<=.{1})./u', '○', $row['rc_nickname']);
-								echo "<h4>" . $row['rc_nickname'] . "</h4>";
-								//echo "<h5 style='text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden'>".$row['mb_biz_addr1']."</h5>";
-								if ($row['meet']) {
-									echo "<div class='pay main_co'><span>방문견적</span></div>";
-								} else {
-									if (!$row['price'] && !$row['price_minus']) {
-										if ($e_type == "2") {
-											echo "<div class='pay main_co'><span>무료철거</span></div>";
-										} else {
-											if (!$row['price_minus']) {
-												echo "<div class='pay main_co'><span>무료수거</span></div>";
-											}
-										}
-									} else {
-										if ($e_type == "2") {
-											echo "<div class='pay'><span class=' ma'>견적가</span> " . number_format($row['price']) . "원</div>";
-										} else {
-											$arUnit = array(
-												'price' => $row['price'],
-												'price_minus' => $row['price_minus']
-											);
-											//array_push($price_array, $arUnit);
-											if ($row['price']) {
-												echo "<div class='pay'><span class='white ma'>매입</span>" . number_format($row['price']) . "원<span>보상</span></div>";
-											}
-											if ($row['price_minus']) {
-												echo "<div class='pay'><span class='white pe'>폐기</span>" . number_format($row['price_minus']) . "원<span>결제</span></div>";
-											}
-										}
-									}
-								}
-								echo "</div>";
-								echo "<div class='btn_list'>";
-								echo "<ul class='row'>";
-								echo "<li class='col-xs-12'>";
-								if ($e_type == "2" && !$row['meet']) {
-									echo "<a class='line_bg' href='javascript:doPriceDetail(\"" . $row['idx'] . "\",\"" . $row['estimate_idx'] . "\",\"" . $row['rc_email'] . "\")'>상세견적</a>";
-								} else {
-									if ($row['attach_file']) {
-										echo "<a class='line_bg' href='" . G5_DATA_URL . '/estimate/' . $row['attach_file'] . "'>파일확인</a>";
-									}
-								}
-								echo "</li>";
-								echo "<li class='col-xs-12'>";
-								if ($row['meet']) {
-									echo "<a class='main_bg' href='javascript:'>방문견적</a>";
-								} else {
-									if ($row['price'] > 0 && $e_type != '2') {
-										echo "<a class='main_bg' href='javascript:doSelect(\"" . $row['idx'] . "\",\"" . $row['estimate_idx'] . "\",\"" . $row['rc_nickname'] . "\")'>업체선택</a>";
-									} else {
-										echo "<a class='main_bg' href='javascript:doSelect_normal(\"" . $row['idx'] . "\",\"" . $row['estimate_idx'] . "\",\"" . $row['rc_nickname'] . "\")'>업체선택</a>";
-									}
-								}
-								echo "</li>";
-								echo "</ul>";
-								echo "</div>";
-								echo "</div>";
-								echo "</li>";
-							}
+						} else {
+							echo '<p style="text-align: center; margin-bottom: 5px;">업체 견적이 들어오지 않았습니다.</p>';
 						}
-					} else {
-						echo '<p style="text-align: center; margin-bottom: 5px;">업체 견적이 들어오지 않았습니다.</p>';
-					}
+					
 					?>
 				</ul><!-- shop_list -->
 				<ul class="shop_list" id="selectList">
 					<p style="text-align: center; margin-bottom: 5px;">*업체에게 문의 하여 빠른 답변을 받아보세요*</p>
 					<?php
-
-						$totalCount = 0;
-						$rows = 0;
-						$totalpage = 0;
-						$startpage = 0;
-
-
-						if ($state == "1" || $state == "2") {
-						?>
-							<?php
-
-							$cnt = " select count(*) as cnt from {$g5['member_table']} a left join {$g5['estimate_request']} b on a.mb_email = b.rc_email and b.estimate_idx = '$idx'";
-							if ($e_type == "0" || $e_type == "1") {
-								$cnt .= " where mb_biz_type in ('1','3') ";
-							} else {
-								$cnt .= " where mb_biz_type in ('2','3') ";
-							}
-
-							$marea1 = $master['area1'];
-							$marea2 = $master['area2'];
-							if ($member['mb_level'] == 10) {
-								$cnt .= " and mb_id in ( select mb_id from {$g5['member_area_table']} where 1=1 and ( ( mb_area1 = '$marea1' and ifnull(mb_area2,'') = '' ) or ( mb_area1 = '$marea1' and mb_area2 = '$marea2'))) ";
-							} else {
-								$cnt .= " and a.mb_show_type = '1' and mb_id in ( select mb_id from {$g5['member_area_table']} where 1=1 and ( ( mb_area1 = '$marea1' and ifnull(mb_area2,'') = '' ) or ( mb_area1 = '$marea1' and mb_area2 = '$marea2'))) ";
-							}
-
-							$cnt .= " and mb_email not in ( select rc_email from {$g5['estimate_propose']} where estimate_idx = '$idx') ";
-							$cnt .= " order by mb_biz_score desc";
-
-							$request_cnt = sql_fetch($cnt);
-
-							$totalCount = $request_cnt['cnt'];
-							$rows = 8;
-							$totalpage = ceil($totalCount / $rows);
-
-							if($page < 1){
-								$page = 1;
-							}
-							$startpage = ($page - 1) * $rows;
-
-							$sql = " select a.*, case when b.rc_email is not null then 'Y' else 'N' end as request_yn, b.estimate_yn from {$g5['member_table']} a left join {$g5['estimate_request']} b on a.mb_email = b.rc_email and b.estimate_idx = '$idx'";
-							if ($e_type == "0" || $e_type == "1") {
-								$sql .= " where mb_biz_type in ('1','3') ";
-							} else {
-								$sql .= " where mb_biz_type in ('2','3') ";
-							}
-
-							$sql = " select a.*, case when b.rc_email is not null then 'Y' else 'N' end as request_yn, b.estimate_yn from {$g5['member_table']} a left join {$g5['estimate_request']} b on a.mb_email = b.rc_email and b.estimate_idx = '$idx'";
-							if ($e_type == "0" || $e_type == "1") {
-								$sql .= " where mb_biz_type in ('1','3') ";
-							} else {
-								$sql .= " where mb_biz_type in ('2','3') ";
-							}
-
-
-							$marea1 = $master['area1'];
-							$marea2 = $master['area2'];
-							if ($member['mb_level'] == 10) {
-								$sql .= " and mb_id in ( select mb_id from {$g5['member_area_table']} where 1=1 and ( ( mb_area1 = '$marea1' and ifnull(mb_area2,'') = '' ) or ( mb_area1 = '$marea1' and mb_area2 = '$marea2'))) ";
-							} else {
-								$sql .= " and a.mb_show_type = '1' and mb_id in ( select mb_id from {$g5['member_area_table']} where 1=1 and ( ( mb_area1 = '$marea1' and ifnull(mb_area2,'') = '' ) or ( mb_area1 = '$marea1' and mb_area2 = '$marea2'))) ";
-							}
-							$sql .= " and mb_email not in ( select rc_email from {$g5['estimate_propose']} where estimate_idx = '$idx') ";
-							$sql .= " order by mb_biz_score desc limit $startpage , $rows";
-
-							$request_list = sql_query($sql);
-
-							for ($i = 0; $row = sql_fetch_array($request_list); $i++) {
-								$sql = " select
-											a.rc_email,
-											round(avg(a.score),1) as score,
-											round(avg(a.score)/5 * 100,0) as rate,
-											count(*) as cnt
-										from
-											g5_estimate_propose a
-											join g5_estimate_list b on a.estimate_idx = b.idx
-										where
-											ifnull(a.review,'') !=  ''
-											and a.rc_email = '{$row['mb_email']}'
-										group by a.rc_email ";
-
-								$score_row = sql_fetch($sql);
-
-								$score = $score_row['score'];
-								echo "<li>";
-								echo "<div>";
-								echo "<div class='img'><img src='/data/estimate/" . $row['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $row['mb_email'] . "\")'>업체소개</p></div>";
-								echo "<div class='text'>";
-
-								if ($score > 0 && $score_row['cnt'] > 0) {
-									if ($score < 1) {
-										echo "<i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 2) {
-										echo "<i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 3) {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 4) {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
-									} else if ($score < 5) {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i>";
-									} else {
-										echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i>";
-									}
-									echo "<a class='re_btn' href='javascript:doReview(\"" . $row['mb_email'] . "\",\"" . $row['mb_biz_score'] . "\")'>후기보기 <i class='xi-angle-right-min'></i></a>";
-								}
-								$row['mb_name'] = preg_replace('/(?<=.{1})./u', '○', $row['mb_name']);
-								echo "<h4>" . $row['mb_name'] . "</h4>";
-								//echo "<h5 style='text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden'>".$row['mb_biz_addr1']."</h5>";
-								echo "</div>";
-								echo "<div class='btn_list'>";
-								echo "<ul class='row'>";
-
-
-								if ($row['estimate_yn']) {
-									echo "<a class='sub_bg' href='javascript:' style='background:#da1a1a !important; color:#fff;'>수거불가</a>";
+						$request=$myEstForm->partnerList($e_type,$master, $state,$page);
+						for ($i = 0; $row = sql_fetch_array($request['request_list']); $i++) {
+								$score_row=$myEstForm->partnerNoSelect($row);
+					
+							$score = $score_row['score'];
+							echo "<li>";
+							echo "<div>";
+							echo "<div class='img'><img src='/data/estimate/" . $row['mb_photo_site'] . "'><p id='partner_show' onclick='show_partner_detail(\"" . $row['mb_email'] . "\")'>업체소개</p></div>";
+							echo "<div class='text'>";
+					
+							if ($score > 0 && $score_row['cnt'] > 0) {
+								if ($score < 1) {
+									echo "<i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+								} else if ($score < 2) {
+									echo "<i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+								} else if ($score < 3) {
+									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+								} else if ($score < 4) {
+									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i><i class='xi-star-o'></i>";
+								} else if ($score < 5) {
+									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star-o'></i>";
 								} else {
-									if ($row['request_yn'] == "Y") {
-										echo "<a class='sub_bg' href='javascript:'>문의중</a>";
-									} else {
-										echo "<a class='main_bg' href='javascript:doRequest(\"" . $idx . "\",\"" . $row['mb_email'] . "\")'>문의하기</a>";
-									}
+									echo "<i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i><i class='xi-star'></i>";
 								}
-
-								echo "</ul>";
-								echo "</div>";
-								echo "</div>";
-								echo "</li>";
+								echo "<a class='re_btn' href='javascript:doReview(\"" . $row['mb_email'] . "\",\"" . $row['mb_biz_score'] . "\")'>후기보기 <i class='xi-angle-right-min'></i></a>";
 							}
-							?>
-						<?php
+							$row['mb_name'] = preg_replace('/(?<=.{1})./u', '○', $row['mb_name']);
+							echo "<h4>" . $row['mb_name'] . "</h4>";
+							//echo "<h5 style='text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden'>".$row['mb_biz_addr1']."</h5>";
+							echo "</div>";
+							echo "<div class='btn_list'>";
+							echo "<ul class='row'>";
+					
+					
+							if ($row['estimate_yn']) {
+								echo "<a class='sub_bg' href='javascript:' style='background:#da1a1a !important; color:#fff;'>수거불가</a>";
+							} else {
+								if ($row['request_yn'] == "Y") {
+									echo "<a class='sub_bg' href='javascript:'>문의중</a>";
+								} else {
+									echo "<a class='main_bg' href='javascript:doRequest(\"" . $idx . "\",\"" . $row['mb_email'] . "\")'>문의하기</a>";
+								}
+							}
+					
+							echo "</ul>";
+							echo "</div>";
+							echo "</div>";
+							echo "</li>";
 						}
-						?>
+					?>
 					<div id="page">
-						<?php echo get_paging_shop_List(G5_IS_MOBILE ? 8: 8, $page, $totalpage, $state ,  $master['area1'],  $master['area2'], $e_type , $member['mb_level'] , $idx); ?>
+					<?php echo get_paging_shop_List(G5_IS_MOBILE ? 8: 8, $request["page"], $request["totalpage"], $request["state"] ,  $master['area1'],   $master['area2'], $e_type , $member['mb_level'] ,  $request["idx"]); ?>
 					</div>
 				</ul>
 
@@ -1245,11 +1199,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 					?>
 				</table>
 				<?php
-				$sql = " select count(*) as cnt from {$g5['estimate_propose']} where estimate_idx = '$idx' and ifnull(content,'') != '' ";
-				$request_cnt = sql_fetch($sql);
+				$request_cnt=$myEstForm->getContentCount();
 				if ($request_cnt['cnt'] > 0) {
-					$sql = " select * from {$g5['estimate_propose']} where estimate_idx = '$idx' and ifnull(content,'') != '' ";
-					$request_list = sql_query($sql);
+					$request_list=$myEstForm->getContent();
 					echo '<div class="text_note" id="partnerNote" style="margin-top:30px;">';
 					echo '<h1>업체 견적 참고사항</h1>';
 					for ($i = 0; $row = sql_fetch_array($request_list); $i++) {
@@ -1266,8 +1218,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 						if ($master['review_yn'] == "0") {
 							echo "<h1 class='tt'>고객후기 <a class='main_bg' href='javascript:doAddReview();'>후기작성</a></h1>";
 						} else {
-							$sql1 = " select * from {$g5['estimate_list_photo']} where estimate_idx = '$idx' order by idx limit 1 ";
-							$photo = sql_fetch($sql1);
+							$photo=$myEstForm->getReviewPhoto();
 							$score = $propose_review['score'];
 							echo "<h1 class='tt'>고객후기</h1>";
 							echo "<table class='re_view'>";
@@ -1479,6 +1430,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 					<form name="frmreview" action="<?php echo G5_URL; ?>/estimate/my_estimate_form_review_update.php" method="post" enctype="multipart/form-data" autocomplete="off">
 						<input type="hidden" id="idx" name="idx" value="<?php echo $master['idx']; ?>">
 						<input type="hidden" id="sub_idx" name="sub_idx" value="<?php echo $master['sub_idx']; ?>">
+						<input type="hidden" id="sub_idx" name="sub_idx" value="<?php echo $master['sub_idx']; ?>">
 						<div class="write">
 							<table>
 								<colgroup>
@@ -1569,7 +1521,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/my_estimate_select.php');
 <form name="frmcancel" action="<?php echo G5_URL; ?>/estimate/my_estimate_form_cancel.php" method="post" enctype="multipart/form-data" autocomplete="off">
 	<input type="hidden" id="idx" name="idx" value="<?php echo $master['idx']; ?>">
 	<input type="hidden" id="state" name="state" value="6">
-	<input type="hidden" id="page" name="page" value="<?php echo $page; ?>">
+	<input type="hidden" id="email" name="email" value="<?php echo  $master['email'];?>">
 </form>
 <div class="loader"></div>
 <?php
@@ -1578,6 +1530,7 @@ if (!$select_gubun) {
 }
 ?>
 <script type="text/javascript" src="/js/jquery.bxslider.js"></script>
+<script type="text/javascript" src="/js/jquery.lightbox.js"></script>
 <script>
 	jQuery(document).ready(function() {
 		$('#mb_bank_select').change(function() {
@@ -1834,7 +1787,7 @@ if (!$select_gubun) {
 </script>
 <?php
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/_tail.php');
+include_once('./_tail.php');
 ?>
 
 
@@ -1961,7 +1914,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/estimate/_tail.php');
 			}
 
 		$.ajax({
-			url : "my_estimate_form_select_shop.php",
+			url : "<?php echo G5_URL; ?>/estimate/my_estimate_form_select_shop.php",
 			type : "post",
 			data : data,
 			error:function(request,status,error){
