@@ -57,6 +57,7 @@ if($config['cf_add_meta'])
 <link rel="stylesheet" href="<?php echo G5_THEME_CSS_URL;?>/animate.css">
 <link rel="stylesheet" href="<?php echo G5_THEME_CSS_URL; ?>/theme.css">
 
+
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
 <!--[if lte IE 8]>
 <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
@@ -77,9 +78,9 @@ var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_edi
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 </script>
 
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="<?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>
 <script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
-<script src="<?php echo G5_JS_URL ?>/bootstrap.min.js"></script>
+<script src="<?php echo G5_JS_URL ?>/jQuery/jquery-ui.js"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/estimate_array.js"></script>
 <script src="<?php echo G5_JS_URL ?>/placeholders.min.js"></script>
@@ -87,10 +88,11 @@ var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.3.8/js/swiper.min.js" integrity="sha512-2zMI2fi89JcUksrmozsywzC0tcEJAACDO/WQHxjm3hzTnG9rgGiVRUwOAbN7Pc8b8/n3Q2+Q39Ih1JOQwAiBeA==" crossorigin="anonymous"></script>
 <script src="<?php echo G5_JS_URL ?>/md5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/embed-js/5.0.4/embed.min.js" integrity="sha512-sCZMeavhBnVDQVJse3hbdJWLWQQf/XjMsIYOnAOT4zv5OEixbj852LeoHl+wZMZBWSbhvmkVSJd7kr2ACEqP3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script src="<?php echo G5_JS_URL ?>/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.3.1/jquery.mb.YTPlayer.min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-<script src="<?php echo G5_JS_URL ?>/jQuery/jquery-ui.js"></script>
 <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
 
 <link rel="stylesheet" href="<?php echo G5_JS_URL ?>/font-awesome/css/font-awesome.min.css">
