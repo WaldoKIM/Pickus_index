@@ -8,13 +8,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 if (!$biztype) {
 	$biztype = "1";
 }
-
-$sql = " select area1 from {$g5['estimate_area1']} order by idx ";
-$result = sql_query($sql);
-
-for ($i=0; $row=sql_fetch_array($result); $i++){
-	echo '<option value="'.$row['area1'].'">'.$row['area1'].'</option>';
-}
 ?>
 
 <!-- 회원정보 입력/수정 시작 { -->
@@ -29,14 +22,16 @@ for ($i=0; $row=sql_fetch_array($result); $i++){
     </div>
 </div>
 <div class="inner">
-	<ul class="register_way">
-        <li data-tab="tab1">
-            <a href="./register_form.php?registerType=customer">일반회원가입</a>
-        </li>
-        <li class="current" data-tab="tab2">
-            <a href="#none">파트너회원가입</a>
-        </li>
-    </ul>
+	<?php if( !$w == 'u'){ ?>
+		<ul class="register_way">
+        	<li data-tab="tab1">
+            	<a href="./register_form.php?registerType=customer">일반회원가입</a>
+        	</li>
+        	<li class="current" data-tab="tab2">
+            	<a href="#none">파트너회원가입</a>
+        	</li>
+    	</ul>
+	<?php }?>
 	<div class="register">
 	<script src="<?php echo G5_JS_URL ?>/jquery.register_form.js"></script>
 	<?php if($config['cf_cert_use'] && ($config['cf_cert_ipin'] || $config['cf_cert_hp'])) { ?>

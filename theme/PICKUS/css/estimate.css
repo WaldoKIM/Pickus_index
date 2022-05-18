@@ -1,0 +1,185 @@
+/*estimate.css*/
+
+/*견적 신청 시작*/
+#estimate_signup{
+    height: 100%;
+}
+
+.signup_info{
+    width: 50%;
+    height: 100vh;
+    float: left;
+}
+
+.signup_form{
+    width: 50%;
+    height: 100vh;
+    float: right;
+    background-color: #49AD84;
+}
+
+.info_section{
+    margin-left: 25%;
+    margin-right: 70px;
+}
+
+.step_info{
+    
+}
+
+.signup_progress{
+    margin-left: 25%;
+    margin-right: 70px;
+    font-size: 2.3em;
+    color: #49AD84;
+    padding-bottom: 60px;
+}
+
+.step_info h2{
+    font-size: 2.8em;
+    line-height: 1.4em;
+    padding-bottom: 40px;
+}
+
+.step_info p{
+    font-size: 1.3em;
+    line-height: 1.2em;
+}
+
+.step_info span{
+    color:#49AD84;
+    font-weight: bold;
+}
+
+.form_order{
+    max-width: 400px;
+    background-color: #ffffff;
+    margin: 0 0 0 70px;
+    box-shadow: 4px 5px 11px 3px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+}
+
+.middle_position{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.info_position{
+    margin-top: 20%;
+}
+
+.step_value{
+    padding: 40px 40px 80px 40px
+}
+
+.signup-input-radio-checkbox{
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+  }
+  
+  .signup-input-radio-checkbox:checked + .signup-input-radio-checkbox-label{
+    color: #ffffff;
+    background-color: #49AD84;
+    border: solid 2px #49AD84;
+  }
+  
+  .signup-input-radio-checkbox-label{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    color: #777;
+    border: 2px solid #49AD84;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+.form_next{
+    text-align: center;
+    line-height: 40px;
+    width: 47.5%;
+    height: 40px;
+    margin-top: 20px;
+    float: right;
+    color: #ffffff;
+    background-color: #49AD84;
+    border: solid 1px #49AD84;
+    border-radius: 5px;
+}
+
+.form_prev{
+    text-align: center;
+    line-height: 40px;
+    width: 47.5%;
+    height: 40px;
+    margin-top: 20px;
+    float: left;
+    color: #333333;
+    background-color: #ffffff;
+    border: solid 1px #333333;
+    border-radius: 5px;
+}
+
+.ProgressBar {
+    margin: 0 auto;
+    list-style: none;
+    position: relative;
+    display: inline-flex;
+    justify-content: space-between;
+  }
+  
+  .ProgressBar-step {
+    margin: 0 5px;
+    text-align: center;
+    position: relative;
+  }
+  .ProgressBar-step:first-child:before, .ProgressBar-step:first-child:after {
+    display: none;
+  }
+  .ProgressBar-step:after {
+    background-color: #49AD84;
+    width: 0%;
+  }
+  .ProgressBar-step.is-complete + .ProgressBar-step.is-current:after, .ProgressBar-step.is-complete + .ProgressBar-step.is-complete:after {
+    width: 100%;
+  }
+  
+  .ProgressBar-icon {
+    width: 0.5em;
+    height: 0.5em;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    padding: 0.4em;
+    max-width: 100%;
+    z-index: 10;
+    position: relative;
+    transition: all 0.25s ease-out;
+  }
+  .is-current .ProgressBar-icon {
+    background-color: #49AD84;
+  }
+  .is-complete .ProgressBar-icon {
+    background-color: #49AD84;
+  }
+  
+  .ProgressBar-stepLabel {
+    display: block;
+    text-transform: uppercase;
+    color: #9F9FA3;
+    position: absolute;
+    padding-top: 0.5em;
+    width: 100%;
+    transition: all 0.25s ease-out;
+  }
+  .is-current > .ProgressBar-stepLabel, .is-complete > .ProgressBar-stepLabel {
+    color: #49AD84;
+  }
+/*견적 신청 끝*/

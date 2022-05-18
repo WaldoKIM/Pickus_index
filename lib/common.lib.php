@@ -822,7 +822,7 @@ function get_member($mb_id, $fields='*', $is_cache=false)
 {
     global $g5;
 
-    //if (preg_match("/[^0-9a-z_]+/i", $mb_id)) 이메일 로그인을 위한 특수문자 검사 주석 with GWKIM
+    //if (preg_match("/[^0-9a-z_]+/i", $mb_id))
     //return array();
 
     static $cache = array();

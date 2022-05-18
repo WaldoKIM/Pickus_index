@@ -38,7 +38,7 @@ if($title == "" || $content == "" || $phone == "" || $area1 == "" || $area2 == "
            echo $error['message'];
     }*/
 
-    $sql = " insert into g5_estimate_list set
+    $sql = " insert into {$g5['estimate_list']} set
                             sub_key = '$sub_key',
                             email = '$email',
                             nickname = '$nickname',
@@ -73,7 +73,7 @@ if($title == "" || $content == "" || $phone == "" || $area1 == "" || $area2 == "
     sql_query($sql);
 
 
-    $sql = " select max(idx) as idx from g5_estimate_list where email = '$email' ";
+    $sql = " select max(idx) as idx from {$g5['estimate_list']} where email = '$email' ";
     $estimate = sql_fetch($sql);
     $idx = $estimate['idx'];
 
@@ -81,7 +81,7 @@ if($title == "" || $content == "" || $phone == "" || $area1 == "" || $area2 == "
     for ($i=0; $i<$photo_count; $i++) {
             if ($_FILES['photo']['name'][$i]) {
                     $photo = estimate_img_upload($_FILES['photo']['tmp_name'][$i], $_FILES['photo']['name'][$i], $img_dir);
-                $sql = " insert into g5_estimate_list_photo set 
+                $sql = " insert into {$g5['estimate_list_photo']} set 
                                             estimate_idx = '$idx',
                                 photo = '$photo',
                                 photo_rotate = '',
@@ -96,7 +96,7 @@ if($title == "" || $content == "" || $phone == "" || $area1 == "" || $area2 == "
                     $rc_email_chk     = $_POST['rc_email_chk'][$i];
                     $rc_email         = $_POST['rc_email'][$i];
                     if($rc_email_chk == "Y"){
-                            $sql = " insert g5_estimate_request set
+                            $sql = " insert {$g5['estimate_request']} set
                                                     estimate_idx = '$idx', 
                                                     rc_email = '$rc_email' ";
 
@@ -108,7 +108,7 @@ if($title == "" || $content == "" || $phone == "" || $area1 == "" || $area2 == "
 
     }
 
-    $url = "/theme/PICKUS/estimate/my_estimate_form.php?idx=".$estimate['idx'];
+    $url = "./my_estimate_form.php?idx=".$estimate['idx'];
     if (!$is_member) {
             $sql = " select * from {$g5['member_table']} where mb_email = '$email' ";
             $mm = sql_fetch($sql);
@@ -139,38 +139,9 @@ if($title == "" || $content == "" || $phone == "" || $area1 == "" || $area2 == "
             }
     }
 
-	insert_notify($email, '11', $title.' 견적신청이 되었습니다.','',$idx, '','cp1');
-
-    /*kakaotalk_send($phone, 'SJT_041562',  get_etype($e_type));*/
-
-	
-
-
+    insert_notify($email, '11', $title.' 견적신청이 되었습니다.','',$idx, '','cp1');
     kakaotalk_send($phone, 'SJT_058638',  $nickname .'|'. $email .'|'. get_etype($e_type));
-
-    echo "
-            <!-- NAVER SCRIPT -->
-            <script type='text/javascript' src='//wcs.naver.net/wcslog.js'></script> 
-            <script type='text/javascript'> 
-            if (!wcs_add) var wcs_add={};
-            wcs_add['wa'] = 's_4e5aa7de4638';
-            if (!_nasa) var _nasa={};
-            _nasa['cnv'] = wcs.cnv('4','1'); //전환유형, 전환가치
-            wcs_do(_nasa);
-            </script>
-            <!-- NAVER SCRIPT END -->
-            ";
-/*
-	$msg = $title.' 견적신청이 되었습니다.';
-
-	$sql = " select * from {$g5['member_token_table']} where mb_email = '{$member['mb_id']}' order by idx desc";
-	$row = sql_fetch($sql);
-	//토큰
-	$token = $row['token'];
-	app_push($token,$msg);
-*/
     alert("견적이 신청되었습니다.",$url);
 
 }
 ?> 
-

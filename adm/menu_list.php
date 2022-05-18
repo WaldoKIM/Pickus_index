@@ -20,6 +20,8 @@ if(!sql_query(" DESCRIBE {$g5['menu_table']} ", false)) {
                   `me_order` int(11) NOT NULL DEFAULT '0',
                   `me_use` tinyint(4) NOT NULL DEFAULT '0',
                   `me_mobile_use` tinyint(4) NOT NULL DEFAULT '0',
+                  `view_target_1` tinyint(4) NOT NULL DEFAULT '0',
+                  `view_target_2` tinyint(4) NOT NULL DEFAULT '0',
                   PRIMARY KEY (`me_id`)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ", true);
 }
@@ -54,6 +56,8 @@ $sub_menu_info = '';
         <th scope="col">순서</th>
         <th scope="col">PC사용</th>
         <th scope="col">모바일사용</th>
+        <th scope="col">회원(비회원)/<br>비회원</th>
+        <th scope="col">업체/소비자</th>
         <th scope="col">관리</th>
     </tr>
     </thead>
@@ -106,6 +110,22 @@ $sub_menu_info = '';
             <select name="me_mobile_use[]" id="me_mobile_use_<?php echo $i; ?>">
                 <option value="1"<?php echo get_selected($row['me_mobile_use'], '1', true); ?>>사용함</option>
                 <option value="0"<?php echo get_selected($row['me_mobile_use'], '0', true); ?>>사용안함</option>
+            </select>
+        </td>
+        <td class="td_mng">
+            <label for="view_target_1<?php echo $i; ?>" class="sound_only">회원(비회원)/비회원</label>
+            <select name="view_target_1[]" id="view_target_1_<?php echo $i; ?>">
+                <option value="0"<?php echo get_selected($row['view_target_1'], '0', true); ?>>모두</option>
+                <option value="1"<?php echo get_selected($row['view_target_1'], '1', true); ?>>회원</option>
+                <option value="2"<?php echo get_selected($row['view_target_1'], '2', true); ?>>비회원</option>
+            </select>
+        </td>
+        <td class="td_mng">
+            <label for="view_target_2<?php echo $i; ?>" class="sound_only">업체/소비자</label>
+            <select name="view_target_2[]" id="view_target_2_<?php echo $i; ?>">
+                <option value="0"<?php echo get_selected($row['view_target_2'], '0', true); ?>>모두</option>
+                <option value="1"<?php echo get_selected($row['view_target_2'], '1', true); ?>>업체</option>
+                <option value="2"<?php echo get_selected($row['view_target_2'], '2', true); ?>>소비자</option>
             </select>
         </td>
         <td class="td_mng">

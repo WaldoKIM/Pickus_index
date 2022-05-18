@@ -17,14 +17,16 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     </div>
 </div>
 <div class="inner">
-	<ul class="register_way">
-        <li class="current" data-tab="tab1">
-            <a href="#none">일반회원가입</a>
-        </li>
-        <li data-tab="tab2">
-            <a href="./register_form.php?registerType=partner">파트너회원가입</a>
-        </li>
-    </ul>
+	<?php if( !$w == 'u'){ ?>
+		<ul class="register_way">
+        	<li class="current" data-tab="tab1">
+            	<a href="#none">일반회원가입</a>
+        	</li>
+        	<li data-tab="tab2">
+            	<a href="./register_form.php?registerType=partner">파트너회원가입</a>
+        	</li>
+    	</ul>
+	<?php }?>
 	<div class="register">
 	<script src="<?php echo G5_JS_URL ?>/jquery.register_form.js"></script>
 	<?php if($config['cf_cert_use'] && ($config['cf_cert_ipin'] || $config['cf_cert_hp'])) { ?>
