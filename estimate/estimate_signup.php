@@ -29,5 +29,5 @@ if ($estimateType == "single") {
     goto_url(G5_URL);
 }
 
-include_once('../_tail.php');
+include_once('../tail.php');
 ?>
