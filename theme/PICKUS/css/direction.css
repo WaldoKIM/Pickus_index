@@ -10,9 +10,11 @@ label {
   width: 100%;
 }
 
+/* 가독성을 위해 95%로 설정-kjs */
 .inner {
-  width: 1200px;
+  width: 95%;
   margin: 0 auto;
+  padding: unset;
 }
 
 .inner::after {

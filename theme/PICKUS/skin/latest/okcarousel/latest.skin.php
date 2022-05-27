@@ -6,6 +6,10 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 0);
 $thumb_width = 284;
 $thumb_height = 185;
+if (isset($main_inc)){
+echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/latest/okcarousel/style_main.css'>";
+}
+
 ?>
 <link rel="stylesheet" href="<?php echo $latest_skin_url;?>/owl.carousel.min.css">
 <link rel="stylesheet" href="<?php echo $latest_skin_url;?>/owl.theme.default.min.css">
@@ -14,7 +18,6 @@ $thumb_height = 185;
 <link rel="stylesheet" href="<?php echo $latest_skin_url;?>/owl.theme.green.min.css">
 <link rel="stylesheet" href="<?php echo $latest_skin_url;?>/owl.carousel.css">
 <script src="<?php echo $latest_skin_url;?>/owl.carousel.js"></script>
-<script src="<?php echo $latest_skin_url;?>/owl.carousel.min.js"></script>
 
 <div class="pic_lt">
     <div class="lat_title_area clearfix">
@@ -97,19 +100,19 @@ $thumb_height = 185;
                     autoplayTimeout: 3000,
                     autoplayHoverPause: true,
                     loop: true,
-                    margin: 10,
+                    margin: 50,
                     responsive: {
                         60: {
                             items:1
                         },
                         600: {
-                            items: 2
+                            items: 1
                         },
                         768: {
-                            items: 3
+                            items: 2
                         },
                         1920: {
-                            items: 4
+                            items: 2
                         }
                     }
                 });

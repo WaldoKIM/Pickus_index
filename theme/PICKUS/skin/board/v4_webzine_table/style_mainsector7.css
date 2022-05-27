@@ -1,0 +1,18 @@
+#bo_list.mainsector7 {padding: 2rem;}
+#bo_list.mainsector7 .inner {padding: 2rem 0;}
+#bo_list.mainsector7 .inner .tbl_wrap{padding: unset; border-top: unset;}
+#bo_list.mainsector7 .board-webzine-body{display: flex; flex-direction: row-reverse;}
+#bo_list.mainsector7 .board-webzine-body .webzine_chk{display: none;}
+#bo_list.mainsector7 .board-webzine-body .webzine_thumbnail{display: flex; width: 30%; margin: auto;}
+#bo_list.mainsector7 .board-webzine-body .webzine_content{display: flex; width: 60%;}
+#bo_list.mainsector7 .board-webzine-body .webzine_content .info_wrap {display: flex; flex-direction: column;}
+#bo_list.mainsector7 .board-webzine-body .webzine_content .info_wrap .info_title{line-height: 3rem; flex-direction: row; border-bottom: 3px solid #000;}
+#bo_list.mainsector7 .board-webzine-body .webzine_content .info_wrap .info_box{display: flex; flex-direction: row; flex-wrap: wrap;}
+#bo_list.mainsector7 .board-webzine-body .webzine_content .info_wrap .info{line-height: 3rem; width: 50%;}
+
+#bo_list.mainsector7 .webzine_thumbnail a{width: 100%;  pointer-events: none;}
+#bo_list.mainsector7 .webzine_thumbnail a img{margin: auto; display: block;  pointer-events: none;}
+#bo_list.mainsector7 .webzine_content .bo_tit a{font-size: 4rem; color: green;line-height: 5rem; margin-bottom: 3rem; text-align: right;width: 100%; float: left;}
+#bo_list.mainsector7 .webzine_content .webzine_text{font-size: 1.5rem; line-height: 2rem;clear: both;}
+#bo_list.mainsector7 .webzine_content .webzine_info_wrap{display: none;}
+#bo_list.mainsector7 .btn_main{float: left; font-size: 2rem;}

@@ -1,0 +1,6 @@
+
+#bo_gall.mainsector4 .board_content_tit_main{text-align: center; font-size: 3rem;}
+#bo_gall.mainsector4 .board_content_tit_main strong{color: darkcyan;}
+#bo_gall.mainsector4 #gall_allchk{display: none;}
+#bo_gall.mainsector4 .gall_box .gall_chk{display: none;}
+#bo_gall.mainsector4 .gall_box .gall_img{pointer-events: none;}

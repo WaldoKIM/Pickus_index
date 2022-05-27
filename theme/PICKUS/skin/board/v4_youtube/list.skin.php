@@ -6,9 +6,25 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/magnific-popup.css">', 0);
 add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"></script>', 0);
-?>
 
-<h2 id="container_title"><?php echo $board['bo_subject'] ?><span class="sound_only"> 목록</span></h2>
+
+if (isset($main_inc)){
+    //유튜브 style.css는 메인 화면 전반에 적용중 -kjs
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_youtube/style.css'>";
+    
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_youtube/style_mainsector$main_inc.css'>";    
+    
+    $bo_gallery_cols = 0;  
+}   
+
+
+
+?>
+<?php
+if (isset($main_inc)){}    
+else{
+    ?>
+    <h2 id="container_title"><?php echo $board['bo_subject'] ?><span class="sound_only"> 목록</span></h2>
 
 
 <div class="board_visual_wrap">
@@ -21,17 +37,28 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
     <?php include_once(G5_THEME_PATH.'/skin/nav/mysubmenu2/mysubmenu2.php'); ?>
 </div>
 
-
+<?php
+}?>
 
 
 <!-- 게시판 목록 시작 { -->
-<div id="bo_gall" class="youtube_board" style="width:<?php echo $width; ?>">
+<div id="bo_gall" class="youtube_board mainsector<?php echo $main_inc;?>" style="width:<?php echo $width; ?>">
     <div class="inner">
-
+    <?php 
+    if (isset($main_inc)){
+        ?>
+        <div class="board_content_tit_main_wrap">
+        <h3 class="board_content_tit_main">피커스에 대한 내용</h3>
+        </div>
+        <?php
+    }
+    else{ ?>    
     <div class="board_content_head list_tit">
         <h3 class="board_content_tit">유튜브</h3>
         <p class="board_content_info">갤러리형 유튜브 게시판을 사용해보세요.</p>
     </div>
+    <?php
+    }?>
 
 
     <?php if ($is_category) { ?>
@@ -70,6 +97,10 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
 
 
     <!-- 게시판 페이지 정보 및 버튼 시작 { -->
+        <?php
+        if (isset($main_inc)){}    
+        else{
+        ?>    
         <div id="bo_btn_top">
             <div id="bo_list_total">
                 <span>Total <?php echo number_format($total_count) ?>건</span>
@@ -99,6 +130,7 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
             </ul>
             <?php } ?>
         </div>
+        <?php } ?>
         <!-- } 게시판 페이지 정보 및 버튼 끝 -->
 
     <?php if ($is_checkbox) { ?>
@@ -137,9 +169,17 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
                     echo $list[$i]['num'];
                  ?>
             </span>
+            
             <ul class="gall_con">
                 <li class="gall_href">
+                <?php
+                // 메인에서 게시판이 아닌 해당 유튜브로 바로가게 링크 변경 -kjs 
+                if (isset($main_inc)){?>
+                    <a class="" href="<?php echo 'https://youtu.be/'.$list[$i]['wr_1'];?>">
+                <?php
+                }else{ ?>                  
                     <a class="" href="<?php echo $list[$i]['href'] ?>">
+                <?php }?>                      
                     <!-- <a class="<?php echo ('popup-youtube'); ?>" href="<?php echo ($list[$i]['wr_link1']); ?>"> -->
                     <?php
                     if ($list[$i]['is_notice']) { // 공지사항  ?>
@@ -148,8 +188,9 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
 
                         // 썸네일. (유튜브 코드로 썸네일처리)
                         $thumbsrc = '';
-                        if ($list[$i]['wr_1']) { 
-                            $thumbsrc = 'http://img.youtube.com/vi/'.$list[$i]['wr_1'].'/0.jpg';
+                        if ($list[$i]['wr_1']) {
+                        // 메인용 썸네일 사이즈 키움 -kjs     
+                            $thumbsrc = 'http://img.youtube.com/vi/'.$list[$i]['wr_1'].'/maxresdefault.jpg';
                         } 
 
                         if($thumbsrc) {
@@ -170,7 +211,9 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
                          ?>
                         <a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo $list[$i]['ca_name'] ?></a>
                         <?php } ?>
-                        <a href="<?php echo $list[$i]['href'] ?>" class="bo_tit">
+
+                        <a href="<?php echo $list[$i]['href'].'&main_inc='.$main_inc ?>" class="bo_tit">
+                                                
                             <div class="gall-tit">
 
                                 <?php echo $list[$i]['subject'] ?>
@@ -186,10 +229,15 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
                                 ?>
                             </div>
 
-                           <!--  <div class="gall_content">
+                            <?php
+                            if (isset($main_inc)){
+                                ?>
+                                <div class="gall_content">
                                 <span class="sound_only">본문내용 </span><?php echo $list[$i]['wr_content'] ?>
-                            </div> -->
-
+                            </div>
+                            <?php 
+                            }else{} ?>
+                             
                             <!--  <div class="gall_name">
                                 <span class="sound_only">작성자 </span><span class="profile_img"><?php echo $list[$i]['name'] ?></span>
                             </div> -->
@@ -208,9 +256,11 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
         <?php if (count($list) == 0) { echo "<li class=\"empty_list\">게시물이 없습니다.</li>"; } ?>
     </ul>
 
-
-    <!-- 페이지 -->
-	<?php echo $write_pages; ?>
+    <?php
+        if (isset($main_inc)){}    
+        else{                                              
+	    echo $write_pages;      
+     ?>   
 	<!-- 페이지 -->
 
     <?php if ($list_href || $is_checkbox || $write_href) { ?>
@@ -224,7 +274,10 @@ add_javascript('<script src="'.$board_skin_url.'/jquery.magnific-popup.min.js"><
         </ul>	
         <?php } ?>
     </div>
-    <?php } ?> 
+    <?php }
+        }
+    ?> 
+
 
 
     </form>

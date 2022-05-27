@@ -1,0 +1,9 @@
+#bo_gall.mainsector7 {}
+#bo_gall.mainsector7 #gall_ul.gall_row {flex-direction: row-reverse;}
+#bo_gall.mainsector7 #gall_ul.gall_row .gall_li{padding: 0 4rem;}
+#bo_gall.mainsector7 #gall_ul .gall_con{display: flex; flex-direction: row-reverse;}
+#bo_gall.mainsector7 #gall_ul .gall_con .gall_href{display: flex; width: 40%; margin-left: 2rem; pointer-events: none;}
+#bo_gall.mainsector7 #gall_ul .gall_con .gall_text_href{display: flex;width: 60%;background-color: #fff;}
+
+#bo_gall.mainsector7 input{display: none;}
+

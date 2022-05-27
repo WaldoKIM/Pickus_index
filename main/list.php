@@ -1,6 +1,10 @@
 <?php
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
+//메인 리스트 쿼리문 -kjs
+include(G5_MAIN_PATH.'/list_main_sql.php');
+
+
 // 분류 사용 여부
 $is_category = false;
 $category_option = '';
@@ -51,7 +55,7 @@ if ($sca || $stx || $stx === '0') {     //검색이면
 
     // 원글만 얻는다. (코멘트의 내용도 검색하기 위함)
     // 라엘님 제안 코드로 대체 http://sir.kr/g5_bug/2922
-    $sql = " SELECT COUNT(DISTINCT `wr_parent`) AS `cnt` FROM {$write_table} WHERE {$sql_search} ";
+   // $sql = " SELECT COUNT(DISTINCT `wr_parent`) AS `cnt` FROM {$write_table} WHERE {$sql_search} ";
     $row = sql_fetch($sql);
     $total_count = $row['cnt'];
     /*
@@ -99,7 +103,7 @@ if (!$is_search_bbs) {
         
         if (trim($arr_notice[$k]) == '') continue;
 
-        $row = sql_fetch(" select * from {$write_table} where wr_id = '{$arr_notice[$k]}' ");
+       $row = sql_fetch(" select * from {$write_table} where wr_id = '{$arr_notice[$k]}' ");
 
         if (!isset($row['wr_id']) || !$row['wr_id']) continue;
 
@@ -181,7 +185,7 @@ if ($sst) {
 if ($is_search_bbs) {
     $sql = " select distinct wr_parent from {$write_table} where {$sql_search} {$sql_order} limit {$from_record}, $page_rows ";
 } else {
-    $sql = " select * from {$write_table} where wr_is_comment = 0 ";
+    $sql = " select * from {$write_table} where wr_id = {$mainsection} ";
     if(!empty($notice_array))
         $sql .= " and wr_id not in (".implode(', ', $notice_array).") ";
     $sql .= " {$sql_order} limit {$from_record}, $page_rows ";
@@ -260,7 +264,8 @@ if ($board['bo_use_rss_view']) {
 
 $stx = get_text(stripslashes($stx));
 
-//해당 스킨명dmf 확인하기 위해 남김 나중에 지우세요 -kjs
+// 섹션별 스킨명 확인용 나중에 주석처리 할 것 -kjs
 echo $board_skin_path;
-    
-include_once($board_skin_path.'/list.skin.php');
+echo '&nbsp;&nbsp;&nbsp;경로 표시를 지우려면 main/list.php 267번째 줄 주석처리 하세요';
+
+include($board_skin_path.'/list.skin.php');

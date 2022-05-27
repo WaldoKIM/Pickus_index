@@ -645,6 +645,10 @@ if(defined('_THEME_PREVIEW_') && _THEME_PREVIEW_ === true)
 
 if(isset($config['cf_theme']) && trim($config['cf_theme'])) {
     $theme_path = G5_PATH.'/'.G5_THEME_DIR.'/'.$config['cf_theme'];
+    $main_path = G5_PATH.'/main';
+    $main_url = G5_URL.'/main';
+    $sub_url = G5_URL.'/sub';
+    $main_theme = 'skin/board/';
     if(is_dir($theme_path)) {
         define('G5_THEME_PATH',        $theme_path);
         define('G5_THEME_URL',         G5_URL.'/'.G5_THEME_DIR.'/'.$config['cf_theme']);
@@ -653,6 +657,10 @@ if(isset($config['cf_theme']) && trim($config['cf_theme'])) {
         define('G5_THEME_CSS_URL',     G5_THEME_URL.'/'.G5_CSS_DIR);
         define('G5_THEME_IMG_URL',     G5_THEME_URL.'/'.G5_IMG_DIR);
         define('G5_THEME_JS_URL',      G5_THEME_URL.'/'.G5_JS_DIR);
+        define('G5_MAIN_PATH',        $main_path);
+        define('G5_MAIN_URL',        $main_url);
+        define('G5_SUB_URL',        $sub_url);
+        define('G5_MAIN_THEM_PATH',        $theme_path.'/'.$main_theme);
     }
     unset($theme_path);
 }

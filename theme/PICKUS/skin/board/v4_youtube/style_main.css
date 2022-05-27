@@ -1,0 +1,6 @@
+#bo_gall.mainsector5 {background-color: green;}
+#bo_gall.mainsector5 #gall_ul.gall_row {flex-direction: row-reverse;}
+#bo_gall.mainsector5 #gall_ul.gall_row .gall_li{padding: 0 4rem;}
+#bo_gall.mainsector5 #gall_ul .gall_con{display: flex; flex-direction: row-reverse;}
+#bo_gall.mainsector5 #gall_ul .gall_con .gall_href{display: flex; width: 66.666666%; margin-left: 2rem;}
+#bo_gall.mainsector5 #gall_ul .gall_con .gall_text_href{display: flex;width: 33.33333%;background-color: #fff;}

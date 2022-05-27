@@ -10,6 +10,11 @@ if ($is_nogood) $colspan++;
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+
+if (isset($main_inc)){
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_news_list/style.css'>";
+}
+
 ?>
 <script>
     new WOW().init();
@@ -20,6 +25,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <div class="board_visual_text">
             <h6 class="wow fadeInDown" data-wow-delay="0.5s"><?php echo $board['bo_subject'] ?></h6>
             <p class="wow fadeInDown" data-wow-delay="0.7s">새소식 게시판입니다.</p>
+
         </div>
     </div>
     <?php include_once(G5_THEME_PATH.'/skin/nav/mysubmenu2/mysubmenu2.php'); ?>
@@ -139,7 +145,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                 
                 <div class="bo_tit">
                     
-                    <a href="<?php echo $list[$i]['href'] ?>">
+                    <a href="<?php echo $list[$i]['href'].'&main_inc='.$main_inc ?>">
                         <?php
                         if ($list[$i]['is_notice']) // 공지사항
                             echo '<div class=" list-item-notice"><span class="notice_item">[공지]</span></div>';

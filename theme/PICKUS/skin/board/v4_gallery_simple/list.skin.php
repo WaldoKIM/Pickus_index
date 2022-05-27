@@ -4,6 +4,11 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+if (isset($main_inc)){
+    //echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_gallery_simple/style.css'>";    
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_gallery_simple/style_mainsection$main_inc.css'>";         
+    $bo_gallery_cols = 0;    
+}
 ?>
 
 
@@ -11,7 +16,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     new WOW().init();
 
 </script>
-<div class="board_visual_wrap">
+
+<?php 
+if (isset($main_inc)){}
+else{ ?>
+
+<div class="board_visual_wrap mainsection<?php echo $main_inc?>">
     <div class="board_visual_img board_gallery_visual_img">
         <div class="board_visual_text">
             <h6 class="wow fadeInDown" data-wow-delay="0.5s"><?php echo $board['bo_subject'] ?></h6>
@@ -20,18 +30,23 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     </div>
     <?php include_once(G5_THEME_PATH.'/skin/nav/mysubmenu2/mysubmenu2.php'); ?>
 </div>
-
+<?php }
+?>
 
 
 
 <!-- 게시판 목록 시작 { -->
-<div id="bo_gall" style="width:<?php echo $width; ?>">
+<div id="bo_gall" style="width:<?php echo $width; ?>" class="mainsection<?php echo $main_inc?>">
     <div class="inner">
+<?php 
+if (isset($main_inc)){}
+else{ ?>            
     <div class="board_content_head list_tit">
         <h3 class="board_content_tit">갤러리</h3>
-        <p class="board_content_info">갤러리형 게시판을 사용해보세요.</p>
+        <p class="board_content_info">갤러리 단순형 게시판을 사용해보세요.</p>
     </div>
-    
+<?php }
+?>    
     <?php if ($is_category) { ?>
     <nav id="bo_cate">
         <h2><?php echo $board['bo_subject'] ?> 카테고리</h2>
@@ -52,6 +67,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <input type="hidden" name="sw" value="">
 
     <!-- 게시판 페이지 정보 및 버튼 시작 { -->
+<?php 
+if (isset($main_inc)){}
+else{ ?>        
     <div id="bo_btn_top">
         <div id="bo_list_total">
             <span>Total <?php echo number_format($total_count) ?>건</span>
@@ -81,6 +99,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         </ul>
         <?php } ?>
     </div>
+<?php }
+?>      
     <!-- } 게시판 페이지 정보 및 버튼 끝 -->
 
     <?php if ($is_checkbox) { ?>
@@ -126,6 +146,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                 </span>
                 </div>
                 <div class="gall_con">
+                <?php
+                //메인일 경우 이미지 출력 안함 -kjs
+                if (isset($main_inc)){}
+                else{ ?>
                     <div class="gall_img">
                         <a href="<?php echo $list[$i]['href'] ?>">
                         <?php
@@ -139,13 +163,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             $img_content = '<span class="no_image">No Image</span>';
                         }
 
-                        echo $img_content;
-                        ?>
-                        <?php } else {
+                        echo $img_content;                        
+                        }else{
                             $thumb = get_list_thumbnail($board['bo_table'], $list[$i]['wr_id'], $board['bo_gallery_width'], $board['bo_gallery_height'], false, true);
 
                             if($thumb['src']) {
-                                $img_content = '<img src="'.$thumb['src'].'" alt="'.$thumb['alt'].'" >';
+                                $img_content = '<img src="'.$thumb['src'].'" alt="'.$thumb['alt'].'" >';                                                                                            
                             } else {
                                 $img_content = '<span class="no_image">No Image</span>';
                             }
@@ -155,12 +178,19 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                          ?>
                         </a>
                     </div>
-
+                <?php } ?>        
                   
                     <div class="gall_text_href">
                        
                         <a href="<?php echo $list[$i]['href'] ?>" class="bo_tit">
-                        
+                        <?php
+                        //메인 섹션 2일 경우 강조문구 출력 
+                        if (isset($main_inc)&&$main_inc==2){
+                        ?>   
+                        <div class="addtext">강조문구</div>
+                        <?php    
+                        }
+                        else{} ?>   
                             <div class="gall-tit">
                             <?php
                             // echo $list[$i]['icon_reply']; 
@@ -183,13 +213,31 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 ?>
                             </div>
 
+
+                            <?php
+                            if (isset($main_inc)&&$main_inc==3){                                                              
+                                //메인 섹션 3일 경우 보조제목 및 이미지 출력
+                                ?>                                 
+                                <div class="addtitle">여기에 보조 제목 문구를 입력하세요</div>
+                                <?php
+                            $main_img = boardCommonImg();                            
+                            echo $main_img;
+                            }   
+                            ?>
+
                             <div class="gall_content">
                                 <span class="sound_only">본문내용 </span><?php echo $list[$i]['wr_content'] ?>
                             </div>
 
+                           
+
+
                             <!--  <div class="gall_name">
                                 <span class="sound_only">작성자 </span><span class="profile_img"><?php echo $list[$i]['name'] ?></span>
                             </div> -->
+                            <?php
+                            if (isset($main_inc)){}
+                            else{ ?>
                             <div class="gall_info">
                                 <span class="">조회수<?php echo $list[$i]['wr_hit'] ?> </span>
                                 <span class=""> <?php if ($is_good) { ?><span class="sound_only">추천</span><strong><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <?php echo $list[$i]['wr_good'] ?></strong><?php } ?></span>
@@ -197,9 +245,31 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 <span class="gall_date"><span class="sound_only">작성일 </span> <?php echo $list[$i]['datetime'] ?></span>
                                 <?php if ($list[$i]['comment_cnt']) { ?><span> 댓글<?php echo $list[$i]['wr_comment']; ?></span><?php } ?>
                             </div>
+                            <?php } ?>
                          </a>
-                    </div>
-                 
+                         <?php
+                            if (isset($main_inc)){
+                            ?>
+                            <div class="btn_wrap">
+                                <?php
+                                if ($main_inc==3){
+                                ?>
+                                <div class="btn_title">버튼 설명 문구</div>           
+                                <div class="btn_main btn_left">
+                                    <a href="#none">바로 가기1</a>
+                                </div>
+                                
+                                <div class="btn_main btn_right">
+                                <a href="#none">바로 가기2</a>
+                                </div>
+                                <?php }else{?>
+                                <div class="btn_main btn_right">
+                                <a href="<?php echo $list[$i]['href'] ?>">바로 가기</a>
+                                </div>    
+                                <?php } ?>
+                            </div>
+                            <?php }else{};?>
+                    </div>                 
                 </div>
             </div>
         </li>
@@ -208,10 +278,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     </ul>
 	
 	<!-- 페이지 -->
-	<?php echo $write_pages; ?>
-	<!-- 페이지 -->
+    <?php                                
+    if (isset($main_inc)){  
+    }else{ 
+	 echo $write_pages; 
 	
-	<?php if ($list_href || $is_checkbox || $write_href) { ?>
+	
+	if ($list_href || $is_checkbox || $write_href) { ?>
     <div class="bo_fx">
         <?php if ($list_href || $write_href) { ?>
         <ul class="btn_bo_user">
@@ -222,6 +295,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         </ul>	
         <?php } ?>
     </div>
+    <?php } ?>
     <?php } ?> 
     </form>
 

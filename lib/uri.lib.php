@@ -74,7 +74,13 @@ function get_pretty_url($folder, $no='', $query_string='', $action='')
 
     } else { // don't use shortten url
         if(in_array($folder, $boards)) {
+            if($_SERVER[ "PHP_SELF" ]=='/index.php'){
+                global $main_inc;                
+                $url = G5_BBS_URL. '/board.php?main_inc='.$main_inc.'&bo_table='. $folder;
+                unset($main_inc);
+            }else{
             $url = G5_BBS_URL. '/board.php?bo_table='. $folder;
+            }
             if($no) {
                 $url .= '&amp;wr_id='. $no;
             }
@@ -100,6 +106,111 @@ function get_pretty_url($folder, $no='', $query_string='', $action='')
 
     return implode('/', $segments).$add_query;
 }
+
+function get_pretty_url_main($folder, $no='', $query_string='', $action='')
+ {
+     global $g5, $config;
+ 
+     $boards = get_board_names();
+     $segments = array();
+     $url = $add_query = '';
+ 
+     if( $url = run_replace('get_pretty_url', $url, $folder, $no, $query_string, $action) ){
+         return $url;
+     }
+ 
+     // use shortten url
+     if($config['cf_bbs_rewrite']) {
+ 
+         $segments[0] = G5_URL;
+ 
+         if( $folder === 'content' && $no ){     // 내용관리
+ 
+             $segments[1] = $folder;
+ 
+             if( $config['cf_bbs_rewrite'] > 1 ){
+ 
+                 $get_content = get_content_db( $no , true);
+                 $segments[2] = (isset($get_content['co_seo_title']) && $get_content['co_seo_title']) ? urlencode($get_content['co_seo_title']).'/' : urlencode($no);
+ 
+             } else {
+                 $segments[2] = urlencode($no);
+             }
+ 
+         } else if(in_array($folder, $boards)) {     // 게시판
+ 
+             $segments[1] = $folder;
+ 
+             if($no) {
+ 
+                 if( $config['cf_bbs_rewrite'] > 1 ){
+ 
+                 $get_write = get_write( $g5['write_prefix'].$folder, $no , true);
+ 
+                 $segments[2] = (isset($get_write['wr_seo_title']) && $get_write['wr_seo_title']) ? urlencode($get_write['wr_seo_title']).'/' : urlencode($no);
+ 
+                 } else {
+                     $segments[2] = urlencode($no);
+                 }
+ 
+             } else if($action) {
+                 $segments[2] = urlencode($action);
+             }
+ 
+         } else {
+             $segments[1] = $folder;
+             if($no) {
+                 $no_array = explode("=", $no);
+                 $no_value = end($no_array);
+                 $segments[2] = urlencode($no_value);
+             }
+         }
+ 
+         if($query_string) {
+             // If the first character of the query string is '&', replace it with '?'.
+             if(substr($query_string, 0, 1) == '&') {
+                 $add_query = preg_replace("/\&amp;/", "?", $query_string, 1);
+             } else {
+                 $add_query = '?'. $query_string;
+             }
+         }
+ 
+     } else { // don't use shortten url
+         if(in_array($folder, $boards)) {
+             if($_SERVER[ "PHP_SELF" ]=='/index.php'){
+                 //*main_shortcut_url 메인 화면의 href 수정시, skin 파일을 건드리지 말고 아래 변수를 수정 할 것 -kjs               
+                 $url = G5_SUB_URL.'/somthing.php';
+             }else{
+             $url = G5_BBS_URL. '/board.php?bo_table='. $folder;
+             }
+             if($no) {
+                 $url .= '&amp;wr_id='. $no;
+             }
+             if($query_string) {
+                 if(substr($query_string, 0, 1) !== '&') {
+                     $url .= '&amp;';
+                 }
+ 
+                 $url .= $query_string;
+             }
+         } else {
+             $url = G5_BBS_URL. '/'.$folder.'.php';
+             if($no) {
+                 $url .= ($folder === 'content') ? '?co_id='. $no : '?'. $no;
+             }
+             if($query_string) {
+                 $url .= (!$no ? '?' : '&amp;'). $query_string;
+             }
+         }
+ 
+         $segments[0] = $url;
+     }
+ 
+     return implode('/', $segments).$add_query;
+ } 
+
+
+
 
 function short_url_clean($string_url, $add_qry=''){
 

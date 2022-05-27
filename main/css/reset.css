@@ -1,0 +1,4 @@
+/* 디자인 작업 편의상 제한적인 리셋 적용 */
+a {text-decoration: none !important; color: #000;}
+a:hover {color: #000;}
+li {list-style: none !important;}

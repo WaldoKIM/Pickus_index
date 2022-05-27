@@ -56,9 +56,10 @@ if($config['cf_add_meta'])
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link rel="stylesheet" href="<?php echo G5_THEME_CSS_URL;?>/animate.css">
 <link rel="stylesheet" href="<?php echo G5_THEME_CSS_URL; ?>/theme.css">
-
-
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
+
+
+
 <!--[if lte IE 8]>
 <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
 <![endif]-->

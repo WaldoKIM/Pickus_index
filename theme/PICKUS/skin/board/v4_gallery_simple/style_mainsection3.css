@@ -1,0 +1,14 @@
+.mainsection3 .chk_box {display:none;}
+#bo_gall.mainsection3 .gall_box{border: none;}
+#bo_gall.mainsection3 .gall_li .gall_chk{display: none;}
+#bo_gall.mainsection3 .gall_img img{width: 33%; object-fit: contain;}
+
+
+
+#bo_gall.mainsection3 .gall_text_href a {display: flex; justify-content: center; align-items: center; pointer-events: none; flex-direction:column ;}
+#bo_gall.mainsection3 .gall_text_href a .gall-tit{font-size: 3rem; line-height: 3rem; overflow: unset; max-height: unset;}
+#bo_gall.mainsection3 .gall_text_href a .addtitle{height: 5rem; padding: 1rem 0;}
+
+#bo_gall.mainsection3 .gall_text_href .gall_content{display: block;  float: right;}
+#bo_gall.mainsection3 .btn_wrap{ display: block;  float: right; width: 50%;} 
+#bo_gall.mainsection3 .gall_text_href .btn_wrap .btn_main a{border: 2px solid magenta; width: 7rem; text-align: center; float: left; pointer-events: unset; }

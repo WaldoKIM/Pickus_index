@@ -1,5 +1,4 @@
 <?php
-
 include_once('./_common.php');
 //var_dump($board);
 
@@ -231,7 +230,7 @@ if (isset($wr_id) && $wr_id) {
 // 전체목록보이기 사용이 "예" 또는 wr_id 값이 없다면 목록을 보임
 //if ($board['bo_use_list_view'] || empty($wr_id))
 if ($member['mb_level'] >= $board['bo_list_level'] && $board['bo_use_list_view'] || empty($wr_id))
-
+    //echo '!!!!!!';    
     if(isset($main_inc)){
         include (G5_MAIN_PATH.'/list.php');
     }else{
@@ -244,6 +243,9 @@ if ($member['mb_level'] >= $board['bo_list_level'] && $board['bo_use_list_view']
 echo "\n<!-- 사용스킨 : ".(G5_IS_MOBILE ? $board['bo_mobile_skin'] : $board['bo_skin'])." -->\n";
 
 
-
+//var_dump($board_skin_url);
+//echo $board_skin_path;
+//echo $bo_table;
+//echo $board['gr_id'];
 
 include_once(G5_PATH.'/tail.sub.php');

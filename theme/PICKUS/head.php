@@ -30,38 +30,48 @@ gtag('config', 'UA-146069223-1');
 
 $(function(){
        /* 화면 최소높이  */
+       
    function page_h() {
+    if(!window.location.pathname == '/'){
+       
         var wheight = $(window).height();
         var header =$('.board_visual_wrap').outerHeight();
         var footer =$('#ft').outerHeight();
         var wrap_h = wheight - header - footer;
 
+        
+
+        
+
         $('#bo_list,#bo_gall').css('min-height',wrap_h);
 
         $('#container').css('min-height',wheight -footer);
-
+        
         console.log(header);
         console.log(footer);
         console.log(wrap_h);
     } page_h();
-
+    
     $(window).on('resize', function(){
         page_h();
     });
+    }
 
 });
 
 
     $(function() {
+        /* no thank you! -kjs */
         setInterval(function() {
             if ($(window).scrollTop() >= 20) {
                 $("#hd").addClass("scroll_bg");
                 $("#mb-open-menu").addClass("scroll_bg");
             } else {
-                $("#hd").removeClass("scroll_bg");
-                $("#mb-open-menu").removeClass("scroll_bg");
+              $("#hd").removeClass("scroll_bg");
+              $("#mb-open-menu").removeClass("scroll_bg");
             }
-        }, 400);
+        }
+        , 400);
 
 
          /* 스크롤 top 버튼 */
@@ -247,6 +257,7 @@ $(function(){
     </div>
     </div>
     <script>
+         /* no thank you! -kjs
         $(function() {
             $(".gnb_menu_btn").click(function() {
                 $("#gnb_all").show();
@@ -257,15 +268,16 @@ $(function(){
 
 
 
-
+            
             setInterval(function() {
                 if ($(window).scrollTop() >= 80) {
                     $("#hd").addClass("scroll_on");
                 } else {
                     $("#hd").removeClass("scroll_on");
                 }
-            }, 400)
+            }, 400) 
         });
+        */
     </script>
 </div>
 <!-- } 상단 끝 -->

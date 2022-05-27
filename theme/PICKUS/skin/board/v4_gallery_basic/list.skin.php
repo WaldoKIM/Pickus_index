@@ -4,6 +4,12 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+if (isset($main_inc)){
+    //echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_gallery_basic/style.css'>";
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_gallery_basic/style_main.css'>";
+    $bo_gallery_cols = 3;
+  
+}
 ?>
 
 
@@ -13,7 +19,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     new WOW().init();
 
 </script>
-
+<?php 
+if (isset($main_inc)){}
+else{ ?>  
 <div class="board_visual_wrap">
     <div class="board_visual_img board_gallery_visual_img">
         <div class="board_visual_text">
@@ -23,16 +31,28 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     </div>
     <?php include_once(G5_THEME_PATH.'/skin/nav/mysubmenu2/mysubmenu2.php'); ?>
 </div>
+<?php }
+?>  
 
 
 
-
-<div id="bo_gall" style="width:<?php echo $width; ?>">
+<div id="bo_gall" style="width:<?php echo $width; ?>" class='mainsector4'>
     <div class="inner">
+    <?php 
+    if (isset($main_inc)){
+        ?>
+        <div class="board_content_tit_main_wrap">
+        <h3 class="board_content_tit_main"><strong>피커스</strong> 주요 서비스 소개</h3>
+        </div>
+        <?php
+    }
+    else{ ?>    
     <div class="board_content_head list_tit">
         <h3 class="board_content_tit">갤러리</h3>
         <p class="board_content_info">갤러리형 게시판을 사용해보세요.</p>
     </div>
+    <?php }
+    ?>  
 
     <?php if ($is_category) { ?>
     <nav id="bo_cate">
@@ -54,6 +74,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <input type="hidden" name="sw" value="">
 
     <!-- 게시판 페이지 정보 및 버튼 시작 { -->
+    <?php 
+    if (isset($main_inc)){}
+    else{ ?>            
     <div id="bo_btn_top">
         <div id="bo_list_total">
             <span>Total <?php echo number_format($total_count) ?>건</span>
@@ -83,7 +106,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         </ul>
         <?php } ?>
     </div>
+    <?php }
+    ?> 
     <!-- } 게시판 페이지 정보 및 버튼 끝 -->
+    
 
     <?php if ($is_checkbox) { ?>
     <div id="gall_allchk" class="all_chk chk_box">
@@ -146,8 +172,19 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             echo $img_content;
                         
                         ?>
-                            
-                        <?php } else {
+                         <?php } else if($main_inc == 4){
+                            //메인 섹션4일 경우 썸네일이 아닌 원본 이미지가 노출되게 설정 -kjs
+                            if(count($list) > 1){
+                            $countrepeat = count($list) - 1;
+                            $reverse = $countrepeat - $i;
+                            //main_inc가 반복해서 불러오는 게시물 id 번호중 가장 낮은 숫자와 동일해야 함 나중에 수정하세요 -kjs
+                            $main_inc_img = $main_inc + $reverse;}                            
+                            $main_img = boardCommonImg();                                                                                    
+                            echo $main_img;                            
+
+
+
+                         } else {
                             $thumb = get_list_thumbnail($board['bo_table'], $list[$i]['wr_id'], $board['bo_gallery_width'], $board['bo_gallery_height'], false, true);
 
                             if($thumb['src']) {
@@ -171,7 +208,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                          ?>
                         <a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo $list[$i]['ca_name'] ?></a>
                         <?php } ?>
-                        <a href="<?php echo $list[$i]['href'] ?>" class="bo_tit">
+                        <a href="<?php echo $list[$i]['href'].'&main_inc='.$main_inc ?>" class="bo_tit">
                             <div class="gall-tit">
 
                                 <?php echo $list[$i]['subject'] ?>
@@ -189,6 +226,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
                             <div class="gall_content">
                                 <span class="sound_only">본문내용 </span><?php echo $list[$i]['wr_content'] ?>
+                                
                             </div>
 
                             <!--  <div class="gall_name">
@@ -201,6 +239,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 <span class="gall_date"><span class="sound_only">작성일 </span> <?php echo $list[$i]['datetime'] ?></span>
                                 <?php if ($list[$i]['comment_cnt']) { ?><span> 댓글<?php echo $list[$i]['wr_comment']; ?></span><?php } ?>
                             </div>
+                            <div class="btn_main">
+                            <a href="<?php echo $list[$i]['href'].'&main_inc='.$main_inc ?>" class="bo_tit">바로 가기</a>
+                            </div>
                          </a>
                     </div>
                  
@@ -211,6 +252,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <?php if (count($list) == 0) { echo "<li class=\"empty_list\">게시물이 없습니다.</li>"; } ?>
     </ul>
 	
+    <?php 
+    if (isset($main_inc)){}
+    else{ ?>    
 	<!-- 페이지 -->
 	<?php echo $write_pages; ?>
 	<!-- 페이지 -->
@@ -227,6 +271,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <?php } ?>
     </div>
     <?php } ?> 
+    <?php } ?>
     </form>
 
     <!-- 게시판 검색 시작 { -->

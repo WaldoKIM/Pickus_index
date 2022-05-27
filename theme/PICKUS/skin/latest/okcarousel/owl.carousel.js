@@ -184,7 +184,7 @@
 	 * @public
 	 */
 	Owl.Defaults = {
-		items: 4,
+		items: 2,
 		loop: false,
 		center: false,
 		rewind: false,
@@ -2977,7 +2977,7 @@
 		slideBy: 1,
 		dotClass: 'owl-dot',
 		dotsClass: 'owl-dots',
-		dots: true,
+		dots: false,
 		dotsEach: true,
 		dotsData: false,
 		dotsSpeed: false,

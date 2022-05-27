@@ -1,0 +1,12 @@
+#bo_list.mainsector6 {background-color: cadetblue; padding: 2rem;}
+#bo_list.mainsector6 .inner {padding: 2rem 0;}
+#bo_list.mainsector6 .inner .tbl_wrap{padding: unset; border-top: unset;}
+#bo_list.mainsector6 .board-webzine-body{display: flex;}
+#bo_list.mainsector6 .board-webzine-body .webzine_chk{display: none;}
+#bo_list.mainsector6 .board-webzine-body .webzine_thumbnail{width: 100%;}
+#bo_list.mainsector6 .webzine_thumbnail a{width: 100%;  pointer-events: none;}
+#bo_list.mainsector6 .webzine_thumbnail a img{margin: auto; display: block;  pointer-events: none;}
+#bo_list.mainsector6 .webzine_content .bo_tit a{font-size: 4rem; color: #fff;line-height: 5rem; margin-bottom: 3rem; text-align: right;width: 50%; float: right;}
+#bo_list.mainsector6 .webzine_content .webzine_text{font-size: 1.5rem; line-height: 2rem;clear: both;}
+#bo_list.mainsector6 .webzine_content .webzine_info_wrap{display: none;}
+#bo_list.mainsector6 .btn_main{float: right; font-size: 3rem;}

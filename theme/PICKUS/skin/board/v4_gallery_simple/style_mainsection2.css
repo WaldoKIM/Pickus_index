@@ -1,0 +1,32 @@
+/*mainsection2 text 부분 */
+.left_40{width:40%; float:left; height: 45rem; background-color: aqua;}
+.mainsection2 .chk_box {display:none;}
+
+#bo_gall.mainsection2 .gall_box{border: none; height: unset;}
+#bo_gall.mainsection2 .gall_li {overflow: visible;}
+#bo_gall.mainsection2 .gall_li .gall_chk{display: none;}
+#bo_gall.mainsection2 #gall_ul {margin:0;padding:0;list-style:none;zoom:1; height:30rem; display: flex; align-self: center;}
+#bo_gall.mainsection2 #gall_ul .gall_con{height:100%;}
+#bo_gall.mainsection2 #gall_ul .gall_con .gall_text_href{height:100%; margin: auto !important;}
+#bo_gall.mainsection2 #gall_ul .gall_con .gall_text_href a{height:100%; display: flex; justify-content: center; align-items: center; flex-direction: column; margin: auto;}
+#bo_gall.mainsection2 #gall_ul .gall_con .gall_text_href a .addtext{align-self: start;}
+#bo_gall.mainsection2 #gall_ul .gall_con .gall_text_href a .gall-tit{height: 5rem; line-height: 2rem; max-height: unset; font-size: 2rem;}
+#bo_gall.mainsection2 #gall_ul .gall_con .gall_content{height: 10rem; line-height: 1rem; display: block; max-height: unset; overflow: visible;}
+#bo_gall.mainsection2 #gall_ul .gall_text_href a {margin:10px 0; overflow: visible; text-decoration: none;}
+#bo_gall.mainsection2 #gall_ul .gall_text_href .btn_wrap{height: 3rem; font-size: 2rem;} 
+#bo_gall.mainsection2 #gall_ul .gall_con .gall_text_href .btn_wrap .btn_main a{border: 2px solid magenta; width: 10rem; text-align: center; float: right; height: 3rem; font-size: 1.5rem;} 
+
+
+
+
+/*mainsection2 marketlist 부분 */
+.right_60{width: 60%; height: 45rem; float:right;}
+.right_60 .inner{width: 100%;}
+.right_60 .inner .bg{position: absolute; background-color: aqua; width:10%; height:45rem; color: transparent; border-top-right-radius:20px; border-bottom-right-radius:20px; font-size: 0;}
+.right_60 .inner .latest_area{position: relative; left: 10%; display: flex;  height:45rem;}
+.right_60 .inner .latest_wr{align-self: center; display: flex;}
+.marketlist_wrap .lt_more{display: none;}
+.marketlist_wrap .owl-item li a:nth-child(1) {height: 34rem; display: flex; align-items: center; background-color: rgb(18, 18, 58);justify-content: center; border-radius: 20px;}
+.marketlist_wrap .owl-item li img {object-fit: cover; height: 25rem; display: flex;}
+.marketlist_wrap .owl-item li a:nth-child(2) {display: none;}
+.marketlist_wrap .owl-item li span {display: none;}

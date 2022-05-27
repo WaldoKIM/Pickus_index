@@ -4,6 +4,12 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+
+if (isset($main_inc)){
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_youtube/style.css'>";
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_youtube/magnific-popup.css'>";
+    echo "<script src='http://localhost/theme/PICKUS/skin/board/v4_youtube/jquery.magnific-popup.min.js'></script>";
+}
 ?>
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>

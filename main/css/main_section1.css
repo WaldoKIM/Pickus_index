@@ -1,0 +1,23 @@
+/*mainsection1 tab 부분 */
+.main_sector1_wrap .tabmenu_wrap {height: 2.5rem; background-color: #000;}
+.containers, .row {height: 100%;}
+.main_sector1_wrap .tabmenu_wrap .tableft{background-color: brown; align-self: center; display: flex; flex-direction: row-reverse;}
+.main_sector1_wrap .tabmenu_wrap .tabright{background-color: blue; align-self: center; display: flex;}
+
+
+/*mainsection1 banner 부분 */
+/*레이아웃*/
+.main_sector1_wrap .maintitle_wrap{height: 1020px; border-bottom: 2rem solid green; box-sizing:content-box;}
+/*좌측 텍스트 영역*/
+.main_sector1_wrap .maintitle_wrap .text{background-color: aquamarine; height: 1020px; display: flex; align-items: center; justify-content: center;}
+.main_sector1_wrap .maintitle_wrap .text .main_sector1_text_wrap{ display: flex; flex-direction: column;}
+.main_sector1_text_wrap h1 {font-weight: 700;}
+.main_sector1_text_wrap h1 strong {color: #fff;}
+.main_sector1_text_wrap h3 {color: #aaa;}
+.main_sector1_text_wrap .main_sector1_btn{display: flex; flex-direction: row;}
+.main_sector1_text_wrap .main_sector1_btn a:first-child{border: 2px solid #000;}
+.main_sector1_text_wrap .main_sector1_btn a:last-child{margin-left: auto; border: 2px solid #000;}
+/*우측 이미지 영역*/
+.main_sector1_wrap .maintitle_wrap .img{background-color:cadetblue; height: 1020px; display: flex; align-items: center; justify-content: center;}
+.main_sector1_wrap .maintitle_wrap .img .main_img_wrap{background-color: #fff; width: 80%; height: 80%; display: flex;  align-items: center; justify-content: center;}
+.img .main_img_wrap span{display: flex; align-self: center;}

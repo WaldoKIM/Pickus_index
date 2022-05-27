@@ -497,6 +497,8 @@ function get_list($write_row, $board, $skin_url, $subject_len=40)
     $list['ca_name_href'] = get_pretty_url($board['bo_table'], '', 'sca='.urlencode($list['ca_name']));
 
     $list['href'] = get_pretty_url($board['bo_table'], $list['wr_id'], $qstr);
+    $list['href_custom'] = get_pretty_url_main($board['bo_table'], $list['wr_id'], $qstr);
+
     $list['comment_href'] = $list['href'];
 
     $list['icon_new'] = '';

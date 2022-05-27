@@ -22,6 +22,12 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+
+
+if (isset($main_inc)){
+    echo "<link rel='stylesheet' href='http://localhost/theme/PICKUS/skin/board/v4_event_list/style.css'>";  
+  
+}
 ?>
 
 <h2 id="container_title"><?php echo $board['bo_subject'] ?><span class="sound_only"> 목록</span></h2>
@@ -174,7 +180,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                     </li>
                     <li class="gall_text_href">
                       
-                        <a href="<?php echo $list[$i]['href'] ?>">
+                        <a href="<?php echo $list[$i]['href'].'&main_inc='.$main_inc?>">
                             <?php echo $list[$i]['subject'] ?>
                             <!-- <?php
                                 if (isset($list[$i]['icon_new'])) echo $list[$i]['icon_new'];
